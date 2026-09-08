@@ -206,7 +206,7 @@ function initHero() {
   const dotsWrap = $("[data-hero-dots]", hero);
   if (slides.length < 2) { if (slides[0]) slides[0].classList.add("is-attiva"); return; }
 
-  const INTERVALLO = 6000;
+  const INTERVALLO = 5500;   // ogni quanti millisecondi cambia l'immagine
   let corrente = 0;
   let timer = null;
   let inPausa = false;
@@ -232,7 +232,7 @@ function initHero() {
 
   function avanti() { vaiA(corrente + 1); }
   function avvia() {
-    if (prefersReducedMotion() || inPausa) return;
+    if (inPausa) return;
     clearInterval(timer);
     timer = setInterval(avanti, INTERVALLO);
   }
@@ -241,8 +241,10 @@ function initHero() {
 
   vaiA(0);
 
-  if (prefersReducedMotion()) return; // resta sulla prima immagine, niente animazione
-
+  // Le immagini cambiano sempre da sole. Se l'utente ha attivato
+  // "riduci animazioni" nel sistema, il CSS toglie la dissolvenza
+  // (@media prefers-reduced-motion) e il cambio diventa netto: la
+  // rotazione resta comunque attiva.
   avvia();
 
   // pausa su hover e su focus da tastiera
@@ -250,7 +252,7 @@ function initHero() {
   hero.addEventListener("mouseleave", () => { inPausa = false; avvia(); });
   hero.addEventListener("focusin", () => { inPausa = true; ferma(); });
   hero.addEventListener("focusout", () => { inPausa = false; avvia(); });
-  // pausa quando la scheda non è visibile
+  // pausa quando la scheda del browser non è in primo piano (riparte al ritorno)
   document.addEventListener("visibilitychange", () => {
     document.hidden ? ferma() : avvia();
   });
