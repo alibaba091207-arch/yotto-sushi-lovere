@@ -60,7 +60,6 @@
   .hero__slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
   .hero__slide.is-attiva{opacity:1}
   .no-js .hero__slide:first-child{opacity:1}
-  .no-js .hero__slide:first-child img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 </style>
 
 <!-- Dati strutturati: scheda ristorante per Google -->
@@ -173,28 +172,33 @@
 <!-- ============================ HERO ============================ -->
 <section class="hero" data-hero aria-label="Yotto Sushi, sushi e cucina asiatica sul Lago d'Iseo">
   <div class="hero__slides" data-hero-slides>
+    <!-- Ogni slide: uno sfondo sfocato (riempie lo schermo) + l'immagine intera al centro, senza ritaglio. -->
     <div class="hero__slide" data-hero-slide>
+      <div class="hero__slide-bg" style="background-image:url(/assets/images/hero/01-esterno-notte-960.jpg)"></div>
       <picture>
         <source type="image/webp" srcset="/assets/images/hero/01-esterno-notte-960.webp 960w, /assets/images/hero/01-esterno-notte-1440.webp 1440w" sizes="100vw">
-        <img src="/assets/images/hero/01-esterno-notte-960.jpg" width="1600" height="1213" alt="L'esterno di Yotto Sushi illuminato di sera, con la terrazza al piano superiore" fetchpriority="high" decoding="async">
+        <img class="hero__slide-fg" src="/assets/images/hero/01-esterno-notte-960.jpg" width="1600" height="1213" alt="L'esterno di Yotto Sushi illuminato di sera, con la terrazza al piano superiore" fetchpriority="high" decoding="async">
       </picture>
     </div>
     <div class="hero__slide" data-hero-slide>
+      <div class="hero__slide-bg" style="background-image:url(/assets/images/hero/02-sala-panoramica-lago-960.jpg)"></div>
       <picture>
         <source type="image/webp" srcset="/assets/images/hero/02-sala-panoramica-lago-960.webp 960w, /assets/images/hero/02-sala-panoramica-lago-1440.webp 1440w" sizes="100vw">
-        <img src="/assets/images/hero/02-sala-panoramica-lago-960.jpg" width="1080" height="1087" alt="La sala panoramica di Yotto con vista sul porto di Lovere" loading="lazy" decoding="async">
+        <img class="hero__slide-fg" src="/assets/images/hero/02-sala-panoramica-lago-960.jpg" width="1080" height="1087" alt="La sala panoramica di Yotto con vista sul porto di Lovere" loading="lazy" decoding="async">
       </picture>
     </div>
     <div class="hero__slide" data-hero-slide>
+      <div class="hero__slide-bg" style="background-image:url(/assets/images/hero/03-sala-pesci-vetro-960.jpg)"></div>
       <picture>
         <source type="image/webp" srcset="/assets/images/hero/03-sala-pesci-vetro-960.webp 960w, /assets/images/hero/03-sala-pesci-vetro-1440.webp 1440w" sizes="100vw">
-        <img src="/assets/images/hero/03-sala-pesci-vetro-960.jpg" width="1080" height="1085" alt="L'installazione di pesci in vetro sospesa sul soffitto della sala" loading="lazy" decoding="async">
+        <img class="hero__slide-fg" src="/assets/images/hero/03-sala-pesci-vetro-960.jpg" width="1080" height="1085" alt="L'installazione di pesci in vetro sospesa sul soffitto della sala" loading="lazy" decoding="async">
       </picture>
     </div>
     <div class="hero__slide" data-hero-slide>
+      <div class="hero__slide-bg" style="background-image:url(/assets/images/hero/04-terrazza-verde-960.jpg)"></div>
       <picture>
         <source type="image/webp" srcset="/assets/images/hero/04-terrazza-verde-960.webp 960w, /assets/images/hero/04-terrazza-verde-1440.webp 1440w" sizes="100vw">
-        <img src="/assets/images/hero/04-terrazza-verde-960.jpg" width="1080" height="1087" alt="Il piano superiore di Yotto con tavolo tondo in marmo e piante" loading="lazy" decoding="async">
+        <img class="hero__slide-fg" src="/assets/images/hero/04-terrazza-verde-960.jpg" width="1080" height="1087" alt="Il piano superiore di Yotto con tavolo tondo in marmo e piante" loading="lazy" decoding="async">
       </picture>
     </div>
   </div>
@@ -237,14 +241,11 @@
   <div class="contenitore">
     <h2 id="piatti-tit">I nostri piatti</h2>
     <ul class="piatti__griglia" data-galleria>
-      <!-- Le card sono <button> per l'apertura del lightbox da tastiera -->
+      <!-- Le card sono <button> per l'apertura del lightbox da tastiera.
+           6 piatti scelti dal cliente. Le immagini sono mostrate intere, senza ritaglio. -->
       <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Tataki di tonno con granella di pistacchio e salsa al mango">
         <picture><source type="image/webp" srcset="/assets/images/piatti/tataki-tonno-01-480.webp 480w, /assets/images/piatti/tataki-tonno-01-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
         <img src="/assets/images/piatti/tataki-tonno-01-480.jpg" width="1079" height="1078" alt="Tataki di tonno con granella di pistacchio e salsa al mango" loading="lazy" decoding="async"></picture>
-      </button></li>
-      <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Tataki di tonno servito su piatto scuro con salse">
-        <picture><source type="image/webp" srcset="/assets/images/piatti/tataki-tonno-02-480.webp 480w, /assets/images/piatti/tataki-tonno-02-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
-        <img src="/assets/images/piatti/tataki-tonno-02-480.jpg" width="1080" height="1073" alt="Tataki di tonno servito su piatto scuro con salse" loading="lazy" decoding="async"></picture>
       </button></li>
       <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Carpaccio di pesce marinato con agrumi">
         <picture><source type="image/webp" srcset="/assets/images/piatti/carpaccio-agrumi-480.webp 480w, /assets/images/piatti/carpaccio-agrumi-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
@@ -254,10 +255,6 @@
         <picture><source type="image/webp" srcset="/assets/images/piatti/sashimi-ghiaccio-secco-480.webp 480w, /assets/images/piatti/sashimi-ghiaccio-secco-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
         <img src="/assets/images/piatti/sashimi-ghiaccio-secco-480.jpg" width="1080" height="1087" alt="Sashimi di tonno servito con ghiaccio secco" loading="lazy" decoding="async"></picture>
       </button></li>
-      <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Sashimi di tonno su letto di ghiaccio con decorazione dorata">
-        <picture><source type="image/webp" srcset="/assets/images/piatti/sashimi-tonno-ghiaccio-480.webp 480w, /assets/images/piatti/sashimi-tonno-ghiaccio-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
-        <img src="/assets/images/piatti/sashimi-tonno-ghiaccio-480.jpg" width="1080" height="1079" alt="Sashimi di tonno su letto di ghiaccio con decorazione dorata" loading="lazy" decoding="async"></picture>
-      </button></li>
       <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Uramaki fritto con tonno e salsa teriyaki">
         <picture><source type="image/webp" srcset="/assets/images/piatti/uramaki-fritto-480.webp 480w, /assets/images/piatti/uramaki-fritto-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
         <img src="/assets/images/piatti/uramaki-fritto-480.jpg" width="1080" height="1079" alt="Uramaki fritto con tonno e salsa teriyaki" loading="lazy" decoding="async"></picture>
@@ -266,17 +263,9 @@
         <picture><source type="image/webp" srcset="/assets/images/piatti/tacos-salmone-pistacchio-480.webp 480w, /assets/images/piatti/tacos-salmone-pistacchio-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
         <img src="/assets/images/piatti/tacos-salmone-pistacchio-480.jpg" width="1080" height="1090" alt="Tacos di salmone con granella di pistacchio su piatto dorato" loading="lazy" decoding="async"></picture>
       </button></li>
-      <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Roll di salmone con uova di pesce e salsa al mango">
-        <picture><source type="image/webp" srcset="/assets/images/piatti/roll-salmone-caviale-480.webp 480w, /assets/images/piatti/roll-salmone-caviale-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
-        <img src="/assets/images/piatti/roll-salmone-caviale-480.jpg" width="1080" height="1438" alt="Roll di salmone con uova di pesce e salsa al mango" loading="lazy" decoding="async"></picture>
-      </button></li>
       <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Onigiri con semi di sesamo e lime essiccato">
         <picture><source type="image/webp" srcset="/assets/images/piatti/onigiri-lime-480.webp 480w, /assets/images/piatti/onigiri-lime-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
         <img src="/assets/images/piatti/onigiri-lime-480.jpg" width="1080" height="1090" alt="Onigiri con semi di sesamo e lime essiccato" loading="lazy" decoding="async"></picture>
-      </button></li>
-      <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Nigiri di salmone scottato con salse al mango e teriyaki">
-        <picture><source type="image/webp" srcset="/assets/images/piatti/nigiri-salmone-scottato-480.webp 480w, /assets/images/piatti/nigiri-salmone-scottato-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
-        <img src="/assets/images/piatti/nigiri-salmone-scottato-480.jpg" width="1080" height="1079" alt="Nigiri di salmone scottato con salse al mango e teriyaki" loading="lazy" decoding="async"></picture>
       </button></li>
     </ul>
   </div>
