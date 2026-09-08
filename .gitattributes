@@ -1,0 +1,8 @@
+# Mantiene fine-riga LF per i file di testo, su qualsiasi computer.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.ico binary
+*.woff2 binary
+*.pdf binary

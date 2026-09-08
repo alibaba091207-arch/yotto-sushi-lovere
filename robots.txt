@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /assets/images/riferimenti/
+
+Sitemap: https://yotto-sushi-lovere.netlify.app/sitemap.xml

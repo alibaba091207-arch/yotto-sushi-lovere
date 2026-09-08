@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--
+  ============================================================
+  YOTTO SUSHI — Lovere (BG)
+  Sito statico: HTML + CSS + JS puro, nessuna dipendenza esterna.
+  Per aggiornare menù, prezzi, orari o link social: vedi README.md
+  ============================================================
+-->
+
+<title>Yotto Sushi Lovere | All you can eat sul Lago d'Iseo</title>
+<meta name="description" content="Ristorante giapponese e asiatico all you can eat a Lovere, sul Lago d'Iseo. Sushi, sashimi e cucina asiatica. Aperto tutti i giorni a pranzo e cena. Prenota su WhatsApp.">
+<link rel="canonical" href="https://yotto-sushi-lovere.netlify.app/">
+<meta name="theme-color" content="#0A1413">
+<meta name="color-scheme" content="dark">
+
+<!-- Open Graph / social -->
+<meta property="og:type" content="restaurant">
+<meta property="og:site_name" content="Yotto Sushi">
+<meta property="og:title" content="Yotto Sushi Lovere | All you can eat sul Lago d'Iseo">
+<meta property="og:description" content="Sushi, sashimi e cucina asiatica all you can eat sul lungolago di Lovere. Aperto tutti i giorni, pranzo e cena. Prenota su WhatsApp.">
+<meta property="og:url" content="https://yotto-sushi-lovere.netlify.app/">
+<meta property="og:locale" content="it_IT">
+<meta property="og:image" content="https://yotto-sushi-lovere.netlify.app/assets/images/hero/01-esterno-notte.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1213">
+<meta property="og:image:alt" content="L'esterno di Yotto Sushi illuminato di sera">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Yotto Sushi Lovere | All you can eat sul Lago d'Iseo">
+<meta name="twitter:description" content="Sushi con vista sul Lago d'Iseo. Aperto tutti i giorni, pranzo e cena. Prenota su WhatsApp.">
+<meta name="twitter:image" content="https://yotto-sushi-lovere.netlify.app/assets/images/hero/01-esterno-notte.jpg">
+
+<!-- Favicon e icone (già pronte in assets/images/brand/) -->
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/images/brand/logo-yotto-cerchio.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/images/brand/icona-180.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<!-- Font self-hosted: nessuna chiamata a Google Fonts -->
+<link rel="preload" href="/assets/fonts/fraunces-variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/karla-variable.woff2" as="font" type="font/woff2" crossorigin>
+
+<!-- Prima immagine dell'hero: caricata subito, non lazy -->
+<link rel="preload" as="image" href="/assets/images/hero/01-esterno-notte-960.webp" type="image/webp"
+      imagesrcset="/assets/images/hero/01-esterno-notte-960.webp 960w, /assets/images/hero/01-esterno-notte-1440.webp 1440w"
+      imagesizes="100vw" fetchpriority="high">
+
+<link rel="stylesheet" href="/styles.css">
+
+<!-- Critical CSS dell'hero: evita il "salto" prima che styles.css sia pronto -->
+<style>
+  :root{--laguna-notte:#0A1413;--crema:#F4EFE6;--ottone:#C2963F}
+  html{background:var(--laguna-notte)}
+  body{margin:0;color:var(--crema);font-family:Karla,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  .hero{position:relative;min-height:100svh;display:grid;place-items:center;overflow:hidden}
+  .hero__slide{position:absolute;inset:0;opacity:0}
+  .hero__slide:first-child{opacity:1}
+  .no-js .hero__slide:first-child img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+</style>
+
+<!-- Dati strutturati: scheda ristorante per Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Yotto Sushi Asian Cuisine",
+  "url": "https://yotto-sushi-lovere.netlify.app/",
+  "image": [
+    "https://yotto-sushi-lovere.netlify.app/assets/images/hero/01-esterno-notte.jpg",
+    "https://yotto-sushi-lovere.netlify.app/assets/images/hero/02-sala-panoramica-lago.jpg",
+    "https://yotto-sushi-lovere.netlify.app/assets/images/hero/03-sala-pesci-vetro.jpg"
+  ],
+  "servesCuisine": ["Giapponese", "Cinese", "Sushi", "Asiatica"],
+  "priceRange": "€€",
+  "telephone": "+390350297470",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Via del Cantiere 10",
+    "addressLocality": "Lovere",
+    "addressRegion": "BG",
+    "postalCode": "24065",
+    "addressCountry": "IT"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.6",
+    "bestRating": "5"
+  },
+  "hasMenu": "https://yotto-sushi-lovere.netlify.app/#menu",
+  "acceptsReservations": "https://wa.me/393520006700",
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "12:00", "closes": "15:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "19:00", "closes": "23:30" }
+  ]
+}
+<!-- TODO: aggiungere "geo" (latitudine/longitudine di Via del Cantiere 10) quando le coordinate esatte sono confermate -->
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Serve prenotare?", "acceptedAnswer": { "@type": "Answer", "text": "È consigliato, soprattutto nel weekend e in estate. Puoi scriverci su WhatsApp o chiamarci." } },
+    { "@type": "Question", "name": "È all you can eat?", "acceptedAnswer": { "@type": "Answer", "text": "Sì, sia a pranzo che a cena, con ordinazioni illimitate e porzioni piccole per assaggiare di più." } },
+    { "@type": "Question", "name": "Quanto costa?", "acceptedAnswer": { "@type": "Answer", "text": "Pranzo da 16,90 €, cena 30,90 € più 2 € di coperto. Tutti i prezzi nella sezione Prezzi." } },
+    { "@type": "Question", "name": "I bambini pagano?", "acceptedAnswer": { "@type": "Answer", "text": "Fino a 130 cm c'è il prezzo ridotto, sotto i 4 anni non pagano." } },
+    { "@type": "Question", "name": "C'è la terrazza?", "acceptedAnswer": { "@type": "Answer", "text": "Sì, aperta nella bella stagione, con vista sul lago." } },
+    { "@type": "Question", "name": "Ci sono piatti vegetariani?", "acceptedAnswer": { "@type": "Answer", "text": "Sì, diverse proposte. Per allergie e intolleranze avvisa al momento dell'ordine." } },
+    { "@type": "Question", "name": "Accettate gruppi ed eventi?", "acceptedAnswer": { "@type": "Answer", "text": "Sì, contattaci su WhatsApp per gruppi numerosi." } }
+  ]
+}
+<!-- TODO: aggiungere le domande "Si può parcheggiare?" e "Fate asporto?" quando il cliente conferma le risposte -->
+</script>
+</head>
+
+<body class="no-js">
+
+<a class="skip-link" href="#contenuto">Salta al contenuto</a>
+
+<!-- ============================ NAVBAR ============================ -->
+<header class="nav" id="nav" data-nav>
+  <div class="nav__inner">
+    <a class="nav__logo" href="#" aria-label="Yotto Sushi — torna su">
+      <span class="logo-segno" aria-hidden="true"></span>
+      <span class="visually-hidden">Yotto Sushi</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Sezioni del sito">
+      <a href="#menu">Menù</a>
+      <a href="#prezzi">Prezzi</a>
+      <a href="#orari">Orari</a>
+      <a href="#il-locale">Il locale</a>
+      <a href="#dove-siamo">Dove siamo</a>
+      <a href="#contatti">Contatti</a>
+    </nav>
+
+    <div class="nav__actions">
+      <ul class="social social--nav" data-social aria-label="Yotto Sushi sui social"></ul>
+      <a class="btn btn--pieno btn--sm" href="https://wa.me/393520006700?text=Ciao%20Yotto%2C%20vorrei%20prenotare%20un%20tavolo" target="_blank" rel="noopener">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 1.8c2.17 0 4.2.84 5.74 2.38a8.06 8.06 0 0 1 2.38 5.73c0 4.47-3.64 8.11-8.12 8.11a8.1 8.1 0 0 1-4.13-1.13l-.3-.18-3.12.82.83-3.04-.2-.31a8.03 8.03 0 0 1-1.26-4.29c0-4.47 3.64-8.11 8.11-8.11Zm4.67 11.53c-.25-.13-1.5-.74-1.73-.82-.23-.09-.4-.13-.56.13-.17.25-.65.82-.79.99-.15.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25a7.6 7.6 0 0 1-1.4-1.74c-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.42l-.48-.01c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.43 1.03 2.6.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.5-.61 1.71-1.21.21-.6.21-1.1.15-1.21-.06-.11-.23-.17-.48-.3Z"/></svg>
+        <span>WhatsApp</span>
+      </a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu-mobile" data-nav-toggle>
+        <span class="nav__toggle-bar" aria-hidden="true"></span>
+        <span class="visually-hidden">Apri il menu</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Menu mobile a tutto schermo -->
+  <div class="nav__mobile" id="menu-mobile" data-nav-mobile hidden>
+    <nav aria-label="Sezioni del sito">
+      <a href="#menu">Menù</a>
+      <a href="#prezzi">Prezzi</a>
+      <a href="#orari">Orari</a>
+      <a href="#il-locale">Il locale</a>
+      <a href="#dove-siamo">Dove siamo</a>
+      <a href="#contatti">Contatti</a>
+    </nav>
+    <a class="btn btn--pieno" href="https://wa.me/393520006700?text=Ciao%20Yotto%2C%20vorrei%20prenotare%20un%20tavolo" target="_blank" rel="noopener">Prenota su WhatsApp</a>
+    <ul class="social social--mobile" data-social aria-label="Yotto Sushi sui social"></ul>
+  </div>
+</header>
+
+<main id="contenuto">
+
+<!-- ============================ HERO ============================ -->
+<section class="hero" data-hero aria-label="Yotto Sushi, sushi e cucina asiatica sul Lago d'Iseo">
+  <div class="hero__slides" data-hero-slides>
+    <div class="hero__slide" data-hero-slide>
+      <picture>
+        <source type="image/webp" srcset="/assets/images/hero/01-esterno-notte-960.webp 960w, /assets/images/hero/01-esterno-notte-1440.webp 1440w" sizes="100vw">
+        <img src="/assets/images/hero/01-esterno-notte-960.jpg" width="1600" height="1213" alt="L'esterno di Yotto Sushi illuminato di sera, con la terrazza al piano superiore" fetchpriority="high" decoding="async">
+      </picture>
+    </div>
+    <div class="hero__slide" data-hero-slide>
+      <picture>
+        <source type="image/webp" srcset="/assets/images/hero/02-sala-panoramica-lago-960.webp 960w, /assets/images/hero/02-sala-panoramica-lago-1440.webp 1440w" sizes="100vw">
+        <img src="/assets/images/hero/02-sala-panoramica-lago-960.jpg" width="1080" height="1087" alt="La sala panoramica di Yotto con vista sul porto di Lovere" loading="lazy" decoding="async">
+      </picture>
+    </div>
+    <div class="hero__slide" data-hero-slide>
+      <picture>
+        <source type="image/webp" srcset="/assets/images/hero/03-sala-pesci-vetro-960.webp 960w, /assets/images/hero/03-sala-pesci-vetro-1440.webp 1440w" sizes="100vw">
+        <img src="/assets/images/hero/03-sala-pesci-vetro-960.jpg" width="1080" height="1085" alt="L'installazione di pesci in vetro sospesa sul soffitto della sala" loading="lazy" decoding="async">
+      </picture>
+    </div>
+    <div class="hero__slide" data-hero-slide>
+      <picture>
+        <source type="image/webp" srcset="/assets/images/hero/04-terrazza-verde-960.webp 960w, /assets/images/hero/04-terrazza-verde-1440.webp 1440w" sizes="100vw">
+        <img src="/assets/images/hero/04-terrazza-verde-960.jpg" width="1080" height="1087" alt="Il piano superiore di Yotto con tavolo tondo in marmo e piante" loading="lazy" decoding="async">
+      </picture>
+    </div>
+  </div>
+
+  <div class="hero__velo" aria-hidden="true"></div>
+
+  <div class="hero__contenuto">
+    <span class="logo-segno logo-segno--hero" aria-hidden="true"></span>
+    <h1 class="hero__titolo">Sushi &amp; Asian Cuisine sul Lago d'Iseo</h1>
+    <p class="hero__sottotitolo">Lovere — Via del Cantiere 10</p>
+    <div class="hero__azioni">
+      <a class="btn btn--pieno" href="https://wa.me/393520006700?text=Ciao%20Yotto%2C%20vorrei%20prenotare%20un%20tavolo" target="_blank" rel="noopener">Prenota su WhatsApp</a>
+      <a class="btn btn--contorno" href="#menu">Guarda i menù</a>
+    </div>
+  </div>
+
+  <div class="hero__dots" role="tablist" aria-label="Scegli l'immagine di sfondo" data-hero-dots></div>
+</section>
+
+<!-- ============================ CHI SIAMO ============================ -->
+<section class="sezione chi-siamo" aria-labelledby="chi-siamo-tit">
+  <div class="contenitore chi-siamo__griglia">
+    <figure class="chi-siamo__foto">
+      <picture>
+        <source type="image/webp" srcset="/assets/images/locale/sala-pesci-vetro-480.webp 480w, /assets/images/locale/sala-pesci-vetro-960.webp 960w" sizes="(min-width: 900px) 45vw, 100vw">
+        <img src="/assets/images/locale/sala-pesci-vetro-960.jpg" width="1080" height="1085" alt="L'installazione di pesci in vetro sospesa sul soffitto della sala" loading="lazy" decoding="async">
+      </picture>
+    </figure>
+    <div class="chi-siamo__testo">
+      <h2 id="chi-siamo-tit">Un banco di pesci sospeso sopra il lago</h2>
+      <p>Yotto nasce sul porto di Lovere, con le vetrate affacciate sull'acqua e la Valle Camonica alle spalle. Dentro, marmo verde, ottone e un'installazione di pesci in vetro che attraversa il soffitto.</p>
+      <p>In cucina, la tradizione giapponese incontra quella cinese: sushi tagliato al momento, sashimi, tempura, wok e piatti caldi. Formula all you can eat, porzioni piccole, così puoi assaggiare tutto senza sprecare niente.</p>
+      <p>D'estate si sale in terrazza, dove si cena guardando il tramonto sul lago.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ I NOSTRI PIATTI ============================ -->
+<section class="sezione piatti" aria-labelledby="piatti-tit">
+  <div class="contenitore">
+    <h2 id="piatti-tit">I nostri piatti</h2>
+    <ul class="piatti__griglia" data-galleria>
+      <!-- Le card sono <button> per l'apertura del lightbox da tastiera -->
+      <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Tataki di tonno con granella di pistacchio e salsa al mango">
+        <picture><source type="image/webp" srcset="/assets/images/piatti/tataki-tonno-01-480.webp 480w, /assets/images/piatti/tataki-tonno-01-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
+        <img src="/assets/images/piatti/tataki-tonno-01-480.jpg" width="1079" height="1078" alt="Tataki di tonno con granella di pistacchio e salsa al mango" loading="lazy" decoding="async"></picture>
+      </button></li>
+      <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Tataki di tonno servito su piatto scuro con salse">
+        <picture><source type="image/webp" srcset="/assets/images/piatti/tataki-tonno-02-480.webp 480w, /assets/images/piatti/tataki-tonno-02-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
+        <img src="/assets/images/piatti/tataki-tonno-02-480.jpg" width="1080" height="1073" alt="Tataki di tonno servito su piatto scuro con salse" loading="lazy" decoding="async"></picture>
+      </button></li>
+      <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Carpaccio di pesce marinato con agrumi">
+        <picture><source type="image/webp" srcset="/assets/images/piatti/carpaccio-agrumi-480.webp 480w, /assets/images/piatti/carpaccio-agrumi-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
+        <img src="/assets/images/piatti/carpaccio-agrumi-480.jpg" width="1080" height="1087" alt="Carpaccio di pesce marinato con agrumi" loading="lazy" decoding="async"></picture>
+      </button></li>
+      <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Sashimi di tonno servito con ghiaccio secco">
+        <picture><source type="image/webp" srcset="/assets/images/piatti/sashimi-ghiaccio-secco-480.webp 480w, /assets/images/piatti/sashimi-ghiaccio-secco-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
+        <img src="/assets/images/piatti/sashimi-ghiaccio-secco-480.jpg" width="1080" height="1087" alt="Sashimi di tonno servito con ghiaccio secco" loading="lazy" decoding="async"></picture>
+      </button></li>
+      <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Sashimi di tonno su letto di ghiaccio con decorazione dorata">
+        <picture><source type="image/webp" srcset="/assets/images/piatti/sashimi-tonno-ghiaccio-480.webp 480w, /assets/images/piatti/sashimi-tonno-ghiaccio-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
+        <img src="/assets/images/piatti/sashimi-tonno-ghiaccio-480.jpg" width="1080" height="1079" alt="Sashimi di tonno su letto di ghiaccio con decorazione dorata" loading="lazy" decoding="async"></picture>
+      </button></li>
+      <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Uramaki fritto con tonno e salsa teriyaki">
+        <picture><source type="image/webp" srcset="/assets/images/piatti/uramaki-fritto-480.webp 480w, /assets/images/piatti/uramaki-fritto-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
+        <img src="/assets/images/piatti/uramaki-fritto-480.jpg" width="1080" height="1079" alt="Uramaki fritto con tonno e salsa teriyaki" loading="lazy" decoding="async"></picture>
+      </button></li>
+      <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Tacos di salmone con granella di pistacchio su piatto dorato">
+        <picture><source type="image/webp" srcset="/assets/images/piatti/tacos-salmone-pistacchio-480.webp 480w, /assets/images/piatti/tacos-salmone-pistacchio-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
+        <img src="/assets/images/piatti/tacos-salmone-pistacchio-480.jpg" width="1080" height="1090" alt="Tacos di salmone con granella di pistacchio su piatto dorato" loading="lazy" decoding="async"></picture>
+      </button></li>
+      <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Roll di salmone con uova di pesce e salsa al mango">
+        <picture><source type="image/webp" srcset="/assets/images/piatti/roll-salmone-caviale-480.webp 480w, /assets/images/piatti/roll-salmone-caviale-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
+        <img src="/assets/images/piatti/roll-salmone-caviale-480.jpg" width="1080" height="1438" alt="Roll di salmone con uova di pesce e salsa al mango" loading="lazy" decoding="async"></picture>
+      </button></li>
+      <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Onigiri con semi di sesamo e lime essiccato">
+        <picture><source type="image/webp" srcset="/assets/images/piatti/onigiri-lime-480.webp 480w, /assets/images/piatti/onigiri-lime-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
+        <img src="/assets/images/piatti/onigiri-lime-480.jpg" width="1080" height="1090" alt="Onigiri con semi di sesamo e lime essiccato" loading="lazy" decoding="async"></picture>
+      </button></li>
+      <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Nigiri di salmone scottato con salse al mango e teriyaki">
+        <picture><source type="image/webp" srcset="/assets/images/piatti/nigiri-salmone-scottato-480.webp 480w, /assets/images/piatti/nigiri-salmone-scottato-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
+        <img src="/assets/images/piatti/nigiri-salmone-scottato-480.jpg" width="1080" height="1079" alt="Nigiri di salmone scottato con salse al mango e teriyaki" loading="lazy" decoding="async"></picture>
+      </button></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================ MENÙ ============================ -->
+<section class="sezione menu" id="menu" aria-labelledby="menu-tit">
+  <div class="contenitore">
+    <h2 id="menu-tit">I menù</h2>
+    <ul class="menu__lista" data-menu-lista></ul>
+    <!-- TODO: menù HTML — quando arriva la lista piatti completa, va inserito qui sotto (meglio per Google e per il mobile) -->
+    <p class="menu__nota">I menù possono variare. Per allergie e intolleranze chiedici pure: siamo attrezzati.</p>
+  </div>
+</section>
+
+<!-- ============================ PREZZI ============================ -->
+<section class="sezione sezione--chiara prezzi" id="prezzi" aria-labelledby="prezzi-tit">
+  <div class="contenitore">
+    <h2 id="prezzi-tit">Prezzi</h2>
+    <div class="prezzi__griglia">
+
+      <article class="prezzo-card">
+        <h3>Pranzo feriale</h3>
+        <p class="prezzo-card__quando">Dal lunedì al venerdì · 12:00–15:00</p>
+        <dl class="prezzo-card__voci">
+          <div><dt>Adulti</dt><dd>16,90 €</dd></div>
+          <div><dt>Bambini fino a 130 cm</dt><dd>10,90 €</dd></div>
+          <div><dt>Sotto i 4 anni</dt><dd>gratis</dd></div>
+        </dl>
+      </article>
+
+      <article class="prezzo-card">
+        <h3>Pranzo weekend e festivi</h3>
+        <p class="prezzo-card__quando">Sabato, domenica e festivi · 12:00–15:00</p>
+        <dl class="prezzo-card__voci">
+          <div><dt>Adulti</dt><dd>23,90 €</dd></div>
+          <div><dt>Bambini fino a 130 cm</dt><dd>15,90 €</dd></div>
+          <div><dt>Sotto i 4 anni</dt><dd>gratis</dd></div>
+        </dl>
+      </article>
+
+      <article class="prezzo-card">
+        <h3>Cena</h3>
+        <p class="prezzo-card__quando">Tutti i giorni · 19:00–23:30</p>
+        <dl class="prezzo-card__voci">
+          <div><dt>Adulti</dt><dd>30,90 € <span class="prezzo-card__coperto">+ 2 € coperto</span></dd></div>
+          <div><dt>Bambini fino a 130 cm</dt><dd>17,90 € <span class="prezzo-card__coperto">+ 2 € coperto</span></dd></div>
+          <div><dt>Sotto i 4 anni</dt><dd>gratis</dd></div>
+        </dl>
+      </article>
+
+    </div>
+    <div class="prezzi__azione">
+      <a class="btn btn--scuro" href="https://wa.me/393520006700?text=Ciao%20Yotto%2C%20vorrei%20prenotare%20un%20tavolo" target="_blank" rel="noopener">Prenota su WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ IL LOCALE ============================ -->
+<section class="sezione locale" id="il-locale" aria-labelledby="locale-tit">
+  <div class="contenitore">
+    <h2 id="locale-tit">Dentro Yotto</h2>
+    <p class="locale__intro">Sala panoramica sul porto, terrazza estiva e cocktail bar.</p>
+    <div class="locale__griglia">
+      <figure class="locale__foto locale__foto--grande">
+        <picture><source type="image/webp" srcset="/assets/images/locale/sala-panoramica-lago-480.webp 480w, /assets/images/locale/sala-panoramica-lago-960.webp 960w, /assets/images/locale/sala-panoramica-lago-1440.webp 1440w" sizes="(min-width:900px) 60vw, 100vw">
+        <img src="/assets/images/locale/sala-panoramica-lago-960.jpg" width="1080" height="1087" alt="La sala panoramica di Yotto con vista sul porto di Lovere" loading="lazy" decoding="async"></picture>
+      </figure>
+      <figure class="locale__foto">
+        <picture><source type="image/webp" srcset="/assets/images/locale/esterno-notte-480.webp 480w, /assets/images/locale/esterno-notte-960.webp 960w" sizes="(min-width:900px) 40vw, 50vw">
+        <img src="/assets/images/locale/esterno-notte-480.jpg" width="1600" height="1213" alt="L'esterno di Yotto Sushi illuminato di sera, con la terrazza al piano superiore" loading="lazy" decoding="async"></picture>
+      </figure>
+      <figure class="locale__foto">
+        <picture><source type="image/webp" srcset="/assets/images/locale/sala-pesci-vetro-480.webp 480w, /assets/images/locale/sala-pesci-vetro-960.webp 960w" sizes="(min-width:900px) 40vw, 50vw">
+        <img src="/assets/images/locale/sala-pesci-vetro-480.jpg" width="1080" height="1085" alt="L'installazione di pesci in vetro sospesa sul soffitto della sala" loading="lazy" decoding="async"></picture>
+      </figure>
+      <figure class="locale__foto">
+        <picture><source type="image/webp" srcset="/assets/images/locale/sala-neon-blu-480.webp 480w, /assets/images/locale/sala-neon-blu-960.webp 960w" sizes="(min-width:900px) 40vw, 50vw">
+        <img src="/assets/images/locale/sala-neon-blu-480.jpg" width="1080" height="1086" alt="La sala di Yotto con pannelli luminosi blu e arredi in velluto" loading="lazy" decoding="async"></picture>
+      </figure>
+      <figure class="locale__foto">
+        <picture><source type="image/webp" srcset="/assets/images/locale/terrazza-verde-480.webp 480w, /assets/images/locale/terrazza-verde-960.webp 960w" sizes="(min-width:900px) 40vw, 50vw">
+        <img src="/assets/images/locale/terrazza-verde-480.jpg" width="1080" height="1087" alt="Il piano superiore di Yotto con tavolo tondo in marmo e piante" loading="lazy" decoding="async"></picture>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ORARI ============================ -->
+<section class="sezione orari" id="orari" aria-labelledby="orari-tit">
+  <div class="contenitore orari__wrap">
+    <div class="orari__testa">
+      <h2 id="orari-tit">Orari</h2>
+      <p class="orari__stato" data-orari-stato aria-live="polite">
+        <span class="orari__badge">Controlla gli orari qui sotto</span>
+      </p>
+    </div>
+    <ul class="orari__lista" data-orari-lista>
+      <li><span class="orari__giorno">Lunedì</span><span class="orari__fasce">12:00–15:00 · 19:00–23:30</span></li>
+      <li><span class="orari__giorno">Martedì</span><span class="orari__fasce">12:00–15:00 · 19:00–23:30</span></li>
+      <li><span class="orari__giorno">Mercoledì</span><span class="orari__fasce">12:00–15:00 · 19:00–23:30</span></li>
+      <li><span class="orari__giorno">Giovedì</span><span class="orari__fasce">12:00–15:00 · 19:00–23:30</span></li>
+      <li><span class="orari__giorno">Venerdì</span><span class="orari__fasce">12:00–15:00 · 19:00–23:30</span></li>
+      <li><span class="orari__giorno">Sabato</span><span class="orari__fasce">12:00–15:00 · 19:00–23:30</span></li>
+      <li><span class="orari__giorno">Domenica</span><span class="orari__fasce">12:00–15:00 · 19:00–23:30</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================ DOVE SIAMO ============================ -->
+<section class="sezione dove-siamo" id="dove-siamo" aria-labelledby="dove-tit">
+  <div class="contenitore">
+    <h2 id="dove-tit">Dove siamo</h2>
+    <p class="dove-siamo__indirizzo">Via del Cantiere 10, 24065 Lovere (BG)</p>
+    <p class="dove-siamo__parcheggio">Parcheggio disponibile in zona porto. <!-- VERIFICARE con il cliente --></p>
+    <a class="btn btn--contorno" href="https://maps.google.com/?q=Via+del+Cantiere+10,+24065+Lovere+BG" target="_blank" rel="noopener">Apri in Google Maps</a>
+
+    <div class="mappa" data-mappa>
+      <div class="mappa__placeholder" data-mappa-placeholder>
+        <p class="mappa__titolo">Carica la mappa di Google</p>
+        <p class="mappa__nota">Caricando la mappa accetti una connessione ai server di Google, che possono registrare la tua visita. Il pulsante “Apri in Google Maps” qui sopra funziona sempre, anche senza caricare la mappa.</p>
+        <button type="button" class="btn btn--pieno btn--sm" data-mappa-carica>Carica la mappa</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CONTATTI ============================ -->
+<section class="sezione sezione--chiara contatti" id="contatti" aria-labelledby="contatti-tit">
+  <div class="contenitore contatti__griglia">
+
+    <div class="contatti__info">
+      <h2 id="contatti-tit">Contatti</h2>
+      <a class="btn btn--scuro contatti__wa" href="https://wa.me/393520006700?text=Ciao%20Yotto%2C%20vorrei%20prenotare%20un%20tavolo" target="_blank" rel="noopener">Prenota su WhatsApp</a>
+      <ul class="contatti__voci">
+        <li><span>Telefono</span> <a href="tel:+390350297470">035 029 7470</a></li>
+        <li><span>Indirizzo</span> <a href="https://maps.google.com/?q=Via+del+Cantiere+10,+24065+Lovere+BG" target="_blank" rel="noopener">Via del Cantiere 10, 24065 Lovere (BG)</a></li>
+        <li><span>Orari</span> Tutti i giorni · 12:00–15:00 e 19:00–23:30</li>
+      </ul>
+      <ul class="social social--contatti" data-social aria-label="Yotto Sushi sui social"></ul>
+    </div>
+
+    <form class="form-prenota" name="prenotazione" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-form-prenota>
+      <h3>Richiedi un tavolo</h3>
+      <p class="form-prenota__intro">Ti ricontattiamo per confermare. Per una risposta immediata, scrivici su WhatsApp.</p>
+
+      <input type="hidden" name="form-name" value="prenotazione">
+      <p class="form-prenota__hp">
+        <label>Non compilare questo campo <input name="bot-field"></label>
+      </p>
+
+      <div class="campo">
+        <label for="p-nome">Nome e cognome</label>
+        <input type="text" id="p-nome" name="nome" required autocomplete="name">
+      </div>
+      <div class="campo campo--due">
+        <div>
+          <label for="p-tel">Telefono</label>
+          <input type="tel" id="p-tel" name="telefono" required autocomplete="tel" inputmode="tel">
+        </div>
+        <div>
+          <label for="p-email">Email</label>
+          <input type="email" id="p-email" name="email" autocomplete="email" inputmode="email">
+        </div>
+      </div>
+      <div class="campo campo--due">
+        <div>
+          <label for="p-data">Data</label>
+          <input type="date" id="p-data" name="data" required>
+        </div>
+        <div>
+          <label for="p-ora">Ora</label>
+          <input type="time" id="p-ora" name="ora" required>
+        </div>
+      </div>
+      <div class="campo">
+        <label for="p-persone">Numero di persone</label>
+        <input type="number" id="p-persone" name="persone" min="1" max="30" required inputmode="numeric">
+      </div>
+      <div class="campo">
+        <label for="p-note">Note <span class="campo__opz">(facoltative)</span></label>
+        <textarea id="p-note" name="note" rows="3"></textarea>
+      </div>
+
+      <label class="campo-consenso">
+        <input type="checkbox" name="consenso-privacy" required>
+        <span>Ho letto e accetto la <a href="/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span>
+      </label>
+
+      <button type="submit" class="btn btn--scuro">Invia la richiesta</button>
+
+      <p class="form-prenota__esito" data-form-esito role="status" aria-live="polite" hidden></p>
+    </form>
+
+  </div>
+</section>
+
+<!-- ============================ RECENSIONI ============================ -->
+<section class="sezione recensioni" aria-labelledby="recensioni-tit">
+  <div class="contenitore">
+    <h2 id="recensioni-tit">Cosa dicono di noi</h2>
+    <div class="recensioni__punteggio">
+      <span class="recensioni__voto">4,6</span>
+      <span class="recensioni__stelle" aria-hidden="true">★★★★★</span>
+      <span class="recensioni__fonte">su Google</span>
+    </div>
+
+    <!-- TODO: recensioni reali da Google Maps — inserire 3-4 recensioni con nome e data.
+         NON inventare recensioni e NON copiare quelle di altri ristoranti. -->
+    <ul class="recensioni__lista" hidden data-recensioni></ul>
+
+    <a class="btn btn--contorno" href="https://www.google.com/maps/search/?api=1&query=Yotto+Sushi+Lovere" target="_blank" rel="noopener">Leggi tutte le recensioni su Google</a>
+  </div>
+</section>
+
+<!-- ============================ FAQ ============================ -->
+<section class="sezione sezione--chiara faq" aria-labelledby="faq-tit">
+  <div class="contenitore">
+    <h2 id="faq-tit">Domande frequenti</h2>
+    <div class="faq__lista">
+      <details><summary>Serve prenotare?</summary><div class="faq__risposta"><p>Consigliato, soprattutto nel weekend e in estate. Puoi scriverci su WhatsApp o chiamarci.</p></div></details>
+      <details><summary>È all you can eat?</summary><div class="faq__risposta"><p>Sì, sia a pranzo che a cena, con ordinazioni illimitate e porzioni piccole per assaggiare di più.</p></div></details>
+      <details><summary>Quanto costa?</summary><div class="faq__risposta"><p>Pranzo da 16,90 €, cena 30,90 € più 2 € di coperto. Tutti i prezzi nella sezione <a href="#prezzi">Prezzi</a>.</p></div></details>
+      <details><summary>I bambini pagano?</summary><div class="faq__risposta"><p>Fino a 130 cm c'è il prezzo ridotto, sotto i 4 anni non pagano.</p></div></details>
+      <details><summary>C'è la terrazza?</summary><div class="faq__risposta"><p>Sì, aperta nella bella stagione, con vista sul lago.</p></div></details>
+      <details><summary>Si può parcheggiare?</summary><div class="faq__risposta"><p>Sì, in zona porto. <!-- VERIFICARE con il cliente: dettagli parcheggio --></p></div></details>
+      <details><summary>Fate asporto?</summary><div class="faq__risposta"><p>Sì, con la stessa selezione del menù cena. <!-- VERIFICARE con il cliente: asporto/delivery --></p></div></details>
+      <details><summary>Ci sono piatti vegetariani?</summary><div class="faq__risposta"><p>Sì, diverse proposte. Per allergie e intolleranze avvisa al momento dell'ordine.</p></div></details>
+      <details><summary>Accettate gruppi ed eventi?</summary><div class="faq__risposta"><p>Sì, contattaci su WhatsApp per gruppi numerosi.</p></div></details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="footer">
+  <div class="contenitore footer__griglia">
+    <div class="footer__brand">
+      <span class="logo-segno logo-segno--footer" aria-hidden="true"></span>
+      <p>Yotto Sushi Asian Cuisine</p>
+    </div>
+    <div class="footer__col">
+      <p>Via del Cantiere 10<br>24065 Lovere (BG)</p>
+      <p><a href="tel:+390350297470">035 029 7470</a><br>
+         <a href="https://wa.me/393520006700" target="_blank" rel="noopener">WhatsApp</a></p>
+    </div>
+    <div class="footer__col">
+      <p>Tutti i giorni<br>12:00–15:00<br>19:00–23:30</p>
+    </div>
+    <div class="footer__col">
+      <ul class="social social--footer" data-social aria-label="Yotto Sushi sui social"></ul>
+      <p class="footer__legali">
+        <a href="/privacy-policy.html">Privacy Policy</a> ·
+        <a href="/cookie-policy.html">Cookie Policy</a>
+      </p>
+    </div>
+  </div>
+  <div class="contenitore footer__basso">
+    <!-- TODO: sostituire con ragione sociale e P.IVA reali -->
+    <p data-footer-azienda>TODO Ragione Sociale — P.IVA TODO</p>
+    <p>&copy; <span data-anno>2026</span> Yotto Sushi. Tutti i diritti riservati.</p>
+  </div>
+</footer>
+
+<!-- ============================ WHATSAPP FISSO (mobile) ============================ -->
+<a class="wa-fab" href="https://wa.me/393520006700?text=Ciao%20Yotto%2C%20vorrei%20prenotare%20un%20tavolo" target="_blank" rel="noopener" data-wa-fab hidden aria-label="Prenota su WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm4.67 13.33c-.25.7-1.23 1.24-1.71 1.31-.43.06-.98.09-1.58-.1a13.9 13.9 0 0 1-1.43-.53c-2.52-1.09-4.16-3.62-4.29-3.79-.13-.17-1.03-1.36-1.03-2.6 0-1.24.65-1.85.88-2.1.23-.25.5-.31.67-.31l.48.01c.16 0 .36-.06.56.42.21.5.71 1.72.77 1.85.06.13.1.27.02.44-.09.17-.13.27-.25.42-.13.15-.27.33-.38.44-.13.12-.26.26-.11.51.15.25.65 1.09 1.4 1.74.96.86 1.77 1.12 2.02 1.25.25.13.39.11.54-.06.15-.17.62-.74.79-.99.17-.26.34-.22.56-.13.23.08 1.48.69 1.73.82.25.13.42.19.48.3.06.11.06.61-.15 1.21Z"/></svg>
+</a>
+
+<!-- ============================ LIGHTBOX ============================ -->
+<div class="lightbox" data-lightbox-modal hidden aria-hidden="true">
+  <div class="lightbox__overlay" data-lightbox-chiudi-overlay></div>
+  <div class="lightbox__box" role="dialog" aria-modal="true" aria-label="Foto ingrandita">
+    <button type="button" class="lightbox__btn lightbox__btn--chiudi" data-lightbox-chiudi aria-label="Chiudi">&times;</button>
+    <button type="button" class="lightbox__btn lightbox__btn--prec" data-lightbox-prec aria-label="Foto precedente">&#8249;</button>
+    <figure class="lightbox__figura">
+      <img data-lightbox-img src="" alt="">
+    </figure>
+    <button type="button" class="lightbox__btn lightbox__btn--succ" data-lightbox-succ aria-label="Foto successiva">&#8250;</button>
+  </div>
+</div>
+
+<!-- ============================ BANNER COOKIE ============================ -->
+<div class="cookie" data-cookie hidden>
+  <div class="cookie__inner">
+    <p class="cookie__testo">
+      Usiamo solo cookie tecnici necessari al sito. La mappa di Google si carica solo se la attivi tu.
+      Dettagli nella <a href="/cookie-policy.html">Cookie Policy</a>.
+    </p>
+    <div class="cookie__azioni">
+      <button type="button" class="btn btn--contorno btn--sm" data-cookie-rifiuta>Rifiuta</button>
+      <button type="button" class="btn btn--pieno btn--sm" data-cookie-accetta>Accetta</button>
+    </div>
+  </div>
+</div>
+
+<script src="/script.js" defer></script>
+</body>
+</html>

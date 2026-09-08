@@ -1,0 +1,16 @@
+{
+  "name": "Yotto Sushi Asian Cuisine",
+  "short_name": "Yotto Sushi",
+  "description": "Ristorante giapponese e asiatico all you can eat a Lovere, sul Lago d'Iseo.",
+  "lang": "it",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0A1413",
+  "theme_color": "#0A1413",
+  "icons": [
+    { "src": "/assets/images/brand/icona-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/images/brand/icona-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/assets/images/brand/icona-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

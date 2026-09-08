@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "yotto",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8123", "--directory", "C:/progetti/yotto-sushi-lovere"],
+      "port": 8123
+    }
+  ]
+}
