@@ -14,7 +14,7 @@
 
 // Link ai profili social. Se un valore resta "#TODO-...", l'icona NON viene mostrata.
 const SOCIAL = {
-  instagram: "#TODO-INSTAGRAM",
+  instagram: "https://www.instagram.com/yottosushilovere",
   facebook:  "#TODO-FACEBOOK",
   tiktok:    "#TODO-TIKTOK",
 };
@@ -113,6 +113,9 @@ function initSocial() {
       ul.appendChild(li);
     });
   });
+
+  // Blocco "Seguici" nel footer: si mostra solo se c'è almeno un social reale.
+  $$("[data-seguici]").forEach((b) => { b.hidden = !voci.length; });
 }
 
 

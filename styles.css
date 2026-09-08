@@ -675,6 +675,14 @@ body.nav-aperta { overflow: hidden; }
 .footer__col p { color: var(--marmo-chiaro); font-size: .95rem; }
 .footer__col a { color: var(--ottone-luce); }
 .footer__legali { margin-top: var(--s3); }
+
+.footer__seguici { margin-bottom: var(--s4); }
+.footer__seguici[hidden] { display: none; }
+.footer__seguici-testo {
+  font-family: "Fraunces", serif;
+  color: var(--crema);
+  margin-bottom: var(--s2);
+}
 .footer__basso {
   margin-top: var(--s6);
   padding-top: var(--s4);
