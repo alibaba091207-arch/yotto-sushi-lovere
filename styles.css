@@ -326,10 +326,12 @@ body.nav-aperta { overflow: hidden; }
   object-fit: cover;
   transform: scale(1.0);
 }
+/* Ken Burns "al contrario": la slide entra leggermente zoomata e si allarga
+   fino all'immagine intera, così l'ultimo fotogramma è quello più nitido. */
 .hero__slide.is-attiva img {
   animation: kenburns 6s ease-out forwards;
 }
-@keyframes kenburns { from { transform: scale(1.0); } to { transform: scale(1.06); } }
+@keyframes kenburns { from { transform: scale(1.06); } to { transform: scale(1.0); } }
 
 /* fallback senza JS: mostra la prima slide */
 .no-js .hero__slide:first-child { opacity: 1; }
