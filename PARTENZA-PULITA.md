@@ -135,8 +135,8 @@ Come generarlo è spiegato nella `GUIDA-PER-TE.md`, Parte 3.2.
 
 Il sito è statico: va bene qualsiasi hosting (Netlify, Vercel, GitHub Pages…).
 Qui usiamo **Netlify** perché è semplice e collegato a GitHub; il `netlify.toml`
-in cartella è già pronto. Il form di prenotazione **non richiede Netlify Forms**:
-apre WhatsApp col messaggio precompilato, non manda email.
+in cartella è già pronto. Non ci sono form né funzioni server: le prenotazioni
+passano solo dal pulsante WhatsApp.
 
 1. netlify.com → accedi **con GitHub**
 2. **Add new site** → **Import an existing project** → **GitHub**

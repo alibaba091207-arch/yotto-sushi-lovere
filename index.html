@@ -408,62 +408,16 @@
 
 <!-- ============================ CONTATTI ============================ -->
 <section class="sezione sezione--chiara contatti" id="contatti" aria-labelledby="contatti-tit">
-  <div class="contenitore contatti__griglia">
-
-    <div class="contatti__info">
-      <h2 id="contatti-tit">Contatti</h2>
-      <!-- Legge i campi del form qui sotto e apre WhatsApp col messaggio già scritto.
-           Senza JavaScript resta un normale link WhatsApp con un messaggio generico. -->
-      <a class="btn btn--scuro contatti__wa" href="https://wa.me/393520006700?text=Ciao%20Yotto%2C%20vorrei%20prenotare%20un%20tavolo" target="_blank" rel="noopener" data-prenota-wa>Prenota su WhatsApp</a>
-      <ul class="contatti__voci">
-        <li><span>Telefono</span> <a href="tel:+390350297470">035 029 7470</a></li>
-        <li><span>Indirizzo</span> <a href="https://maps.google.com/?q=Via+del+Cantiere+10,+24065+Lovere+BG" target="_blank" rel="noopener">Via del Cantiere 10, 24065 Lovere (BG)</a></li>
-        <li><span>Orari</span> Tutti i giorni · 12:00–15:00 e 19:00–23:30</li>
-      </ul>
-      <ul class="social social--contatti" data-social aria-label="Yotto Sushi sui social"></ul>
-    </div>
-
-    <!-- Questo form non invia niente a nessun server: serve solo a comporre
-         il messaggio di prenotazione. Il pulsante "Prenota su WhatsApp" qui
-         accanto legge i campi e apre la chat con il testo già pronto. -->
-    <form class="form-prenota" data-form-prenota>
-      <h3>Richiedi un tavolo</h3>
-      <p class="form-prenota__intro">Compila i campi e premi <strong>Prenota su WhatsApp</strong>: si apre la chat con il messaggio già scritto, tu controlli e invii. Nessun dato viene inviato da questo sito.</p>
-
-      <div class="campo">
-        <label for="p-nome">Nome e cognome</label>
-        <input type="text" id="p-nome" name="nome" required autocomplete="name">
-      </div>
-      <div class="campo campo--due">
-        <div>
-          <label for="p-tel">Telefono</label>
-          <input type="tel" id="p-tel" name="telefono" required autocomplete="tel" inputmode="tel">
-        </div>
-        <div>
-          <label for="p-email">Email <span class="campo__opz">(facoltativa)</span></label>
-          <input type="email" id="p-email" name="email" autocomplete="email" inputmode="email">
-        </div>
-      </div>
-      <div class="campo campo--due">
-        <div>
-          <label for="p-data">Data</label>
-          <input type="date" id="p-data" name="data" required>
-        </div>
-        <div>
-          <label for="p-ora">Ora</label>
-          <input type="time" id="p-ora" name="ora" required>
-        </div>
-      </div>
-      <div class="campo">
-        <label for="p-persone">Numero di persone</label>
-        <input type="number" id="p-persone" name="persone" min="1" max="30" required inputmode="numeric">
-      </div>
-      <div class="campo">
-        <label for="p-note">Note <span class="campo__opz">(facoltative)</span></label>
-        <textarea id="p-note" name="note" rows="3"></textarea>
-      </div>
-    </form>
-
+  <div class="contenitore contatti__info">
+    <h2 id="contatti-tit">Contatti</h2>
+    <p class="contatti__intro">Per prenotare un tavolo scrivici su WhatsApp: è il modo più veloce. Puoi anche chiamarci.</p>
+    <a class="btn btn--scuro contatti__wa" href="https://wa.me/393520006700?text=Ciao%20Yotto%2C%20vorrei%20prenotare%20un%20tavolo" target="_blank" rel="noopener">Prenota su WhatsApp</a>
+    <ul class="contatti__voci">
+      <li><span>Telefono</span> <a href="tel:+390350297470">035 029 7470</a></li>
+      <li><span>Indirizzo</span> <a href="https://maps.google.com/?q=Via+del+Cantiere+10,+24065+Lovere+BG" target="_blank" rel="noopener">Via del Cantiere 10, 24065 Lovere (BG)</a></li>
+      <li><span>Orari</span> Tutti i giorni · 12:00–15:00 e 19:00–23:30</li>
+    </ul>
+    <ul class="social social--contatti" data-social aria-label="Yotto Sushi sui social"></ul>
   </div>
 </section>
 

@@ -274,9 +274,7 @@ Le 5 foto di `assets/images/locale/` in una **striscia a scorrimento automatico 
 - **WhatsApp** — pulsante grande, principale. Link `https://wa.me/393520006700?text=Ciao%20Yotto%2C%20vorrei%20prenotare%20un%20tavolo` (il messaggio precompilato aumenta parecchio le conversioni).
 - **Telefono** — `tel:+390350297470`, cliccabile.
 - **Indirizzo** — con link alla mappa.
-- **Form di prenotazione**: nome, telefono, email (facoltativa), data, ora, numero di persone, note. Il cliente **non vuole ricevere le richieste via email**: il form non invia niente a nessun server. Serve solo a comporre il messaggio; il pulsante **Prenota su WhatsApp** legge i campi, valida (HTML5 nativa) e apre WhatsApp con il testo già precompilato. Senza JavaScript il pulsante resta un normale link WhatsApp con messaggio generico.
-  - Niente Netlify Forms, niente honeypot, niente `<input type="hidden" name="form-name">`.
-  - **Nessuna checkbox di consenso privacy**: il sito non raccoglie né trasmette i dati del form.
+- **Niente form di prenotazione.** Il cliente non vuole raccogliere richieste (né via email né altro). La prenotazione avviene solo tramite il **pulsante "Prenota su WhatsApp"** (link `wa.me` con messaggio precompilato) e il telefono. Nessun campo da compilare, nessun consenso privacy, niente Netlify Forms.
 - **Icone social** — questa è una richiesta esplicita del cliente: **solo icone cliccabili, il link non si deve vedere.**
   - Icone SVG inline (Instagram, Facebook, TikTok, WhatsApp), disegnate a mano o prese da un set libero. Niente librerie di icone.
   - Ognuna dentro un `<a target="_blank" rel="noopener noreferrer">` con un `aria-label` (es. `aria-label="Yotto Sushi su Instagram"`) — l'etichetta serve ai lettori di schermo, resta invisibile a schermo.
@@ -436,7 +434,7 @@ Nell'hero e nella navbar usa **l'SVG**, non il PNG.
 2. **Prima di scrivere codice**, proponi il piano di design: token di colore, scala tipografica, wireframe testuale delle sezioni. Fermati e fallo approvare.
 3. Costruisci l'HTML semantico completo con i contenuti reali (niente lorem ipsum: i testi sono in questo brief).
 4. Poi il CSS, mobile-first.
-5. Poi il JS: slider, navbar, lightbox, orari dinamici, FAQ, banner cookie, mappa on-consent, form.
+5. Poi il JS: slider, navbar, lightbox, orari dinamici, FAQ, banner cookie, mappa on-consent, strisce foto (marquee).
 6. Ottimizza le immagini (WebP + `srcset`), genera favicon e manifest.
 7. Aggiungi SEO e JSON-LD.
 8. **Verifica:** Lighthouse mobile su tutte e quattro le voci, navigazione con la sola tastiera, contrasti, e prova a 360 px, 768 px, 1440 px di larghezza.
@@ -451,7 +449,7 @@ Nell'hero e nella navbar usa **l'SVG**, non il PNG.
 - [ ] Badge "Aperto ora / Chiuso" funzionante su fuso `Europe/Rome`
 - [ ] Mappa caricata solo dopo consenso; pulsante "Apri in Google Maps" sempre attivo
 - [ ] Icone social cliccabili senza link visibili, nascoste se il link è ancora un TODO
-- [ ] Form prenotazione: compone il messaggio e apre WhatsApp precompilato (nessun invio a server, nessun consenso privacy)
+- [ ] Nessun form di prenotazione: solo pulsante "Prenota su WhatsApp" (link precompilato) e telefono
 - [ ] JSON-LD `Restaurant` + `FAQPage` validi
 - [ ] Privacy e Cookie policy create, coerenti nella grafica
 - [ ] Lighthouse mobile ≥ 90 su tutte e quattro le metriche

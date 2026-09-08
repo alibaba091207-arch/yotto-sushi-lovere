@@ -625,36 +625,12 @@ body.nav-aperta { overflow: hidden; }
 .mappa__nota { font-size: .9rem; color: var(--crema); max-width: 44ch; opacity: .85; }
 .mappa iframe { width: 100%; height: 100%; border: 0; display: block; }
 
-/* ---------- 17. CONTATTI + FORM ---------- */
-.contatti__griglia { display: grid; gap: var(--s7); }
+/* ---------- 17. CONTATTI ---------- */
 .contatti__info { display: flex; flex-direction: column; gap: var(--s4); align-items: flex-start; }
+.contatti__intro { max-width: 48ch; }
 .contatti__voci { list-style: none; padding: 0; display: grid; gap: var(--s3); }
 .contatti__voci li { display: grid; gap: var(--s1); }
 .contatti__voci span { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--chiaro-testo-2); }
-
-.form-prenota {
-  background: #fff;
-  border: 1px solid var(--verde-vetro);
-  padding: clamp(1.25rem, 4vw, 2.25rem);
-  display: grid;
-  gap: var(--s4);
-}
-.form-prenota h3 { color: var(--chiaro-testo); }
-.form-prenota__intro { font-size: .95rem; margin-bottom: var(--s1); }
-.campo { display: grid; gap: var(--s1); }
-.campo--due { grid-template-columns: 1fr; gap: var(--s4); }
-.campo label { font-size: .95rem; color: var(--chiaro-testo); font-weight: 500; }
-.campo__opz { font-weight: 400; color: var(--chiaro-testo-2); }
-.campo input, .campo textarea {
-  font: inherit;
-  padding: .7em .8em;
-  border: 1.5px solid rgba(30, 79, 74, .4);
-  border-radius: var(--raggio);
-  background: #fff;
-  color: var(--chiaro-testo);
-  width: 100%;
-}
-.campo input:focus, .campo textarea:focus { border-color: var(--verde-vetro); outline-offset: 1px; }
 
 /* ---------- 18. RECENSIONI ---------- */
 .recensioni__punteggio { display: flex; align-items: baseline; gap: var(--s3); margin-bottom: var(--s5); }
@@ -749,7 +725,6 @@ body.nav-aperta { overflow: hidden; }
 /* ---------- BREAKPOINT: tablet (≥ 600px) ---------- */
 @media (min-width: 600px) {
   .marquee__track > li { width: 17rem; }
-  .campo--due { grid-template-columns: 1fr 1fr; }
   .menu__lista { grid-template-columns: repeat(2, 1fr); }
   .nav__actions .btn--sm span { display: inline; }
 }
@@ -777,8 +752,6 @@ body.nav-aperta { overflow: hidden; }
   .marquee__track > li { width: 20rem; }
 
   .prezzi__griglia { grid-template-columns: repeat(3, 1fr); }
-
-  .contatti__griglia { grid-template-columns: 1fr 1.15fr; align-items: start; gap: var(--s8); }
 
   .footer__griglia { grid-template-columns: 1.4fr 1fr 1fr 1.2fr; }
 }

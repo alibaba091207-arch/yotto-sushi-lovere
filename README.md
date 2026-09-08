@@ -144,16 +144,15 @@ di consultazione (la foto del listino prezzi).
 
 ---
 
-## 7. Il modulo di prenotazione (via WhatsApp)
+## 7. Le prenotazioni
 
-Il modulo nella sezione Contatti **non invia niente a nessun server e non manda
-email**. Serve solo a scrivere il messaggio: il cliente compila i campi (nome,
-telefono, data, ora, persone…) e preme **Prenota su WhatsApp**. Si apre la chat
-di WhatsApp del ristorante con il messaggio già pronto; la prenotazione si
-conferma rispondendo lì.
+**Non c'è un modulo da compilare.** Nella sezione Contatti c'è il pulsante
+**Prenota su WhatsApp**: apre la chat di WhatsApp del ristorante con un messaggio
+già pronto ("Ciao Yotto, vorrei prenotare un tavolo"). La prenotazione si
+gestisce lì, oppure al telefono.
 
-Non c'è niente da attivare o configurare. Se un domani servisse ricevere le
-richieste via email, si può aggiungere Netlify Forms: chiedilo a chi ha
+Non c'è niente da attivare o configurare. Se un domani servisse un modulo con
+i dati (data, persone…) o ricevere le richieste via email, chiedilo a chi ha
 costruito il sito.
 
 ---
@@ -165,7 +164,7 @@ index.html            la pagina principale (tutti i contenuti)
 privacy-policy.html    pagina Privacy
 cookie-policy.html     pagina Cookie
 styles.css            tutto l'aspetto grafico
-script.js             slideshow, menu mobile, orari, mappa, form...  (con i dati da compilare in cima)
+script.js             slideshow, menu mobile, orari, mappa, strisce foto...  (con i dati da compilare in cima)
 netlify.toml          impostazioni di pubblicazione
 robots.txt · sitemap.xml · site.webmanifest · favicon.ico
 _ottimizza-immagini.py  script per rigenerare le versioni leggere delle foto
