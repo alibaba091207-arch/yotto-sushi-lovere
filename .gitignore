@@ -1,0 +1,22 @@
+# File di sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*~
+
+# Log e temporanei
+*.log
+.cache/
+node_modules/
+
+# Materiale di consultazione: NON deve finire online
+assets/images/riferimenti/
+
+# File di lavoro locali (immagini sorgente prima della conversione in WebP, ecc.)
+_lavoro/
+*.psd

@@ -1,0 +1,9 @@
+Qui vanno i 3 PDF dei menu, con questi nomi ESATTI:
+
+  menu-pranzo.pdf    -> Menu Pranzo (lun-ven)
+  menu-festivo.pdf   -> Menu Festivo (sab, dom e festivi)
+  menu-cena.pdf      -> Menu Cena  (usato anche per il Menu Asporto)
+
+I nomi non cambiano MAI.
+Per aggiornare un menu: sostituisci il file mantenendo lo stesso nome.
+Nessuna modifica al codice, nessun link da cambiare.
