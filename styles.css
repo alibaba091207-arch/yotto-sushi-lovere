@@ -533,8 +533,15 @@ body.nav-aperta { overflow: hidden; }
 /* ---------- 14. IL LOCALE ---------- */
 .locale__intro { margin-bottom: var(--s5); color: var(--marmo-chiaro); }
 .locale__griglia { display: grid; gap: var(--s3); grid-template-columns: 1fr; }
-.locale__foto { overflow: hidden; border: 1px solid rgba(194, 150, 63, .5); }
-.locale__foto img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.locale__foto {
+  overflow: hidden;
+  border: 1px solid rgba(194, 150, 63, .5);
+  background: #0d1a19;
+}
+/* Foto mostrate intere, senza ritaglio. */
+.locale__foto img { width: 100%; aspect-ratio: 1 / 1; object-fit: contain; }
+.locale__foto--esterna { grid-column: 1 / -1; }
+.locale__foto--esterna img { aspect-ratio: 16 / 10; }
 
 /* ---------- 15. ORARI ---------- */
 .orari__wrap { display: grid; gap: var(--s5); }
@@ -739,13 +746,15 @@ body.nav-aperta { overflow: hidden; }
 
   .prezzi__griglia { grid-template-columns: repeat(3, 1fr); }
 
-  /* Locale: griglia asimmetrica — una grande + quattro piccole */
-  .locale__griglia {
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 1fr;
+  /* Locale: le 4 foto degli interni in 2x2, poi la foto esterna
+     più grande e centrata sotto. */
+  .locale__griglia { grid-template-columns: repeat(2, 1fr); }
+  .locale__foto--esterna {
+    grid-column: 1 / -1;
+    max-width: 70%;
+    margin-inline: auto;
+    margin-top: var(--s3);
   }
-  .locale__foto--grande { grid-row: span 2; }
-  .locale__foto--grande img { aspect-ratio: 3 / 4; height: 100%; }
 
   .contatti__griglia { grid-template-columns: 1fr 1.15fr; align-items: start; gap: var(--s8); }
 
