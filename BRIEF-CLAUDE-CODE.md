@@ -212,9 +212,12 @@ Foto grande della sala coi pesci di vetro a fianco del testo. Testo da usare (sc
 
 ### 8.4 — I nostri piatti
 
-- Griglia responsive (1 colonna su mobile, 2 su tablet, 3 su desktop) con le 10 foto di `assets/images/piatti/`.
-- Nessuna didascalia sotto: le foto parlano da sole. Al passaggio del mouse, un filo d'ottone appare sul bordo e l'immagine si scurisce leggerissimamente.
-- Cliccando si apre un **lightbox** semplice, scritto a mano: sfondo scuro, frecce, chiusura con `Esc` o clic fuori, navigabile da tastiera, con `aria-modal` e focus trap.
+- **Striscia a scorrimento automatico continuo (marquee)**, non una griglia statica. Le foto di `assets/images/piatti/` scorrono in orizzontale, sempre, verso **sinistra**. Il ciclo è senza stacchi (gli elementi vengono duplicati: la traccia contiene due copie identiche).
+- Direzione **opposta** a quella della striscia "Il locale" (8.7): una va a sinistra, l'altra a destra.
+- Nessuna didascalia: le foto parlano da sole. Al passaggio del mouse, un filo d'ottone appare sul bordo e l'immagine si scurisce leggerissimamente.
+- Cliccando una foto si apre un **lightbox** semplice, scritto a mano: sfondo scuro, frecce, chiusura con `Esc` o clic fuori, navigabile da tastiera, con `aria-modal` e focus trap. Le foto sono `<button>` veri, ma i duplicati del ciclo sono `aria-hidden` e fuori dal Tab.
+- **Pausa dello scorrimento** quando è vera anche solo una tra: mouse sopra la striscia, focus da tastiera dentro la striscia, lightbox aperto. Riparte solo quando nessuna delle tre è vera. All'apertura del lightbox si ferma anche la striscia dietro, così alla chiusura le foto sono ferme dov'erano.
+- `prefers-reduced-motion: reduce`: lo scorrimento si ferma e le foto tornano una **griglia statica e completa**, senza scroll orizzontale.
 - Alt text descrittivi e in italiano (li trovi in sezione 12).
 
 ### 8.5 — Menù *(id: `menu`)*
@@ -248,7 +251,9 @@ Note importanti:
 
 ### 8.7 — Il locale
 
-Le 5 foto di `assets/images/locale/` in una griglia asimmetrica (una grande, le altre più piccole) — non 5 riquadri identici. Titolo: **Dentro Yotto**. Una riga sotto: *Sala panoramica sul porto, terrazza estiva e cocktail bar.*
+Titolo: **Dentro Yotto**. Una riga sotto: *Sala panoramica sul porto, terrazza estiva e cocktail bar.*
+
+Le 5 foto di `assets/images/locale/` in una **striscia a scorrimento automatico continuo (marquee)**, come i piatti (8.4), ma in **direzione opposta**: questa scorre verso **destra**. Stesso ciclo senza stacchi, stesso comportamento con `prefers-reduced-motion` (si ferma e diventa una griglia statica). Qui non c'è lightbox: si mette in pausa al passaggio del mouse.
 
 ### 8.8 — Orari *(id: `orari`)*
 

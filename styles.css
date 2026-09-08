@@ -432,13 +432,43 @@ body.nav-aperta { overflow: hidden; }
 .chi-siamo__foto img { width: 100%; border: 1px solid var(--ottone); }
 .chi-siamo__testo { display: flex; flex-direction: column; gap: var(--s4); }
 
-/* ---------- 11. PIATTI + LIGHTBOX ---------- */
-.piatti__griglia {
-  list-style: none; padding: 0;
-  display: grid;
-  gap: var(--s3);
-  grid-template-columns: 1fr;
+/* ---------- 11. PIATTI + IL LOCALE: strisce a scorrimento (marquee) ---------- */
+/* Due strisce che scorrono da sole in continuazione, in versi opposti:
+   i piatti verso sinistra (dir="sx"), il locale verso destra (dir="dx").
+   Il ciclo è senza stacchi perché script.js duplica gli elementi: la
+   traccia contiene due copie identiche e si sposta esattamente di metà.
+   La pausa è gestita da script.js con la classe .is-in-pausa. */
+.marquee {
+  overflow: hidden;
 }
+.marquee__track {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  will-change: transform;
+  animation: marquee-sx var(--marquee-durata, 60s) linear infinite;
+}
+.marquee[data-marquee-dir="dx"] .marquee__track { animation-name: marquee-dx; }
+.marquee.is-in-pausa .marquee__track { animation-play-state: paused; }
+
+@keyframes marquee-sx { from { transform: translateX(0); }   to { transform: translateX(-50%); } }
+@keyframes marquee-dx { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
+/* ogni foto della striscia ha larghezza fissa: non si schiaccia mai.
+   Lo spazio tra le foto è un margine (non "gap"): così la distanza di
+   scorrimento coincide esattamente con una copia + il suo stacco e il
+   ciclo non fa scatti. */
+.marquee__track > li {
+  flex: 0 0 auto;
+  width: 15rem;
+  margin: 0;
+  margin-inline-end: var(--s3);
+}
+.marquee__track .locale__foto { height: 100%; margin: 0; }
+
 .piatto {
   display: block;
   width: 100%;
@@ -538,8 +568,8 @@ body.nav-aperta { overflow: hidden; }
 .prezzi__azione { margin-top: var(--s6); }
 
 /* ---------- 14. IL LOCALE ---------- */
+/* La disposizione è la striscia marquee (vedi sezione 11). Qui solo le foto. */
 .locale__intro { margin-bottom: var(--s5); color: var(--marmo-chiaro); }
-.locale__griglia { display: grid; gap: var(--s3); grid-template-columns: 1fr; }
 .locale__foto {
   overflow: hidden;
   border: 1px solid rgba(194, 150, 63, .5);
@@ -547,8 +577,6 @@ body.nav-aperta { overflow: hidden; }
 }
 /* Foto mostrate intere, senza ritaglio. */
 .locale__foto img { width: 100%; aspect-ratio: 1 / 1; object-fit: contain; }
-.locale__foto--esterna { grid-column: 1 / -1; }
-.locale__foto--esterna img { aspect-ratio: 16 / 10; }
 
 /* ---------- 15. ORARI ---------- */
 .orari__wrap { display: grid; gap: var(--s5); }
@@ -730,10 +758,9 @@ body.nav-aperta { overflow: hidden; }
 
 /* ---------- BREAKPOINT: tablet (≥ 600px) ---------- */
 @media (min-width: 600px) {
-  .piatti__griglia { grid-template-columns: repeat(2, 1fr); }
+  .marquee__track > li { width: 17rem; }
   .campo--due { grid-template-columns: 1fr 1fr; }
   .menu__lista { grid-template-columns: repeat(2, 1fr); }
-  .locale__griglia { grid-template-columns: repeat(2, 1fr); }
   .nav__actions .btn--sm span { display: inline; }
 }
 
@@ -757,19 +784,9 @@ body.nav-aperta { overflow: hidden; }
   .social--nav { display: flex; }
 
   .chi-siamo__griglia { grid-template-columns: 0.9fr 1.1fr; align-items: center; }
-  .piatti__griglia { grid-template-columns: repeat(3, 1fr); gap: var(--s4); }
+  .marquee__track > li { width: 20rem; }
 
   .prezzi__griglia { grid-template-columns: repeat(3, 1fr); }
-
-  /* Locale: le 4 foto degli interni in 2x2, poi la foto esterna
-     più grande e centrata sotto. */
-  .locale__griglia { grid-template-columns: repeat(2, 1fr); }
-  .locale__foto--esterna {
-    grid-column: 1 / -1;
-    max-width: 70%;
-    margin-inline: auto;
-    margin-top: var(--s3);
-  }
 
   .contatti__griglia { grid-template-columns: 1fr 1.15fr; align-items: start; gap: var(--s8); }
 
@@ -839,4 +856,17 @@ body.nav-aperta { overflow: hidden; }
     transition-duration: .001ms !important;
   }
   .hero__slide { transition: none; }
+
+  /* Le strisce non scorrono: diventano una griglia ferma e completa,
+     senza scroll orizzontale. I cloni aggiunti da script.js si nascondono. */
+  .marquee { overflow: visible; }
+  .marquee__track {
+    animation: none !important;
+    transform: none !important;
+    flex-wrap: wrap;
+    width: auto;
+    justify-content: center;
+  }
+  .marquee__track > li { width: min(100%, 20rem); }
+  .marquee__track > .is-clone { display: none; }
 }

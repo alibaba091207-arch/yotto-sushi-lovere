@@ -141,6 +141,71 @@ function initMenu() {
 
 
 /* -------------------------------------------------------------
+   3-bis. STRISCE A SCORRIMENTO (marquee) — piatti e "il locale"
+   Due strisce che scorrono da sole all'infinito, in versi opposti.
+   - Il ciclo è senza stacchi: si duplicano gli elementi una volta,
+     così la traccia ha due copie identiche e l'animazione CSS la
+     sposta esattamente di metà (-50%).
+   - I cloni sono decorativi: nascosti agli screen reader e fuori dal Tab.
+   - Pausa: la striscia scorre solo se NESSUNA di queste è vera →
+     mouse sopra la striscia, focus da tastiera dentro, lightbox aperto.
+     La condizione "lightbox" è pilotata da initLightbox tramite
+     l'handler mq.pausaPerLightbox().
+   - Con "riduci animazioni" attivo il CSS ferma tutto e mostra le foto
+     come griglia statica: qui evitiamo anche di duplicare gli elementi.
+   ------------------------------------------------------------- */
+function initMarquee() {
+  const strisce = $$("[data-marquee]");
+  if (!strisce.length) return;
+
+  const menoMovimento = prefersReducedMotion();
+
+  strisce.forEach((mq) => {
+    const track = $("[data-marquee-track]", mq);
+    if (!track) return;
+
+    const originali = Array.from(track.children);
+    if (!originali.length) return;
+
+    // indice stabile su ogni elemento (serve al lightbox per ritrovare la foto
+    // giusta anche quando si clicca su un clone)
+    originali.forEach((el, i) => { el.dataset.marqueeIndice = String(i); });
+
+    if (!menoMovimento) {
+      // Duplica una volta gli elementi per il ciclo continuo.
+      originali.forEach((el) => {
+        const clone = el.cloneNode(true);
+        clone.classList.add("is-clone");
+        clone.setAttribute("aria-hidden", "true");
+        $$('a, button, input, textarea, select, [tabindex]', clone)
+          .forEach((f) => f.setAttribute("tabindex", "-1"));
+        track.appendChild(clone);
+      });
+
+      // Velocità costante: ~4,5 s per foto, così resta uguale anche se
+      // un domani se ne aggiungono o tolgono.
+      track.style.setProperty("--marquee-durata", (originali.length * 4.5) + "s");
+    }
+
+    // --- gestione della pausa -------------------------------------------------
+    const cond = { hover: false, focus: false, lightbox: false };
+    const applica = () => {
+      const inPausa = cond.hover || cond.focus || cond.lightbox;
+      mq.classList.toggle("is-in-pausa", inPausa);
+    };
+
+    // handler usato da initLightbox (true = lightbox aperto)
+    mq.pausaPerLightbox = (aperto) => { cond.lightbox = !!aperto; applica(); };
+
+    mq.addEventListener("mouseenter", () => { cond.hover = true;  applica(); });
+    mq.addEventListener("mouseleave", () => { cond.hover = false; applica(); });
+    mq.addEventListener("focusin",    () => { cond.focus = true;  applica(); });
+    mq.addEventListener("focusout",   () => { cond.focus = false; applica(); });
+  });
+}
+
+
+/* -------------------------------------------------------------
    4. NAVBAR — sfondo allo scroll + menu mobile
    ------------------------------------------------------------- */
 function initNavbar() {
@@ -313,8 +378,15 @@ function initLightbox() {
   const btnSucc = $("[data-lightbox-succ]", modal);
   const overlay = $("[data-lightbox-chiudi-overlay]", modal);
 
+  // La striscia (marquee) che contiene la galleria: la mettiamo in pausa
+  // mentre il lightbox è aperto, così alla chiusura le foto sono ferme dov'erano.
+  const mqDietro = galleria.closest("[data-marquee]");
+
+  // Tutti i pulsanti, cloni compresi (i cloni servono solo al ciclo continuo).
   const bottoni = $$("[data-lightbox]", galleria);
-  const foto = bottoni.map((b) => {
+  // Solo gli originali, in ordine, per costruire l'elenco delle foto.
+  const originali = bottoni.filter((b) => !b.closest(".is-clone"));
+  const foto = originali.map((b) => {
     const im = $("img", b);
     return { src: im.currentSrc || im.src, alt: im.getAttribute("alt") || "" };
   });
@@ -333,6 +405,7 @@ function initLightbox() {
     modal.hidden = false;
     modal.setAttribute("aria-hidden", "false");
     document.body.classList.add("nav-aperta"); // blocca lo scroll
+    if (mqDietro && mqDietro.pausaPerLightbox) mqDietro.pausaPerLightbox(true);
     btnChiudi.focus();
     document.addEventListener("keydown", suTasto);
   }
@@ -340,6 +413,7 @@ function initLightbox() {
     modal.hidden = true;
     modal.setAttribute("aria-hidden", "true");
     document.body.classList.remove("nav-aperta");
+    if (mqDietro && mqDietro.pausaPerLightbox) mqDietro.pausaPerLightbox(false);
     document.removeEventListener("keydown", suTasto);
     if (ultimoFocus) ultimoFocus.focus();
   }
@@ -357,7 +431,13 @@ function initLightbox() {
     }
   }
 
-  bottoni.forEach((b, i) => b.addEventListener("click", () => apri(i)));
+  bottoni.forEach((b) => {
+    b.addEventListener("click", () => {
+      const host = b.closest("[data-marquee-indice]");
+      const i = host ? Number(host.dataset.marqueeIndice) : bottoni.indexOf(b);
+      apri(i);
+    });
+  });
   btnChiudi.addEventListener("click", chiudi);
   overlay.addEventListener("click", chiudi);
   btnPrec.addEventListener("click", () => mostra(indice - 1));
@@ -551,6 +631,7 @@ function init() {
   initFooter();
   initSocial();
   initMenu();
+  initMarquee();
   initNavbar();
   initHero();
   initAnimazioni();

@@ -241,31 +241,38 @@
 <section class="sezione piatti" aria-labelledby="piatti-tit">
   <div class="contenitore" data-animate>
     <h2 id="piatti-tit">I nostri piatti</h2>
-    <ul class="piatti__griglia" data-galleria>
-      <!-- Le card sono <button> per l'apertura del lightbox da tastiera.
-           6 piatti scelti dal cliente. Le immagini sono mostrate intere, senza ritaglio. -->
+  </div>
+  <!-- Striscia a scorrimento automatico continuo (marquee), verso sinistra.
+       Va in pausa se è vera anche solo una tra: mouse sopra la striscia,
+       focus da tastiera dentro la striscia, lightbox aperto. Riparte solo
+       quando nessuna delle tre è vera.
+       Le card sono <button>: aprono la foto ingrandita nel lightbox.
+       Con "riduci animazioni" lo scorrimento si ferma e le foto tornano
+       una griglia statica e completa (vedi styles.css). -->
+  <div class="marquee" data-marquee data-marquee-dir="sx" aria-label="Alcuni dei nostri piatti">
+    <ul class="marquee__track" data-galleria data-marquee-track>
       <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Tataki di tonno con granella di pistacchio e salsa al mango">
-        <picture><source type="image/webp" srcset="/assets/images/piatti/tataki-tonno-01-480.webp 480w, /assets/images/piatti/tataki-tonno-01-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
+        <picture><source type="image/webp" srcset="/assets/images/piatti/tataki-tonno-01-480.webp 480w, /assets/images/piatti/tataki-tonno-01-960.webp 960w" sizes="(min-width:900px) 20rem, (min-width:600px) 17rem, 15rem">
         <img src="/assets/images/piatti/tataki-tonno-01-480.jpg" width="1079" height="1078" alt="Tataki di tonno con granella di pistacchio e salsa al mango" loading="lazy" decoding="async"></picture>
       </button></li>
       <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Carpaccio di pesce marinato con agrumi">
-        <picture><source type="image/webp" srcset="/assets/images/piatti/carpaccio-agrumi-480.webp 480w, /assets/images/piatti/carpaccio-agrumi-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
+        <picture><source type="image/webp" srcset="/assets/images/piatti/carpaccio-agrumi-480.webp 480w, /assets/images/piatti/carpaccio-agrumi-960.webp 960w" sizes="(min-width:900px) 20rem, (min-width:600px) 17rem, 15rem">
         <img src="/assets/images/piatti/carpaccio-agrumi-480.jpg" width="1080" height="1087" alt="Carpaccio di pesce marinato con agrumi" loading="lazy" decoding="async"></picture>
       </button></li>
       <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Sashimi di tonno servito con ghiaccio secco">
-        <picture><source type="image/webp" srcset="/assets/images/piatti/sashimi-ghiaccio-secco-480.webp 480w, /assets/images/piatti/sashimi-ghiaccio-secco-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
+        <picture><source type="image/webp" srcset="/assets/images/piatti/sashimi-ghiaccio-secco-480.webp 480w, /assets/images/piatti/sashimi-ghiaccio-secco-960.webp 960w" sizes="(min-width:900px) 20rem, (min-width:600px) 17rem, 15rem">
         <img src="/assets/images/piatti/sashimi-ghiaccio-secco-480.jpg" width="1080" height="1087" alt="Sashimi di tonno servito con ghiaccio secco" loading="lazy" decoding="async"></picture>
       </button></li>
       <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Uramaki fritto con tonno e salsa teriyaki">
-        <picture><source type="image/webp" srcset="/assets/images/piatti/uramaki-fritto-480.webp 480w, /assets/images/piatti/uramaki-fritto-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
+        <picture><source type="image/webp" srcset="/assets/images/piatti/uramaki-fritto-480.webp 480w, /assets/images/piatti/uramaki-fritto-960.webp 960w" sizes="(min-width:900px) 20rem, (min-width:600px) 17rem, 15rem">
         <img src="/assets/images/piatti/uramaki-fritto-480.jpg" width="1080" height="1079" alt="Uramaki fritto con tonno e salsa teriyaki" loading="lazy" decoding="async"></picture>
       </button></li>
       <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Tacos di salmone con granella di pistacchio su piatto dorato">
-        <picture><source type="image/webp" srcset="/assets/images/piatti/tacos-salmone-pistacchio-480.webp 480w, /assets/images/piatti/tacos-salmone-pistacchio-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
+        <picture><source type="image/webp" srcset="/assets/images/piatti/tacos-salmone-pistacchio-480.webp 480w, /assets/images/piatti/tacos-salmone-pistacchio-960.webp 960w" sizes="(min-width:900px) 20rem, (min-width:600px) 17rem, 15rem">
         <img src="/assets/images/piatti/tacos-salmone-pistacchio-480.jpg" width="1080" height="1090" alt="Tacos di salmone con granella di pistacchio su piatto dorato" loading="lazy" decoding="async"></picture>
       </button></li>
       <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Onigiri con semi di sesamo e lime essiccato">
-        <picture><source type="image/webp" srcset="/assets/images/piatti/onigiri-lime-480.webp 480w, /assets/images/piatti/onigiri-lime-960.webp 960w" sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
+        <picture><source type="image/webp" srcset="/assets/images/piatti/onigiri-lime-480.webp 480w, /assets/images/piatti/onigiri-lime-960.webp 960w" sizes="(min-width:900px) 20rem, (min-width:600px) 17rem, 15rem">
         <img src="/assets/images/piatti/onigiri-lime-480.jpg" width="1080" height="1090" alt="Onigiri con semi di sesamo e lime essiccato" loading="lazy" decoding="async"></picture>
       </button></li>
     </ul>
@@ -330,30 +337,33 @@
   <div class="contenitore" data-animate>
     <h2 id="locale-tit">Dentro Yotto</h2>
     <p class="locale__intro">Sala panoramica sul porto, terrazza estiva e cocktail bar.</p>
-    <div class="locale__griglia">
-      <!-- Prima le 4 foto degli interni (2x2 su desktop)... -->
-      <figure class="locale__foto">
-        <picture><source type="image/webp" srcset="/assets/images/locale/sala-panoramica-lago-480.webp 480w, /assets/images/locale/sala-panoramica-lago-960.webp 960w" sizes="(min-width:900px) 45vw, 50vw">
+  </div>
+  <!-- Striscia a scorrimento automatico continuo (marquee), verso destra:
+       direzione opposta a quella dei piatti. In pausa quando il mouse è sopra.
+       Con "riduci animazioni" si ferma e diventa una griglia statica. -->
+  <div class="marquee" data-marquee data-marquee-dir="dx" aria-label="Gli spazi del locale">
+    <ul class="marquee__track" data-marquee-track>
+      <li><figure class="locale__foto">
+        <picture><source type="image/webp" srcset="/assets/images/locale/sala-panoramica-lago-480.webp 480w, /assets/images/locale/sala-panoramica-lago-960.webp 960w" sizes="(min-width:900px) 20rem, (min-width:600px) 17rem, 15rem">
         <img src="/assets/images/locale/sala-panoramica-lago-480.jpg" width="1080" height="1087" alt="La sala panoramica di Yotto con vista sul porto di Lovere" loading="lazy" decoding="async"></picture>
-      </figure>
-      <figure class="locale__foto">
-        <picture><source type="image/webp" srcset="/assets/images/locale/sala-pesci-vetro-480.webp 480w, /assets/images/locale/sala-pesci-vetro-960.webp 960w" sizes="(min-width:900px) 45vw, 50vw">
+      </figure></li>
+      <li><figure class="locale__foto">
+        <picture><source type="image/webp" srcset="/assets/images/locale/sala-pesci-vetro-480.webp 480w, /assets/images/locale/sala-pesci-vetro-960.webp 960w" sizes="(min-width:900px) 20rem, (min-width:600px) 17rem, 15rem">
         <img src="/assets/images/locale/sala-pesci-vetro-480.jpg" width="1080" height="1085" alt="L'installazione di pesci in vetro sospesa sul soffitto della sala" loading="lazy" decoding="async"></picture>
-      </figure>
-      <figure class="locale__foto">
-        <picture><source type="image/webp" srcset="/assets/images/locale/sala-neon-blu-480.webp 480w, /assets/images/locale/sala-neon-blu-960.webp 960w" sizes="(min-width:900px) 45vw, 50vw">
+      </figure></li>
+      <li><figure class="locale__foto">
+        <picture><source type="image/webp" srcset="/assets/images/locale/sala-neon-blu-480.webp 480w, /assets/images/locale/sala-neon-blu-960.webp 960w" sizes="(min-width:900px) 20rem, (min-width:600px) 17rem, 15rem">
         <img src="/assets/images/locale/sala-neon-blu-480.jpg" width="1080" height="1086" alt="La sala di Yotto con pannelli luminosi blu e arredi in velluto" loading="lazy" decoding="async"></picture>
-      </figure>
-      <figure class="locale__foto">
-        <picture><source type="image/webp" srcset="/assets/images/locale/terrazza-verde-480.webp 480w, /assets/images/locale/terrazza-verde-960.webp 960w" sizes="(min-width:900px) 45vw, 50vw">
+      </figure></li>
+      <li><figure class="locale__foto">
+        <picture><source type="image/webp" srcset="/assets/images/locale/terrazza-verde-480.webp 480w, /assets/images/locale/terrazza-verde-960.webp 960w" sizes="(min-width:900px) 20rem, (min-width:600px) 17rem, 15rem">
         <img src="/assets/images/locale/terrazza-verde-480.jpg" width="1080" height="1087" alt="Il piano superiore di Yotto con tavolo tondo in marmo e piante" loading="lazy" decoding="async"></picture>
-      </figure>
-      <!-- ...poi la foto esterna, più grande e centrata, per ultima. -->
-      <figure class="locale__foto locale__foto--esterna">
-        <picture><source type="image/webp" srcset="/assets/images/locale/esterno-notte-480.webp 480w, /assets/images/locale/esterno-notte-960.webp 960w, /assets/images/locale/esterno-notte-1440.webp 1440w" sizes="(min-width:900px) 70vw, 100vw">
-        <img src="/assets/images/locale/esterno-notte-960.jpg" width="1600" height="1213" alt="L'esterno di Yotto Sushi illuminato di sera, con la terrazza al piano superiore" loading="lazy" decoding="async"></picture>
-      </figure>
-    </div>
+      </figure></li>
+      <li><figure class="locale__foto">
+        <picture><source type="image/webp" srcset="/assets/images/locale/esterno-notte-480.webp 480w, /assets/images/locale/esterno-notte-960.webp 960w" sizes="(min-width:900px) 20rem, (min-width:600px) 17rem, 15rem">
+        <img src="/assets/images/locale/esterno-notte-480.jpg" width="1600" height="1213" alt="L'esterno di Yotto Sushi illuminato di sera, con la terrazza al piano superiore" loading="lazy" decoding="async"></picture>
+      </figure></li>
+    </ul>
   </div>
 </section>
 
