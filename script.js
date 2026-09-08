@@ -59,7 +59,8 @@ const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 const prefersReducedMotion = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-document.documentElement.classList.remove("no-js");
+// La classe "js" sull'<html> è già impostata da uno script inline nell'head
+// (così non c'è nessun lampeggìo prima che parta questo file).
 document.body.classList.remove("no-js");
 
 
@@ -259,6 +260,42 @@ function initHero() {
   document.addEventListener("visibilitychange", () => {
     document.hidden ? ferma() : avvia();
   });
+}
+
+
+/* -------------------------------------------------------------
+   5-bis. ANIMAZIONI D'INGRESSO
+   - l'hero entra in dissolvenza dall'alto al caricamento (solo CSS)
+   - i blocchi principali fanno un fade-up quando entrano nello scroll.
+     Ogni blocco marcato con [data-animate] si anima come UN pezzo solo,
+     non elemento per elemento.
+   ------------------------------------------------------------- */
+function initAnimazioni() {
+  const blocchi = $$("[data-animate]");
+  if (!blocchi.length) return;
+
+  // Con "riduci animazioni" o senza IntersectionObserver: mostra tutto subito.
+  if (prefersReducedMotion() || !("IntersectionObserver" in window)) {
+    blocchi.forEach((b) => b.classList.add("is-visibile"));
+    return;
+  }
+
+  const mostra = (el) => el.classList.add("is-visibile");
+
+  const osservatore = new IntersectionObserver((voci) => {
+    voci.forEach((v) => {
+      if (v.isIntersecting) {
+        mostra(v.target);
+        osservatore.unobserve(v.target);
+      }
+    });
+  }, { threshold: 0, rootMargin: "0px 0px -12% 0px" });
+
+  blocchi.forEach((b) => osservatore.observe(b));
+
+  // Rete di sicurezza: se per qualsiasi motivo un blocco non venisse rivelato
+  // (observer non scattato, errore, ecc.), dopo 3 secondi lo mostriamo comunque.
+  setTimeout(() => blocchi.forEach(mostra), 3000);
 }
 
 
@@ -516,6 +553,7 @@ function init() {
   initMenu();
   initNavbar();
   initHero();
+  initAnimazioni();
   initLightbox();
   initOrari();
   initCookieMappa();

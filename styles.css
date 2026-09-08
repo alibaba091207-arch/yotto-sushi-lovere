@@ -800,6 +800,36 @@ body.nav-aperta { overflow: hidden; }
 }
 .legale__aggiornato { margin-top: var(--s6); font-size: .9rem; }
 
+/* ---------- 22-bis. ANIMAZIONI D'INGRESSO ----------
+   Attive solo se l'utente NON ha chiesto meno animazioni e solo con JS
+   attivo (classe .js sull'<html>), così senza JS i contenuti restano visibili. */
+@media (prefers-reduced-motion: no-preference) {
+
+  /* HERO: logo, titolo, sottotitolo e pulsanti entrano dall'alto in sequenza */
+  .js .hero__contenuto > * {
+    opacity: 0;
+    transform: translateY(-18px);
+    animation: entra-dall-alto .8s cubic-bezier(.2, .7, .3, 1) forwards;
+  }
+  .js .hero__contenuto > :nth-child(1) { animation-delay: .20s; }
+  .js .hero__contenuto > :nth-child(2) { animation-delay: .38s; }
+  .js .hero__contenuto > :nth-child(3) { animation-delay: .52s; }
+  .js .hero__contenuto > :nth-child(4) { animation-delay: .66s; }
+
+  @keyframes entra-dall-alto { to { opacity: 1; transform: none; } }
+
+  /* BLOCCHI PRINCIPALI: fade-up allo scroll, ognuno come pezzo unico */
+  .js [data-animate] {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .js [data-animate].is-visibile {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* ---------- 23. MOVIMENTO RIDOTTO ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

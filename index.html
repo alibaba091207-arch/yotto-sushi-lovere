@@ -1,8 +1,9 @@
 <!doctype html>
-<html lang="it">
+<html lang="it" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js","js");</script>
 
 <!--
   ============================================================
@@ -220,7 +221,7 @@
 
 <!-- ============================ CHI SIAMO ============================ -->
 <section class="sezione chi-siamo" aria-labelledby="chi-siamo-tit">
-  <div class="contenitore chi-siamo__griglia">
+  <div class="contenitore chi-siamo__griglia" data-animate>
     <figure class="chi-siamo__foto">
       <picture>
         <source type="image/webp" srcset="/assets/images/locale/sala-pesci-vetro-480.webp 480w, /assets/images/locale/sala-pesci-vetro-960.webp 960w" sizes="(min-width: 900px) 45vw, 100vw">
@@ -238,7 +239,7 @@
 
 <!-- ============================ I NOSTRI PIATTI ============================ -->
 <section class="sezione piatti" aria-labelledby="piatti-tit">
-  <div class="contenitore">
+  <div class="contenitore" data-animate>
     <h2 id="piatti-tit">I nostri piatti</h2>
     <ul class="piatti__griglia" data-galleria>
       <!-- Le card sono <button> per l'apertura del lightbox da tastiera.
@@ -283,7 +284,7 @@
 
 <!-- ============================ PREZZI ============================ -->
 <section class="sezione sezione--chiara prezzi" id="prezzi" aria-labelledby="prezzi-tit">
-  <div class="contenitore">
+  <div class="contenitore" data-animate>
     <h2 id="prezzi-tit">Prezzi</h2>
     <div class="prezzi__griglia">
 
@@ -326,7 +327,7 @@
 
 <!-- ============================ IL LOCALE ============================ -->
 <section class="sezione locale" id="il-locale" aria-labelledby="locale-tit">
-  <div class="contenitore">
+  <div class="contenitore" data-animate>
     <h2 id="locale-tit">Dentro Yotto</h2>
     <p class="locale__intro">Sala panoramica sul porto, terrazza estiva e cocktail bar.</p>
     <div class="locale__griglia">
@@ -467,7 +468,7 @@
 
 <!-- ============================ RECENSIONI ============================ -->
 <section class="sezione recensioni" aria-labelledby="recensioni-tit">
-  <div class="contenitore">
+  <div class="contenitore" data-animate>
     <h2 id="recensioni-tit">Cosa dicono di noi</h2>
     <div class="recensioni__punteggio">
       <span class="recensioni__voto">4,6</span>
