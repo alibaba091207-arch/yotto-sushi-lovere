@@ -144,15 +144,17 @@ di consultazione (la foto del listino prezzi).
 
 ---
 
-## 7. Il modulo di prenotazione (Netlify Forms)
+## 7. Il modulo di prenotazione (via WhatsApp)
 
-Il modulo nella sezione Contatti è gestito da **Netlify**: le richieste arrivano
-via email, senza bisogno di alcun server.
+Il modulo nella sezione Contatti **non invia niente a nessun server e non manda
+email**. Serve solo a scrivere il messaggio: il cliente compila i campi (nome,
+telefono, data, ora, persone…) e preme **Prenota su WhatsApp**. Si apre la chat
+di WhatsApp del ristorante con il messaggio già pronto; la prenotazione si
+conferma rispondendo lì.
 
-Per ricevere le email: su Netlify → **Forms** → **Notifications** → aggiungi
-l'indirizzo email del ristorante.
-
-Il pulsante **WhatsApp** resta comunque il canale principale e più veloce.
+Non c'è niente da attivare o configurare. Se un domani servisse ricevere le
+richieste via email, si può aggiungere Netlify Forms: chiedilo a chi ha
+costruito il sito.
 
 ---
 

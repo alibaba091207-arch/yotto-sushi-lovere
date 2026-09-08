@@ -141,12 +141,11 @@ Dopo un minuto avrai un indirizzo tipo `random-name-123.netlify.app`. **Il sito 
 Per dargli un nome decente: **Site configuration** → **Change site name** → `yotto-sushi-lovere`.
 Diventa `yotto-sushi-lovere.netlify.app`, perfetto da mandare al cliente per l'approvazione.
 
-### Attiva il form di prenotazione
+### Il form di prenotazione
 
-Netlify rileva il form da solo. Vai in **Forms** e dovresti vedere `prenotazione`.
-Poi **Forms** → **Notifications** → aggiungi un'email: ogni prenotazione arriverà via mail al ristorante.
-
-Se il form non compare, chiedi a Claude Code: `il form non viene rilevato da Netlify, controlla gli attributi`.
+Non c'è niente da attivare. Il form nella sezione Contatti non manda email e non
+invia niente a Netlify: compilandolo e premendo **Prenota su WhatsApp** si apre
+la chat di WhatsApp con il messaggio già scritto. La prenotazione si gestisce lì.
 
 ---
 
@@ -200,7 +199,7 @@ Controlla queste cose. Sono quelle che fanno la differenza tra un lavoro amatori
 - [ ] La mappa si carica dopo aver accettato i cookie
 - [ ] Il badge "Aperto ora" mostra la cosa giusta all'ora giusta
 - [ ] Le icone social portano ai profili veri (non ai `#TODO`)
-- [ ] Hai fatto una prova di prenotazione dal form e l'email è arrivata
+- [ ] Compilato il form di prenotazione e premuto "Prenota su WhatsApp": si apre la chat col messaggio già scritto e i dati inseriti
 - [ ] Prezzi e orari corrispondono al listino del cliente
 - [ ] Non ci sono recensioni inventate
 - [ ] Nel footer non ci sono testi segnaposto dimenticati

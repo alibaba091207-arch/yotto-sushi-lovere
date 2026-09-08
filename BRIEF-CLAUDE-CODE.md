@@ -274,8 +274,9 @@ Le 5 foto di `assets/images/locale/` in una **striscia a scorrimento automatico 
 - **WhatsApp** — pulsante grande, principale. Link `https://wa.me/393520006700?text=Ciao%20Yotto%2C%20vorrei%20prenotare%20un%20tavolo` (il messaggio precompilato aumenta parecchio le conversioni).
 - **Telefono** — `tel:+390350297470`, cliccabile.
 - **Indirizzo** — con link alla mappa.
-- **Form di prenotazione**: nome, telefono, email, data, ora, numero di persone, note. Configurato per **Netlify Forms** (attributo `data-netlify="true"`, campo honeypot antispam, e un `<input type="hidden" name="form-name">`). Validazione HTML5 nativa, messaggio di conferma senza cambiare pagina.
-  - Sotto il form, la checkbox obbligatoria di consenso privacy con link a `privacy-policy.html`.
+- **Form di prenotazione**: nome, telefono, email (facoltativa), data, ora, numero di persone, note. Il cliente **non vuole ricevere le richieste via email**: il form non invia niente a nessun server. Serve solo a comporre il messaggio; il pulsante **Prenota su WhatsApp** legge i campi, valida (HTML5 nativa) e apre WhatsApp con il testo già precompilato. Senza JavaScript il pulsante resta un normale link WhatsApp con messaggio generico.
+  - Niente Netlify Forms, niente honeypot, niente `<input type="hidden" name="form-name">`.
+  - **Nessuna checkbox di consenso privacy**: il sito non raccoglie né trasmette i dati del form.
 - **Icone social** — questa è una richiesta esplicita del cliente: **solo icone cliccabili, il link non si deve vedere.**
   - Icone SVG inline (Instagram, Facebook, TikTok, WhatsApp), disegnate a mano o prese da un set libero. Niente librerie di icone.
   - Ognuna dentro un `<a target="_blank" rel="noopener noreferrer">` con un `aria-label` (es. `aria-label="Yotto Sushi su Instagram"`) — l'etichetta serve ai lettori di schermo, resta invisibile a schermo.
@@ -450,7 +451,7 @@ Nell'hero e nella navbar usa **l'SVG**, non il PNG.
 - [ ] Badge "Aperto ora / Chiuso" funzionante su fuso `Europe/Rome`
 - [ ] Mappa caricata solo dopo consenso; pulsante "Apri in Google Maps" sempre attivo
 - [ ] Icone social cliccabili senza link visibili, nascoste se il link è ancora un TODO
-- [ ] Form prenotazione pronto per Netlify Forms, con consenso privacy
+- [ ] Form prenotazione: compone il messaggio e apre WhatsApp precompilato (nessun invio a server, nessun consenso privacy)
 - [ ] JSON-LD `Restaurant` + `FAQPage` validi
 - [ ] Privacy e Cookie policy create, coerenti nella grafica
 - [ ] Lighthouse mobile ≥ 90 su tutte e quattro le metriche

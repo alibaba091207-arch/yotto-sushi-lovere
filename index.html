@@ -412,7 +412,9 @@
 
     <div class="contatti__info">
       <h2 id="contatti-tit">Contatti</h2>
-      <a class="btn btn--scuro contatti__wa" href="https://wa.me/393520006700?text=Ciao%20Yotto%2C%20vorrei%20prenotare%20un%20tavolo" target="_blank" rel="noopener">Prenota su WhatsApp</a>
+      <!-- Legge i campi del form qui sotto e apre WhatsApp col messaggio già scritto.
+           Senza JavaScript resta un normale link WhatsApp con un messaggio generico. -->
+      <a class="btn btn--scuro contatti__wa" href="https://wa.me/393520006700?text=Ciao%20Yotto%2C%20vorrei%20prenotare%20un%20tavolo" target="_blank" rel="noopener" data-prenota-wa>Prenota su WhatsApp</a>
       <ul class="contatti__voci">
         <li><span>Telefono</span> <a href="tel:+390350297470">035 029 7470</a></li>
         <li><span>Indirizzo</span> <a href="https://maps.google.com/?q=Via+del+Cantiere+10,+24065+Lovere+BG" target="_blank" rel="noopener">Via del Cantiere 10, 24065 Lovere (BG)</a></li>
@@ -421,14 +423,12 @@
       <ul class="social social--contatti" data-social aria-label="Yotto Sushi sui social"></ul>
     </div>
 
-    <form class="form-prenota" name="prenotazione" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-form-prenota>
+    <!-- Questo form non invia niente a nessun server: serve solo a comporre
+         il messaggio di prenotazione. Il pulsante "Prenota su WhatsApp" qui
+         accanto legge i campi e apre la chat con il testo già pronto. -->
+    <form class="form-prenota" data-form-prenota>
       <h3>Richiedi un tavolo</h3>
-      <p class="form-prenota__intro">Ti ricontattiamo per confermare. Per una risposta immediata, scrivici su WhatsApp.</p>
-
-      <input type="hidden" name="form-name" value="prenotazione">
-      <p class="form-prenota__hp">
-        <label>Non compilare questo campo <input name="bot-field"></label>
-      </p>
+      <p class="form-prenota__intro">Compila i campi e premi <strong>Prenota su WhatsApp</strong>: si apre la chat con il messaggio già scritto, tu controlli e invii. Nessun dato viene inviato da questo sito.</p>
 
       <div class="campo">
         <label for="p-nome">Nome e cognome</label>
@@ -440,7 +440,7 @@
           <input type="tel" id="p-tel" name="telefono" required autocomplete="tel" inputmode="tel">
         </div>
         <div>
-          <label for="p-email">Email</label>
+          <label for="p-email">Email <span class="campo__opz">(facoltativa)</span></label>
           <input type="email" id="p-email" name="email" autocomplete="email" inputmode="email">
         </div>
       </div>
@@ -462,15 +462,6 @@
         <label for="p-note">Note <span class="campo__opz">(facoltative)</span></label>
         <textarea id="p-note" name="note" rows="3"></textarea>
       </div>
-
-      <label class="campo-consenso">
-        <input type="checkbox" name="consenso-privacy" required>
-        <span>Ho letto e accetto la <a href="/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span>
-      </label>
-
-      <button type="submit" class="btn btn--scuro">Invia la richiesta</button>
-
-      <p class="form-prenota__esito" data-form-esito role="status" aria-live="polite" hidden></p>
     </form>
 
   </div>

@@ -571,43 +571,44 @@ function initCookieMappa() {
 
 
 /* -------------------------------------------------------------
-   9. FORM PRENOTAZIONE — invio a Netlify senza cambiare pagina
+   9. FORM PRENOTAZIONE — compone il messaggio e apre WhatsApp
+   Nessun invio a server: il form serve solo a raccogliere i dati,
+   il pulsante "Prenota su WhatsApp" li mette in un messaggio e apre
+   la chat già precompilata. Senza JavaScript il pulsante resta un
+   normale link WhatsApp con un messaggio generico.
    ------------------------------------------------------------- */
 function initForm() {
   const form = $("[data-form-prenota]");
-  if (!form) return;
-  const esito = $("[data-form-esito]", form);
+  const btn = $("[data-prenota-wa]");
+  if (!form || !btn) return;
 
-  form.addEventListener("submit", (e) => {
+  // "2026-09-08" -> "08/09/2026"
+  const dataLeggibile = (iso) => {
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || "");
+    return m ? `${m[3]}/${m[2]}/${m[1]}` : (iso || "");
+  };
+
+  const valore = (nome) => (form.elements[nome]?.value || "").trim();
+
+  function componiMessaggio() {
+    const righe = [
+      "Ciao Yotto, vorrei prenotare un tavolo.",
+      `Nome: ${valore("nome")}`,
+      `Telefono: ${valore("telefono")}`,
+    ];
+    if (valore("email")) righe.push(`Email: ${valore("email")}`);
+    righe.push(`Data: ${dataLeggibile(valore("data"))} alle ${valore("ora")}`);
+    righe.push(`Persone: ${valore("persone")}`);
+    if (valore("note")) righe.push(`Note: ${valore("note")}`);
+    return righe.join("\n");
+  }
+
+  btn.addEventListener("click", (e) => {
     e.preventDefault();
     if (!form.checkValidity()) { form.reportValidity(); return; }
-
-    const dati = new URLSearchParams(new FormData(form)).toString();
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: dati,
-    })
-      .then((r) => {
-        if (!r.ok) throw new Error("risposta non ok");
-        form.reset();
-        mostraEsito(true,
-          "Richiesta inviata. Ti ricontattiamo per confermare. Per una risposta subito, scrivici su WhatsApp.");
-      })
-      .catch(() => {
-        mostraEsito(false,
-          "Invio non riuscito. Riprova tra poco, oppure scrivici direttamente su WhatsApp o al telefono.");
-      });
+    const url = "https://wa.me/393520006700?text=" + encodeURIComponent(componiMessaggio());
+    window.open(url, "_blank", "noopener");
   });
-
-  function mostraEsito(ok, testo) {
-    if (!esito) return;
-    esito.hidden = false;
-    esito.textContent = testo;
-    esito.classList.toggle("is-ok", ok);
-    esito.classList.toggle("is-ko", !ok);
-    esito.scrollIntoView({ block: "nearest", behavior: prefersReducedMotion() ? "auto" : "smooth" });
-  }
 }
 
 

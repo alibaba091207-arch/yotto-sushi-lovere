@@ -641,10 +641,9 @@ body.nav-aperta { overflow: hidden; }
 }
 .form-prenota h3 { color: var(--chiaro-testo); }
 .form-prenota__intro { font-size: .95rem; margin-bottom: var(--s1); }
-.form-prenota__hp { position: absolute; left: -5000px; }
 .campo { display: grid; gap: var(--s1); }
 .campo--due { grid-template-columns: 1fr; gap: var(--s4); }
-.campo label, .campo-consenso span { font-size: .95rem; color: var(--chiaro-testo); font-weight: 500; }
+.campo label { font-size: .95rem; color: var(--chiaro-testo); font-weight: 500; }
 .campo__opz { font-weight: 400; color: var(--chiaro-testo-2); }
 .campo input, .campo textarea {
   font: inherit;
@@ -656,15 +655,6 @@ body.nav-aperta { overflow: hidden; }
   width: 100%;
 }
 .campo input:focus, .campo textarea:focus { border-color: var(--verde-vetro); outline-offset: 1px; }
-.campo-consenso { display: flex; gap: var(--s3); align-items: flex-start; }
-.campo-consenso input { margin-top: .25em; flex: none; width: 1.1rem; height: 1.1rem; }
-.form-prenota__esito {
-  padding: var(--s3) var(--s4);
-  border-radius: var(--raggio);
-  font-weight: 600;
-}
-.form-prenota__esito.is-ok { background: rgba(30, 79, 74, .12); color: var(--verde-vetro); }
-.form-prenota__esito.is-ko { background: rgba(160, 60, 40, .12); color: #a03c28; }
 
 /* ---------- 18. RECENSIONI ---------- */
 .recensioni__punteggio { display: flex; align-items: baseline; gap: var(--s3); margin-bottom: var(--s5); }

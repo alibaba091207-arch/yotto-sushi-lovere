@@ -131,15 +131,12 @@ Come generarlo è spiegato nella `GUIDA-PER-TE.md`, Parte 3.2.
 
 ---
 
-## PASSO 6 — Netlify, non Vercel
+## PASSO 6 — Netlify (o un altro hosting statico)
 
-Hai usato Vercel prima, ma **per questo progetto usa Netlify**, e c'è un motivo preciso.
-
-Il sito ha un **form di prenotazione**. Netlify lo raccoglie da solo, gratis, e ti manda una
-mail a ogni richiesta: zero codice, zero server. Vercel questa cosa non ce l'ha — serviresti
-una funzione serverless o un servizio esterno. Complicazione inutile.
-
-Su tutto il resto (velocità, HTTPS, dominio) sono equivalenti.
+Il sito è statico: va bene qualsiasi hosting (Netlify, Vercel, GitHub Pages…).
+Qui usiamo **Netlify** perché è semplice e collegato a GitHub; il `netlify.toml`
+in cartella è già pronto. Il form di prenotazione **non richiede Netlify Forms**:
+apre WhatsApp col messaggio precompilato, non manda email.
 
 1. netlify.com → accedi **con GitHub**
 2. **Add new site** → **Import an existing project** → **GitHub**
@@ -149,11 +146,6 @@ Su tutto il resto (velocità, HTTPS, dominio) sono equivalenti.
 
 Poi **Site configuration** → **Change site name** → `yotto-sushi-lovere`,
 così hai un indirizzo presentabile da mandare al cliente.
-
-Infine **Forms** → **Notifications** → aggiungi la mail dove ricevere le prenotazioni.
-
-> Puoi tenere Vercel per altri progetti. Avere entrambi gli account non crea nessun conflitto:
-> sono collegati a repository diversi.
 
 ---
 

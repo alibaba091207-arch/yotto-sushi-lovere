@@ -61,7 +61,8 @@ assets/
 
 ## Deploy
 
-GitHub → **Netlify** (non Vercel: serve Netlify Forms per il form di prenotazione).
+GitHub → **Netlify** (hosting scelto per il progetto; il `netlify.toml` è già pronto).
+Il form di prenotazione **non usa Netlify Forms**: compone il messaggio e apre WhatsApp precompilato.
 Sito statico: build command vuoto, publish directory `.`
 
 ## Come lavorare
