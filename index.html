@@ -132,10 +132,10 @@
     </a>
 
     <nav class="nav__links" aria-label="Sezioni del sito">
+      <a href="#il-locale">Il locale</a>
       <a href="#menu">Menù</a>
       <a href="#prezzi">Prezzi</a>
       <a href="#orari">Orari</a>
-      <a href="#il-locale">Il locale</a>
       <a href="#dove-siamo">Dove siamo</a>
       <a href="#contatti">Contatti</a>
     </nav>
@@ -156,10 +156,10 @@
   <!-- Menu mobile a tutto schermo -->
   <div class="nav__mobile" id="menu-mobile" data-nav-mobile hidden>
     <nav aria-label="Sezioni del sito">
+      <a href="#il-locale">Il locale</a>
       <a href="#menu">Menù</a>
       <a href="#prezzi">Prezzi</a>
       <a href="#orari">Orari</a>
-      <a href="#il-locale">Il locale</a>
       <a href="#dove-siamo">Dove siamo</a>
       <a href="#contatti">Contatti</a>
     </nav>
@@ -219,24 +219,6 @@
   <div class="hero__dots" role="tablist" aria-label="Scegli l'immagine di sfondo" data-hero-dots></div>
 </section>
 
-<!-- ============================ CHI SIAMO ============================ -->
-<section class="sezione chi-siamo" aria-labelledby="chi-siamo-tit">
-  <div class="contenitore chi-siamo__griglia" data-animate>
-    <figure class="chi-siamo__foto">
-      <picture>
-        <source type="image/webp" srcset="/assets/images/locale/sala-pesci-vetro-480.webp 480w, /assets/images/locale/sala-pesci-vetro-960.webp 960w" sizes="(min-width: 900px) 45vw, 100vw">
-        <img src="/assets/images/locale/sala-pesci-vetro-960.jpg" width="1080" height="1085" alt="L'installazione di pesci in vetro sospesa sul soffitto della sala" loading="lazy" decoding="async">
-      </picture>
-    </figure>
-    <div class="chi-siamo__testo">
-      <h2 id="chi-siamo-tit">Un banco di pesci sospeso sopra il lago</h2>
-      <p>Yotto nasce sul porto di Lovere, con le vetrate affacciate sull'acqua e la Valle Camonica alle spalle. Dentro, marmo verde, ottone e un'installazione di pesci in vetro che attraversa il soffitto.</p>
-      <p>In cucina, la tradizione giapponese incontra quella cinese: sushi tagliato al momento, sashimi, tempura, wok e piatti caldi. Formula all you can eat, porzioni piccole, così puoi assaggiare tutto senza sprecare niente.</p>
-      <p>D'estate si sale in terrazza, dove si cena guardando il tramonto sul lago.</p>
-    </div>
-  </div>
-</section>
-
 <!-- ============================ I NOSTRI PIATTI ============================ -->
 <section class="sezione piatti" aria-labelledby="piatti-tit">
   <div class="contenitore" data-animate>
@@ -275,6 +257,41 @@
         <picture><source type="image/webp" srcset="/assets/images/piatti/onigiri-lime-480.webp 480w, /assets/images/piatti/onigiri-lime-960.webp 960w" sizes="(min-width:900px) 20rem, (min-width:600px) 17rem, 15rem">
         <img src="/assets/images/piatti/onigiri-lime-480.jpg" width="1080" height="1090" alt="Onigiri con semi di sesamo e lime essiccato" loading="lazy" decoding="async"></picture>
       </button></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================ IL LOCALE ============================ -->
+<section class="sezione locale" id="il-locale" aria-labelledby="locale-tit">
+  <div class="contenitore" data-animate>
+    <h2 id="locale-tit">Dentro Yotto</h2>
+    <p class="locale__intro">Sala panoramica sul porto, terrazza estiva e cocktail bar.</p>
+  </div>
+  <!-- Striscia a scorrimento automatico continuo (marquee), verso destra:
+       direzione opposta a quella dei piatti. In pausa quando il mouse è sopra.
+       Con "riduci animazioni" si ferma e diventa una griglia statica. -->
+  <div class="marquee" data-marquee data-marquee-dir="dx" aria-label="Gli spazi del locale">
+    <ul class="marquee__track" data-marquee-track>
+      <li><figure class="locale__foto">
+        <picture><source type="image/webp" srcset="/assets/images/locale/sala-panoramica-lago-480.webp 480w, /assets/images/locale/sala-panoramica-lago-960.webp 960w" sizes="(min-width:900px) 20rem, (min-width:600px) 17rem, 15rem">
+        <img src="/assets/images/locale/sala-panoramica-lago-480.jpg" width="1080" height="1087" alt="La sala panoramica di Yotto con vista sul porto di Lovere" loading="lazy" decoding="async"></picture>
+      </figure></li>
+      <li><figure class="locale__foto">
+        <picture><source type="image/webp" srcset="/assets/images/locale/sala-pesci-vetro-480.webp 480w, /assets/images/locale/sala-pesci-vetro-960.webp 960w" sizes="(min-width:900px) 20rem, (min-width:600px) 17rem, 15rem">
+        <img src="/assets/images/locale/sala-pesci-vetro-480.jpg" width="1080" height="1085" alt="L'installazione di pesci in vetro sospesa sul soffitto della sala" loading="lazy" decoding="async"></picture>
+      </figure></li>
+      <li><figure class="locale__foto">
+        <picture><source type="image/webp" srcset="/assets/images/locale/sala-neon-blu-480.webp 480w, /assets/images/locale/sala-neon-blu-960.webp 960w" sizes="(min-width:900px) 20rem, (min-width:600px) 17rem, 15rem">
+        <img src="/assets/images/locale/sala-neon-blu-480.jpg" width="1080" height="1086" alt="La sala di Yotto con pannelli luminosi blu e arredi in velluto" loading="lazy" decoding="async"></picture>
+      </figure></li>
+      <li><figure class="locale__foto">
+        <picture><source type="image/webp" srcset="/assets/images/locale/terrazza-verde-480.webp 480w, /assets/images/locale/terrazza-verde-960.webp 960w" sizes="(min-width:900px) 20rem, (min-width:600px) 17rem, 15rem">
+        <img src="/assets/images/locale/terrazza-verde-480.jpg" width="1080" height="1087" alt="Il piano superiore di Yotto con tavolo tondo in marmo e piante" loading="lazy" decoding="async"></picture>
+      </figure></li>
+      <li><figure class="locale__foto">
+        <picture><source type="image/webp" srcset="/assets/images/locale/esterno-notte-480.webp 480w, /assets/images/locale/esterno-notte-960.webp 960w" sizes="(min-width:900px) 20rem, (min-width:600px) 17rem, 15rem">
+        <img src="/assets/images/locale/esterno-notte-480.jpg" width="1600" height="1213" alt="L'esterno di Yotto Sushi illuminato di sera, con la terrazza al piano superiore" loading="lazy" decoding="async"></picture>
+      </figure></li>
     </ul>
   </div>
 </section>
@@ -329,41 +346,6 @@
     <div class="prezzi__azione">
       <a class="btn btn--scuro" href="https://wa.me/393520006700?text=Ciao%20Yotto%2C%20vorrei%20prenotare%20un%20tavolo" target="_blank" rel="noopener">Prenota su WhatsApp</a>
     </div>
-  </div>
-</section>
-
-<!-- ============================ IL LOCALE ============================ -->
-<section class="sezione locale" id="il-locale" aria-labelledby="locale-tit">
-  <div class="contenitore" data-animate>
-    <h2 id="locale-tit">Dentro Yotto</h2>
-    <p class="locale__intro">Sala panoramica sul porto, terrazza estiva e cocktail bar.</p>
-  </div>
-  <!-- Striscia a scorrimento automatico continuo (marquee), verso destra:
-       direzione opposta a quella dei piatti. In pausa quando il mouse è sopra.
-       Con "riduci animazioni" si ferma e diventa una griglia statica. -->
-  <div class="marquee" data-marquee data-marquee-dir="dx" aria-label="Gli spazi del locale">
-    <ul class="marquee__track" data-marquee-track>
-      <li><figure class="locale__foto">
-        <picture><source type="image/webp" srcset="/assets/images/locale/sala-panoramica-lago-480.webp 480w, /assets/images/locale/sala-panoramica-lago-960.webp 960w" sizes="(min-width:900px) 20rem, (min-width:600px) 17rem, 15rem">
-        <img src="/assets/images/locale/sala-panoramica-lago-480.jpg" width="1080" height="1087" alt="La sala panoramica di Yotto con vista sul porto di Lovere" loading="lazy" decoding="async"></picture>
-      </figure></li>
-      <li><figure class="locale__foto">
-        <picture><source type="image/webp" srcset="/assets/images/locale/sala-pesci-vetro-480.webp 480w, /assets/images/locale/sala-pesci-vetro-960.webp 960w" sizes="(min-width:900px) 20rem, (min-width:600px) 17rem, 15rem">
-        <img src="/assets/images/locale/sala-pesci-vetro-480.jpg" width="1080" height="1085" alt="L'installazione di pesci in vetro sospesa sul soffitto della sala" loading="lazy" decoding="async"></picture>
-      </figure></li>
-      <li><figure class="locale__foto">
-        <picture><source type="image/webp" srcset="/assets/images/locale/sala-neon-blu-480.webp 480w, /assets/images/locale/sala-neon-blu-960.webp 960w" sizes="(min-width:900px) 20rem, (min-width:600px) 17rem, 15rem">
-        <img src="/assets/images/locale/sala-neon-blu-480.jpg" width="1080" height="1086" alt="La sala di Yotto con pannelli luminosi blu e arredi in velluto" loading="lazy" decoding="async"></picture>
-      </figure></li>
-      <li><figure class="locale__foto">
-        <picture><source type="image/webp" srcset="/assets/images/locale/terrazza-verde-480.webp 480w, /assets/images/locale/terrazza-verde-960.webp 960w" sizes="(min-width:900px) 20rem, (min-width:600px) 17rem, 15rem">
-        <img src="/assets/images/locale/terrazza-verde-480.jpg" width="1080" height="1087" alt="Il piano superiore di Yotto con tavolo tondo in marmo e piante" loading="lazy" decoding="async"></picture>
-      </figure></li>
-      <li><figure class="locale__foto">
-        <picture><source type="image/webp" srcset="/assets/images/locale/esterno-notte-480.webp 480w, /assets/images/locale/esterno-notte-960.webp 960w" sizes="(min-width:900px) 20rem, (min-width:600px) 17rem, 15rem">
-        <img src="/assets/images/locale/esterno-notte-480.jpg" width="1600" height="1213" alt="L'esterno di Yotto Sushi illuminato di sera, con la terrazza al piano superiore" loading="lazy" decoding="async"></picture>
-      </figure></li>
-    </ul>
   </div>
 </section>
 

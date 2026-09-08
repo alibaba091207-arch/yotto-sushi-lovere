@@ -173,6 +173,11 @@ Una sola idea forte, ripetuta: **la linea d'ottone dell'orizzonte.** Un filo sot
 
 ## 8. STRUTTURA DELLA PAGINA, SEZIONE PER SEZIONE
 
+**Ordine delle sezioni nella pagina:** Hero → I nostri piatti → Il locale → Menù →
+Prezzi → Orari → Dove siamo → Contatti → Recensioni → FAQ → Footer.
+(La sezione "Chi siamo" è stata rimossa. I numeri 8.x qui sotto sono solo
+etichette di paragrafo, non l'ordine di visualizzazione.)
+
 ### 8.1 — Hero (slideshow)
 
 **Questa è una richiesta esplicita del cliente**, ispirata a Yang.
@@ -193,22 +198,14 @@ Una sola idea forte, ripetuta: **la linea d'ottone dell'orizzonte.** Un filo sot
 ### 8.2 — Barra di navigazione
 
 - **Sticky in alto**, trasparente sull'hero, che diventa `--laguna-notte` con un filo d'ottone sotto appena si scrolla.
-- Logo a sinistra, ancore al centro/destra: **Menù · Prezzi · Orari · Il locale · Dove siamo · Contatti**
+- Logo a sinistra, ancore al centro/destra: **Il locale · Menù · Prezzi · Orari · Dove siamo · Contatti** (stesso ordine delle sezioni nella pagina)
 - A destra le icone social (vedi 8.10) e un pulsante WhatsApp compatto.
 - Su mobile: menu hamburger a tutto schermo. Deve chiudersi con `Esc`, intrappolare il focus mentre è aperto, e bloccare lo scroll del body.
 - Scroll fluido alle ancore con `scroll-behavior: smooth` e `scroll-margin-top` sulle sezioni pari all'altezza della barra (altrimenti i titoli finiscono sotto la nav — errore classico).
 
-### 8.3 — Chi siamo
+### 8.3 — Chi siamo — RIMOSSA
 
-Foto grande della sala coi pesci di vetro a fianco del testo. Testo da usare (scritto da zero, non copiato da Yang):
-
-> **Un banco di pesci sospeso sopra il lago**
->
-> Yotto nasce sul porto di Lovere, con le vetrate affacciate sull'acqua e la Valle Camonica alle spalle. Dentro, marmo verde, ottone e un'installazione di pesci in vetro che attraversa il soffitto.
->
-> In cucina, la tradizione giapponese incontra quella cinese: sushi tagliato al momento, sashimi, tempura, wok e piatti caldi. Formula all you can eat, porzioni piccole, così puoi assaggiare tutto senza sprecare niente.
->
-> D'estate si sale in terrazza, dove si cena guardando il tramonto sul lago.
+Sezione eliminata su richiesta del cliente. Non reintrodurla.
 
 ### 8.4 — I nostri piatti
 

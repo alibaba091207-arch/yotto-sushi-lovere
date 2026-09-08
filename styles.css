@@ -426,13 +426,8 @@ body.nav-aperta { overflow: hidden; }
 .sezione--chiara a:not(.btn) { color: var(--verde-vetro); }
 .sezione h2 { margin-bottom: var(--s5); }
 
-/* ---------- 10. CHI SIAMO ---------- */
-.chi-siamo__griglia { display: grid; gap: var(--s6); }
-.chi-siamo__foto { position: relative; }
-.chi-siamo__foto img { width: 100%; border: 1px solid var(--ottone); }
-.chi-siamo__testo { display: flex; flex-direction: column; gap: var(--s4); }
-
 /* ---------- 11. PIATTI + IL LOCALE: strisce a scorrimento (marquee) ---------- */
+/* (la ex sezione 10 "Chi siamo" è stata rimossa) */
 /* Due strisce che scorrono da sole in continuazione, in versi opposti:
    i piatti verso sinistra (dir="sx"), il locale verso destra (dir="dx").
    Il ciclo è senza stacchi perché script.js duplica gli elementi: la
@@ -748,7 +743,6 @@ body.nav-aperta { overflow: hidden; }
   .nav__mobile { display: none !important; }
   .social--nav { display: flex; }
 
-  .chi-siamo__griglia { grid-template-columns: 0.9fr 1.1fr; align-items: center; }
   .marquee__track > li { width: 20rem; }
 
   .prezzi__griglia { grid-template-columns: repeat(3, 1fr); }
