@@ -228,13 +228,6 @@ function initHero() {
     corrente = (i + slides.length) % slides.length;
     slides[corrente].classList.add("is-attiva");
     dots[corrente].setAttribute("aria-selected", "true");
-    // forza il restart dell'animazione Ken Burns
-    const img = $("img", slides[corrente]);
-    if (img && !prefersReducedMotion()) {
-      img.style.animation = "none";
-      void img.offsetWidth;
-      img.style.animation = "";
-    }
   }
 
   function avanti() { vaiA(corrente + 1); }

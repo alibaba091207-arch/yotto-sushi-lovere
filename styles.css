@@ -324,14 +324,11 @@ body.nav-aperta { overflow: hidden; }
 }
 .hero__slide img {
   object-fit: cover;
-  transform: scale(1.0);
+  object-position: center;
 }
-/* Ken Burns "al contrario": la slide entra leggermente zoomata e si allarga
-   fino all'immagine intera, così l'ultimo fotogramma è quello più nitido. */
-.hero__slide.is-attiva img {
-  animation: kenburns 6s ease-out forwards;
-}
-@keyframes kenburns { from { transform: scale(1.06); } to { transform: scale(1.0); } }
+/* Niente zoom sulle immagini dell'hero: le foto originali non hanno
+   risoluzione sufficiente e qualsiasi ingrandimento le rende sfocate.
+   Resta solo la dissolvenza incrociata tra una foto e l'altra. */
 
 /* fallback senza JS: mostra la prima slide */
 .no-js .hero__slide:first-child { opacity: 1; }
@@ -773,5 +770,4 @@ body.nav-aperta { overflow: hidden; }
     transition-duration: .001ms !important;
   }
   .hero__slide { transition: none; }
-  .hero__slide img, .hero__slide.is-attiva img { animation: none; transform: none; }
 }
