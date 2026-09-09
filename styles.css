@@ -429,6 +429,12 @@ body.nav-aperta { overflow: hidden; }
   text-wrap: balance;
 }
 .hero__azioni { display: flex; flex-wrap: wrap; gap: var(--s3); justify-content: center; margin-top: var(--s2); }
+/* Il pulsante pieno non deve ereditare l'alone scuro di .hero__contenuto:
+   ha gia' il suo fondo d'ottone, e l'alone gli sporca il colore facendolo
+   sembrare spento. Cosi' resta identico agli altri pulsanti oro del sito
+   (sezione Cocktail, navbar). "Guarda i menu'" invece e' trasparente sopra
+   la foto: li' l'alone serve a leggerlo, e resta. */
+.hero__azioni .btn--pieno { text-shadow: none; }
 
 .hero__dots {
   position: absolute;
