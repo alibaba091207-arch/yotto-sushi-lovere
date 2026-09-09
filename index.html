@@ -236,7 +236,7 @@
        Le card sono <button>: aprono la foto ingrandita nel lightbox.
        Con "riduci animazioni" lo scorrimento si ferma e le foto tornano
        una griglia statica e completa (vedi styles.css). -->
-  <div class="marquee" data-marquee data-marquee-dir="sx" aria-label="Alcuni dei nostri piatti">
+  <div class="marquee" data-marquee data-marquee-dir="sx" tabindex="0" role="group" aria-label="Alcuni dei nostri piatti — scorri per vederle tutte">
     <ul class="marquee__track" data-galleria data-marquee-track>
       <li><button type="button" class="piatto" data-lightbox aria-label="Ingrandisci: Tataki di tonno con granella di pistacchio e salsa al mango">
         <picture><source type="image/webp" srcset="/assets/images/piatti/tataki-tonno-01-480.webp 480w, /assets/images/piatti/tataki-tonno-01-960.webp 960w" sizes="(min-width:900px) 20rem, (min-width:600px) 17rem, 15rem">
@@ -275,7 +275,7 @@
   <!-- Striscia a scorrimento automatico continuo (marquee), verso destra:
        direzione opposta a quella dei piatti. In pausa quando il mouse è sopra.
        Con "riduci animazioni" si ferma e diventa una griglia statica. -->
-  <div class="marquee" data-marquee data-marquee-dir="dx" aria-label="Gli spazi del locale">
+  <div class="marquee" data-marquee data-marquee-dir="dx" tabindex="0" role="group" aria-label="Gli spazi del locale — scorri per vederle tutte">
     <ul class="marquee__track" data-marquee-track>
       <li><figure class="locale__foto">
         <picture><source type="image/webp" srcset="/assets/images/locale/sala-panoramica-lago-480.webp 480w, /assets/images/locale/sala-panoramica-lago-960.webp 960w" sizes="(min-width:900px) 20rem, (min-width:600px) 17rem, 15rem">

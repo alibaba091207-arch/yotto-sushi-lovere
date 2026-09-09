@@ -210,12 +210,13 @@ Sezione eliminata su richiesta del cliente. Non reintrodurla.
 
 ### 8.4 — I nostri piatti
 
-- **Striscia a scorrimento automatico continuo (marquee)**, non una griglia statica. Le foto di `assets/images/piatti/` scorrono in orizzontale, sempre, verso **sinistra**. Il ciclo è senza stacchi (gli elementi vengono duplicati: la traccia contiene due copie identiche).
+- **Striscia orizzontale** che scorre da sola verso **sinistra**, ma che si può anche **scorrere a mano**: swipe col dito, drag col mouse, scroll orizzontale con trackpad/rotellina, frecce da tastiera quando la striscia ha il focus.
 - Direzione **opposta** a quella della striscia "Il locale" (8.7): una va a sinistra, l'altra a destra.
+- **Come è fatta:** il contenitore ha `overflow-x` scrollabile (scrollbar nascosta via CSS, ma scroll attivo); lo scorrimento automatico è in JavaScript (`requestAnimationFrame` che muove `scrollLeft`), così si può "afferrare" a metà. Le foto sono duplicate più volte: quando `scrollLeft` esce dall'intervallo di una serie viene riportato indietro di una serie esatta, su contenuto identico → il loop non si vede.
 - Nessuna didascalia: le foto parlano da sole. Al passaggio del mouse, un filo d'ottone appare sul bordo e l'immagine si scurisce leggerissimamente.
-- Cliccando una foto si apre un **lightbox** semplice, scritto a mano: sfondo scuro, frecce, chiusura con `Esc` o clic fuori, navigabile da tastiera, con `aria-modal` e focus trap. Le foto sono `<button>` veri, ma i duplicati del ciclo sono `aria-hidden` e fuori dal Tab.
-- **Pausa dello scorrimento** quando è vera anche solo una tra: mouse sopra la striscia, focus da tastiera dentro la striscia, lightbox aperto. Riparte solo quando nessuna delle tre è vera. All'apertura del lightbox si ferma anche la striscia dietro, così alla chiusura le foto sono ferme dov'erano.
-- `prefers-reduced-motion: reduce`: lo scorrimento si ferma e le foto tornano una **griglia statica e completa**, senza scroll orizzontale.
+- Cliccando una foto si apre un **lightbox** semplice, scritto a mano: sfondo scuro, frecce, chiusura con `Esc` o clic fuori, navigabile da tastiera, con `aria-modal` e focus trap. Le foto sono `<button>` veri, ma i duplicati del ciclo sono `aria-hidden` e fuori dal Tab. Il clic **non** apre il lightbox se l'utente stava trascinando (spostamento > ~5 px = drag, non click).
+- **Pause che si sommano:** mouse sopra la striscia, focus da tastiera dentro, lightbox aperto, interazione di trascinamento/scroll in corso (+ ~2 s di inattività dopo). Riparte SOLO quando nessuna è attiva, e **da dove si trova** (non riavvolge). All'apertura del lightbox si ferma anche la striscia dietro.
+- `prefers-reduced-motion: reduce`: **niente scorrimento automatico**, ma lo scorrimento manuale resta disponibile.
 - Alt text descrittivi e in italiano (li trovi in sezione 12).
 
 ### 8.5 — Menù *(id: `menu`)*
@@ -251,7 +252,7 @@ Note importanti:
 
 Titolo: **Dentro Yotto**. Una riga sotto: *Sala panoramica sul porto, terrazza estiva e cocktail bar.*
 
-Le 5 foto di `assets/images/locale/` in una **striscia a scorrimento automatico continuo (marquee)**, come i piatti (8.4), ma in **direzione opposta**: questa scorre verso **destra**. Stesso ciclo senza stacchi, stesso comportamento con `prefers-reduced-motion` (si ferma e diventa una griglia statica). Qui non c'è lightbox: si mette in pausa al passaggio del mouse.
+Le 5 foto di `assets/images/locale/` in una **striscia orizzontale** come i piatti (8.4), ma in **direzione opposta**: scorre verso **destra**. Stesso funzionamento: scorre da sola ma è anche scorribile a mano (swipe, drag, trackpad, frecce), stesso loop invisibile, stesse pause, stesso comportamento con `prefers-reduced-motion`. Qui non c'è lightbox.
 
 ### 8.8 — Orari *(id: `orari`)*
 
@@ -432,7 +433,7 @@ Nell'hero e nella navbar usa **l'SVG**, non il PNG.
 2. **Prima di scrivere codice**, proponi il piano di design: token di colore, scala tipografica, wireframe testuale delle sezioni. Fermati e fallo approvare.
 3. Costruisci l'HTML semantico completo con i contenuti reali (niente lorem ipsum: i testi sono in questo brief).
 4. Poi il CSS, mobile-first.
-5. Poi il JS: slider, navbar, lightbox, orari dinamici, FAQ, banner cookie, mappa on-consent, strisce foto (marquee).
+5. Poi il JS: slider, navbar, lightbox, orari dinamici, FAQ, banner cookie, mappa on-consent, strisce foto scorribili (auto + manuale).
 6. Ottimizza le immagini (WebP + `srcset`), genera favicon e manifest.
 7. Aggiungi SEO e JSON-LD.
 8. **Verifica:** Lighthouse mobile su tutte e quattro le voci, navigazione con la sola tastiera, contrasti, e prova a 360 px, 768 px, 1440 px di larghezza.

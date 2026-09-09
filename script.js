@@ -141,38 +141,116 @@ function initMenu() {
 
 
 /* -------------------------------------------------------------
-   3-bis. STRISCE A SCORRIMENTO (marquee) — piatti e "il locale"
-   Due strisce che scorrono da sole all'infinito, in versi opposti.
-   - Il ciclo è senza stacchi: si duplicano gli elementi una volta,
-     così la traccia ha due copie identiche e l'animazione CSS la
-     sposta esattamente di metà (-50%).
-   - I cloni sono decorativi: nascosti agli screen reader e fuori dal Tab.
-   - Pausa: la striscia scorre solo se NESSUNA di queste è vera →
-     mouse sopra la striscia, focus da tastiera dentro, lightbox aperto.
-     La condizione "lightbox" è pilotata da initLightbox tramite
-     l'handler mq.pausaPerLightbox().
-   - Con "riduci animazioni" attivo il CSS ferma tutto e mostra le foto
-     come griglia statica: qui evitiamo anche di duplicare gli elementi.
+   3-bis. STRISCE A SCORRIMENTO — piatti e "il locale"
+   Due strisce orizzontali che scorrono da sole in versi opposti
+   (piatti verso sinistra, locale verso destra) MA che si possono
+   anche scorrere a mano: swipe sul telefono, drag col mouse,
+   scroll orizzontale con trackpad/rotellina, frecce da tastiera.
+
+   Come funziona:
+   - Il contenitore .marquee ha overflow-x scrollabile (scrollbar
+     nascosta via CSS). Swipe, trackpad e frecce funzionano nativi.
+   - Lo scorrimento automatico è in JS: un requestAnimationFrame che
+     incrementa/decrementa scrollLeft. Così si può "afferrare" a metà.
+   - Loop infinito invisibile: gli elementi vengono duplicati più volte;
+     quando scrollLeft esce dall'intervallo di una serie viene riportato
+     indietro (o avanti) di una serie esatta, su contenuto identico:
+     lo stacco non si vede.
+   - Pause che si sommano: mouse sopra, focus da tastiera dentro,
+     lightbox aperto, e interazione di trascinamento/scroll in corso
+     (+ ~2 s di inattività dopo). Riprende SOLO se nessuna è attiva,
+     e riprende da dove si trova.
+   - Il clic su una foto apre il lightbox, ma NON se era un drag
+     (spostamento del puntatore > ~5 px): vedi mq.gestoEraDrag().
+   - prefers-reduced-motion: niente scorrimento automatico (niente
+     cloni, niente rAF), lo scorrimento manuale resta disponibile.
    ------------------------------------------------------------- */
 function initMarquee() {
   const strisce = $$("[data-marquee]");
   if (!strisce.length) return;
 
   const menoMovimento = prefersReducedMotion();
+  const SOGLIA_DRAG = 5;      // px oltre i quali un press diventa "drag", non "click"
+  const ATTESA_RIPRESA = 2000; // ms di inattività prima che riparta l'automatico
 
   strisce.forEach((mq) => {
     const track = $("[data-marquee-track]", mq);
     if (!track) return;
-
     const originali = Array.from(track.children);
     if (!originali.length) return;
 
-    // indice stabile su ogni elemento (serve al lightbox per ritrovare la foto
+    // indice stabile su ogni <li> (il lightbox lo usa per ritrovare la foto
     // giusta anche quando si clicca su un clone)
     originali.forEach((el, i) => { el.dataset.marqueeIndice = String(i); });
 
-    if (!menoMovimento) {
-      // Duplica una volta gli elementi per il ciclo continuo.
+    // il contenitore riceve il focus: così le frecce da tastiera lo scrollano
+    if (!mq.hasAttribute("tabindex")) mq.tabIndex = 0;
+
+    /* ---- distinzione drag / click (serve sempre, anche con reduced-motion) ---- */
+    let puntatoreGiu = false;
+    let mossoOltreSoglia = false;
+    let trascinandoMouse = false;
+    let startX = 0, ultimoX = 0;
+
+    mq.gestoEraDrag = () => mossoOltreSoglia;
+
+    mq.addEventListener("pointerdown", (e) => {
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+      puntatoreGiu = true;
+      mossoOltreSoglia = false;
+      startX = ultimoX = e.clientX;
+      segnalaInterazione();
+      // per il mouse gestiamo noi il drag; touch/pen usano lo scroll nativo
+      if (e.pointerType === "mouse") {
+        trascinandoMouse = true;
+        mq.classList.add("is-trascinando");
+        try { mq.setPointerCapture(e.pointerId); } catch (_) {}
+      }
+    });
+    mq.addEventListener("pointermove", (e) => {
+      if (!puntatoreGiu) return;
+      if (Math.abs(e.clientX - startX) > SOGLIA_DRAG) mossoOltreSoglia = true;
+      segnalaInterazione();
+      if (trascinandoMouse) {
+        mq.scrollLeft -= (e.clientX - ultimoX);
+        ultimoX = e.clientX;
+      }
+    });
+    const finePress = (e) => {
+      puntatoreGiu = false;
+      if (trascinandoMouse) {
+        trascinandoMouse = false;
+        mq.classList.remove("is-trascinando");
+        try { mq.releasePointerCapture(e.pointerId); } catch (_) {}
+      }
+      segnalaInterazione(); // fa partire il conteggio dei ~2 s
+    };
+    mq.addEventListener("pointerup", finePress);
+    mq.addEventListener("pointercancel", finePress);
+    mq.addEventListener("dragstart", (e) => e.preventDefault()); // niente "fantasma" dell'immagine
+
+    /* ---------------- da qui in poi: solo scorrimento automatico ---------------- */
+    // segnalaInterazione va definita anche se usciamo subito (reduced-motion)
+    let cond = { hover: false, focus: false, lightbox: false, interazione: false };
+    let timerRipresa = null;
+    function segnalaInterazione() {
+      cond.interazione = true;
+      if (timerRipresa) clearTimeout(timerRipresa);
+      timerRipresa = setTimeout(() => { cond.interazione = false; }, ATTESA_RIPRESA);
+    }
+
+    if (menoMovimento) {
+      mq.pausaPerLightbox = () => {};   // no-op: non c'è nulla da mettere in pausa
+      return;                           // niente cloni, niente rAF
+    }
+
+    // Quante copie servono perché il "salto" del loop non tocchi mai i bordi
+    // dello scroll. Stima prudente con la foto più stretta (15rem) e la
+    // larghezza massima possibile della finestra.
+    const larghezzaMax = (window.screen && window.screen.width) || window.innerWidth;
+    const serieStretta = originali.length * (15 * 16 + 16);
+    const nCopie = Math.min(8, Math.max(3, Math.ceil(larghezzaMax / serieStretta) + 2));
+    for (let c = 0; c < nCopie; c++) {
       originali.forEach((el) => {
         const clone = el.cloneNode(true);
         clone.classList.add("is-clone");
@@ -181,26 +259,106 @@ function initMarquee() {
           .forEach((f) => f.setAttribute("tabindex", "-1"));
         track.appendChild(clone);
       });
-
-      // Velocità costante: ~4,5 s per foto, così resta uguale anche se
-      // un domani se ne aggiungono o tolgono.
-      track.style.setProperty("--marquee-durata", (originali.length * 4.5) + "s");
     }
 
-    // --- gestione della pausa -------------------------------------------------
-    const cond = { hover: false, focus: false, lightbox: false };
-    const applica = () => {
-      const inPausa = cond.hover || cond.focus || cond.lightbox;
-      mq.classList.toggle("is-in-pausa", inPausa);
+    // Larghezza di UNA serie = n foto + il loro stacco (margine destro).
+    const misuraSerie = () => {
+      let w = 0;
+      originali.forEach((el) => {
+        const cs = getComputedStyle(el);
+        w += el.getBoundingClientRect().width +
+             parseFloat(cs.marginRight || cs.marginInlineEnd || "0");
+      });
+      return w;
     };
+    let seriesW = misuraSerie();
+    if (!seriesW) { mq.pausaPerLightbox = () => {}; return; }
 
-    // handler usato da initLightbox (true = lightbox aperto)
-    mq.pausaPerLightbox = (aperto) => { cond.lightbox = !!aperto; applica(); };
+    const segno = mq.dataset.marqueeDir === "dx" ? -1 : 1;
+    let velocita = seriesW / (originali.length * 4.5); // px/s (~4,5 s a foto)
 
-    mq.addEventListener("mouseenter", () => { cond.hover = true;  applica(); });
-    mq.addEventListener("mouseleave", () => { cond.hover = false; applica(); });
-    mq.addEventListener("focusin",    () => { cond.focus = true;  applica(); });
-    mq.addEventListener("focusout",   () => { cond.focus = false; applica(); });
+    // Partenza: chi va a sinistra (sx) parte dall'inizio della 2ª serie e sale;
+    // chi va a destra (dx) parte dalla fine della 2ª serie e scende. Così
+    // entrambi hanno una serie intera di margine prima del primo riavvolgimento.
+    let pos = segno > 0 ? seriesW : (2 * seriesW - 2);
+    let atteso = pos;
+    mq.scrollLeft = pos;
+
+    /* --- pause --- */
+    const scorreDaSolo = () =>
+      !cond.hover && !cond.focus && !cond.lightbox && !cond.interazione;
+
+    mq.pausaPerLightbox = (aperto) => { cond.lightbox = !!aperto; };
+
+    mq.addEventListener("mouseenter", () => { cond.hover = true; });
+    mq.addEventListener("mouseleave", () => { cond.hover = false; });
+    mq.addEventListener("focusin",  () => { cond.focus = true; });
+    mq.addEventListener("focusout", () => { cond.focus = false; });
+    mq.addEventListener("keydown", (e) => {
+      if (/^Arrow|^Page|^Home$|^End$/.test(e.key)) segnalaInterazione();
+    });
+    // scroll orizzontale con trackpad / rotellina (anche Shift+rotellina)
+    mq.addEventListener("wheel", (e) => {
+      if (e.deltaX !== 0 || e.shiftKey) segnalaInterazione();
+    }, { passive: true });
+
+    /* --- loop invisibile: riporta scrollLeft nell'intervallo [seriesW, 2·seriesW),
+       su contenuto identico, così lo stacco non si vede. Si fa solo quando lo
+       scorrimento manuale si è fermato (~120 ms), per non spezzare lo slancio. --- */
+    function normalizza() {
+      const s = mq.scrollLeft;
+      if (s >= 2 * seriesW || s < seriesW) {
+        mq.scrollLeft = seriesW + (((s - seriesW) % seriesW) + seriesW) % seriesW;
+      }
+      pos = mq.scrollLeft;
+      atteso = mq.scrollLeft;
+    }
+    let tNorm = null;
+    mq.addEventListener("scroll", () => {
+      if (Math.abs(mq.scrollLeft - atteso) > 2) segnalaInterazione();
+      if (scorreDaSolo()) { atteso = mq.scrollLeft; return; }
+      pos = mq.scrollLeft;
+      if (tNorm) clearTimeout(tNorm);
+      tNorm = setTimeout(normalizza, 120);
+    }, { passive: true });
+
+    /* --- motore dello scorrimento automatico --- */
+    let ultimoT = null;
+    function tick(t) {
+      const dt = ultimoT == null ? 0 : Math.min((t - ultimoT) / 1000, 0.1);
+      ultimoT = t;
+      if (scorreDaSolo()) {
+        pos += segno * velocita * dt;
+        if (pos >= 2 * seriesW) pos -= seriesW;
+        else if (pos < seriesW) pos += seriesW;
+        mq.scrollLeft = pos;
+        const reale = mq.scrollLeft;
+        if (Math.abs(reale - pos) > 1) pos = reale; // il browser ha clampato
+        atteso = reale;
+      } else {
+        pos = mq.scrollLeft;
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    /* --- ai breakpoint le foto cambiano larghezza: ricalcola la serie --- */
+    let tResize = null;
+    window.addEventListener("resize", () => {
+      if (tResize) clearTimeout(tResize);
+      tResize = setTimeout(() => {
+        const nuova = misuraSerie();
+        if (nuova > 0 && Math.abs(nuova - seriesW) > 0.5) {
+          let frazione = (mq.scrollLeft - seriesW) / seriesW;
+          frazione = Math.min(Math.max(frazione, 0), 1);
+          seriesW = nuova;
+          velocita = seriesW / (originali.length * 4.5);
+          pos = seriesW + frazione * seriesW;
+          mq.scrollLeft = pos;
+          atteso = pos;
+        }
+      }, 200);
+    });
   });
 }
 
@@ -436,6 +594,8 @@ function initLightbox() {
 
   bottoni.forEach((b) => {
     b.addEventListener("click", () => {
+      // se l'utente stava trascinando la striscia, il "clic" non deve aprire nulla
+      if (mqDietro && mqDietro.gestoEraDrag && mqDietro.gestoEraDrag()) return;
       const host = b.closest("[data-marquee-indice]");
       const i = host ? Number(host.dataset.marqueeIndice) : bottoni.indexOf(b);
       apri(i);
