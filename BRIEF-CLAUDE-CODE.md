@@ -256,7 +256,7 @@ Note importanti:
 
 Titolo: **Dentro Yotto**. Una riga sotto: *Sala panoramica sul porto, terrazza estiva e cocktail bar.*
 
-Le 5 foto di `assets/images/locale/` in una **striscia orizzontale** come i piatti (8.4), ma in **direzione opposta**: scorre verso **destra**. Stesso funzionamento: scorre da sola ma è anche scorribile a mano (swipe, drag, trackpad, frecce), stesso loop invisibile, stesse pause, stesso comportamento con `prefers-reduced-motion`. Qui non c'è lightbox.
+Le 6 foto di `assets/images/locale/` in una **striscia orizzontale** come i piatti (8.4), ma in **direzione opposta**: scorre verso **destra**. Stesso funzionamento: scorre da sola ma è anche scorribile a mano (swipe, drag, trackpad, frecce), stesso loop invisibile, stesse pause, stesso comportamento con `prefers-reduced-motion`. Qui non c'è lightbox.
 
 ### 8.7-bis — Cocktail Night *(id: `cocktail`)*
 
@@ -398,8 +398,8 @@ Tutte le foto sono già in `assets/images/`. Sono quadrate (1080×1080 circa) tr
 | `04-sala-pesci-vetro.jpg` | Installazione di pesci in vetro azzurro, divani verdi | `L'installazione di pesci in vetro sospesa sul soffitto della sala` |
 | `05-terrazza-verde.jpg` | Piano superiore, tavolo tondo in marmo, verde, insegna YOTTO | `Il piano superiore di Yotto con tavolo tondo in marmo e piante` |
 
-### `locale/` — sezione "Dentro Yotto" (5 foto)
-`esterno-notte.jpg` · `sala-panoramica-lago.jpg` · `sala-pesci-vetro.jpg` · `sala-neon-blu.jpg` (sala con pannelli al neon blu) · `terrazza-verde.jpg`
+### `locale/` — sezione "Dentro Yotto" (6 foto)
+`esterno-notte.jpg` · `sala-panoramica-lago.jpg` · `sala-pesci-vetro.jpg` · `sala-neon-blu.jpg` (sala con pannelli al neon blu) · `lounge-velluto.jpg` (area lounge, divani curvi in velluto arancione attorno alla colonna di piante, tavolini in marmo e ottone) · `terrazza-verde.jpg`
 
 Alt per la neon blu: `La sala di Yotto con pannelli luminosi blu e arredi in velluto`
 
