@@ -14,9 +14,15 @@ desktop.ini
 .cache/
 node_modules/
 
+# Stato locale di Wrangler / Cloudflare
+.wrangler/
+
 # Materiale di consultazione: NON deve finire online
 assets/images/riferimenti/
 
 # File di lavoro locali (immagini sorgente prima della conversione in WebP, ecc.)
 _lavoro/
 *.psd
+
+# Tipi generati da "wrangler types" (non servono a un sito statico)
+worker-configuration.d.ts

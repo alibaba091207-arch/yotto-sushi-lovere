@@ -1,0 +1,23 @@
+# File che NON devono essere pubblicati online da Cloudflare.
+# Sintassi identica a .gitignore. Cloudflare carica tutto il resto della
+# cartella indicata in wrangler.jsonc ("assets.directory").
+
+# Cartelle di sistema / versionamento
+.git/
+.wrangler/
+
+# Configurazioni e strumenti di sviluppo
+wrangler.jsonc
+netlify.toml
+_ottimizza-immagini.py
+.claude/
+.gitignore
+.gitattributes
+
+# Documentazione interna del progetto (CLAUDE.md, BRIEF-CLAUDE-CODE.md,
+# README.md, GUIDA-PER-TE.md, PARTENZA-PULITA.md)
+*.md
+
+# Materiale di consultazione e file sorgente non usati dal sito
+assets/images/riferimenti/
+assets/images/brand/logo-yotto-ORIGINALE.jpg

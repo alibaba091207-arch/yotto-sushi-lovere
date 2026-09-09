@@ -1,0 +1,20 @@
+{
+  // Configurazione per pubblicare il sito su Cloudflare Workers (Static Assets).
+  // Il sito è statico: NON c'è codice server, Cloudflare serve solo i file.
+  // Per aggiornare il sito basta fare push su GitHub: Cloudflare ripubblica da solo.
+
+  "name": "yotto-sushi-lovere",
+  "compatibility_date": "2026-09-09",
+
+  "assets": {
+    // Cartella con i file da mettere online: qui è la radice del progetto
+    // (index.html, styles.css, script.js, la cartella assets/, ecc.).
+    // I file che NON devono finire online sono elencati in .assetsignore
+    // (README, brief, script Python, questo file di config, cartella .git...).
+    "directory": "./",
+
+    // Pagina 404: se qualcuno apre un indirizzo che non esiste, Cloudflare
+    // mostra /404.html con codice di stato 404 corretto (utile anche per la SEO).
+    "not_found_handling": "404-page"
+  }
+}
