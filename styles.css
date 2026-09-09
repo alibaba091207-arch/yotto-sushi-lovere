@@ -430,22 +430,6 @@ body.nav-aperta { overflow: hidden; }
 }
 .hero__azioni { display: flex; flex-wrap: wrap; gap: var(--s3); justify-content: center; margin-top: var(--s2); }
 
-/* Il pulsante principale dell'hero ("Prenota su WhatsApp") sta su una foto
-   scura e movimentata: il colore è quello giusto (--ottone), ma senza
-   stacco sembra spento. Gli diamo un filo luminoso sul bordo e un'ombra
-   morbida, così si legge come ottone acceso e si separa dallo sfondo. */
-.hero__azioni .btn--pieno {
-  --btn-bd: var(--ottone-luce);
-  box-shadow:
-    0 2px 6px rgba(0, 0, 0, .35),
-    0 10px 28px rgba(10, 20, 19, .45);
-}
-.hero__azioni .btn--pieno:hover {
-  box-shadow:
-    0 2px 6px rgba(0, 0, 0, .35),
-    0 12px 32px rgba(10, 20, 19, .5);
-}
-
 .hero__dots {
   position: absolute;
   bottom: clamp(1.25rem, 4vw, 2.25rem);
