@@ -111,11 +111,12 @@
     { "@type": "Question", "name": "Quanto costa?", "acceptedAnswer": { "@type": "Answer", "text": "Pranzo da 16,90 €, cena 30,90 € più 2 € di coperto. Tutti i prezzi nella sezione Prezzi." } },
     { "@type": "Question", "name": "I bambini pagano?", "acceptedAnswer": { "@type": "Answer", "text": "Fino a 130 cm c'è il prezzo ridotto, sotto i 4 anni non pagano." } },
     { "@type": "Question", "name": "C'è la terrazza?", "acceptedAnswer": { "@type": "Answer", "text": "Sì, aperta nella bella stagione, con vista sul lago." } },
+    { "@type": "Question", "name": "Si può parcheggiare?", "acceptedAnswer": { "@type": "Answer", "text": "Sì, un parcheggio enorme gratuito sotto il campo sportivo." } },
     { "@type": "Question", "name": "Ci sono piatti vegetariani?", "acceptedAnswer": { "@type": "Answer", "text": "Sì, diverse proposte. Per allergie e intolleranze avvisa al momento dell'ordine." } },
     { "@type": "Question", "name": "Accettate gruppi ed eventi?", "acceptedAnswer": { "@type": "Answer", "text": "Sì, contattaci su WhatsApp per gruppi numerosi." } }
   ]
 }
-<!-- TODO: aggiungere le domande "Si può parcheggiare?" e "Fate asporto?" quando il cliente conferma le risposte -->
+<!-- TODO: aggiungere la domanda "Fate asporto?" quando il cliente conferma la risposta -->
 </script>
 </head>
 
@@ -155,6 +156,9 @@
 
   <!-- Menu mobile a tutto schermo -->
   <div class="nav__mobile" id="menu-mobile" data-nav-mobile hidden>
+    <button class="nav__mobile-chiudi" type="button" data-nav-chiudi aria-label="Chiudi il menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
     <nav aria-label="Sezioni del sito">
       <a href="#il-locale">Il locale</a>
       <a href="#menu">Menù</a>
@@ -209,6 +213,7 @@
   <div class="hero__contenuto">
     <span class="logo-segno logo-segno--hero" aria-hidden="true"></span>
     <h1 class="hero__titolo">Sushi &amp; Asian Cuisine sul Lago d'Iseo</h1>
+    <p class="hero__offerta">Menù All You Can Eat &amp; Menù alla Carta</p>
     <p class="hero__sottotitolo">Lovere — Via del Cantiere 10</p>
     <div class="hero__azioni">
       <a class="btn btn--pieno" href="https://wa.me/393520006700?text=Ciao%20Yotto%2C%20vorrei%20prenotare%20un%20tavolo" target="_blank" rel="noopener">Prenota su WhatsApp</a>
@@ -327,7 +332,7 @@
         <p class="prezzo-card__quando">Sabato, domenica e festivi · 12:00–15:00</p>
         <dl class="prezzo-card__voci">
           <div><dt>Adulti</dt><dd>23,90 €</dd></div>
-          <div><dt>Bambini fino a 130 cm</dt><dd>15,90 €</dd></div>
+          <div><dt>Bambini fino a 130 cm</dt><dd>14,90 €</dd></div>
           <div><dt>Sotto i 4 anni</dt><dd>gratis</dd></div>
         </dl>
       </article>
@@ -375,7 +380,13 @@
   <div class="contenitore">
     <h2 id="dove-tit">Dove siamo</h2>
     <p class="dove-siamo__indirizzo">Via del Cantiere 10, 24065 Lovere (BG)</p>
-    <p class="dove-siamo__parcheggio">Parcheggio disponibile in zona porto. <!-- VERIFICARE con il cliente --></p>
+    <p class="parcheggio-badge">
+      <svg class="parcheggio-badge__ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <rect x="2.6" y="2.6" width="18.8" height="18.8" rx="4" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <path fill="currentColor" d="M8.7 6.5h4.2c2.2 0 3.7 1.4 3.7 3.6 0 2.2-1.5 3.6-3.8 3.6h-2V17.5H8.7V6.5Zm2.1 1.9v3.4h1.8c1.1 0 1.8-.7 1.8-1.7 0-1-.7-1.7-1.8-1.7h-1.8Z"/>
+      </svg>
+      <span>Parcheggio gratuito sotto il campo sportivo</span>
+    </p>
     <a class="btn btn--contorno" href="https://maps.google.com/?q=Via+del+Cantiere+10,+24065+Lovere+BG" target="_blank" rel="noopener">Apri in Google Maps</a>
 
     <div class="mappa" data-mappa>
@@ -395,7 +406,7 @@
     <p class="contatti__intro">Per prenotare un tavolo scrivici su WhatsApp: è il modo più veloce. Puoi anche chiamarci.</p>
     <a class="btn btn--scuro contatti__wa" href="https://wa.me/393520006700?text=Ciao%20Yotto%2C%20vorrei%20prenotare%20un%20tavolo" target="_blank" rel="noopener">Prenota su WhatsApp</a>
     <ul class="contatti__voci">
-      <li><span>Telefono</span> <a href="tel:+390350297470">035 029 7470</a></li>
+      <li><span>Telefono</span> <a href="tel:+393520006700">3520006700</a> <span class="tel-sep" aria-hidden="true">/</span> <a href="tel:+390350297470">0350297470</a></li>
       <li><span>Indirizzo</span> <a href="https://maps.google.com/?q=Via+del+Cantiere+10,+24065+Lovere+BG" target="_blank" rel="noopener">Via del Cantiere 10, 24065 Lovere (BG)</a></li>
       <li><span>Orari</span> Tutti i giorni · 12:00–15:00 e 19:00–23:30</li>
     </ul>
@@ -431,7 +442,7 @@
       <details><summary>Quanto costa?</summary><div class="faq__risposta"><p>Pranzo da 16,90 €, cena 30,90 € più 2 € di coperto. Tutti i prezzi nella sezione <a href="#prezzi">Prezzi</a>.</p></div></details>
       <details><summary>I bambini pagano?</summary><div class="faq__risposta"><p>Fino a 130 cm c'è il prezzo ridotto, sotto i 4 anni non pagano.</p></div></details>
       <details><summary>C'è la terrazza?</summary><div class="faq__risposta"><p>Sì, aperta nella bella stagione, con vista sul lago.</p></div></details>
-      <details><summary>Si può parcheggiare?</summary><div class="faq__risposta"><p>Sì, in zona porto. <!-- VERIFICARE con il cliente: dettagli parcheggio --></p></div></details>
+      <details><summary>Si può parcheggiare?</summary><div class="faq__risposta"><p>Sì, un parcheggio enorme gratuito sotto il campo sportivo.</p></div></details>
       <details><summary>Fate asporto?</summary><div class="faq__risposta"><p>Sì, con la stessa selezione del menù cena. <!-- VERIFICARE con il cliente: asporto/delivery --></p></div></details>
       <details><summary>Ci sono piatti vegetariani?</summary><div class="faq__risposta"><p>Sì, diverse proposte. Per allergie e intolleranze avvisa al momento dell'ordine.</p></div></details>
       <details><summary>Accettate gruppi ed eventi?</summary><div class="faq__risposta"><p>Sì, contattaci su WhatsApp per gruppi numerosi.</p></div></details>
@@ -450,7 +461,7 @@
     </div>
     <div class="footer__col">
       <p>Via del Cantiere 10<br>24065 Lovere (BG)</p>
-      <p><a href="tel:+390350297470">035 029 7470</a><br>
+      <p><a href="tel:+393520006700">3520006700</a> <span class="tel-sep" aria-hidden="true">/</span> <a href="tel:+390350297470">0350297470</a><br>
          <a href="https://wa.me/393520006700" target="_blank" rel="noopener">WhatsApp</a></p>
     </div>
     <div class="footer__col">

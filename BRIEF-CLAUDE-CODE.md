@@ -49,7 +49,7 @@ Pranzo, dal lunedì al venerdì
 
 Pranzo, sabato / domenica / festivi
 - Adulti — 23,90 €
-- Bambini fino a 130 cm — 15,90 €
+- Bambini fino a 130 cm — 14,90 €
 - Sotto i 4 anni — gratis
 
 Cena, tutti i giorni
@@ -189,6 +189,7 @@ etichette di paragrafo, non l'ordine di visualizzazione.)
 - Contenuto fisso, centrato:
   - Logo YOTTO
   - Titolo: **Sushi & Asian Cuisine sul Lago d'Iseo**
+  - Riga sotto il titolo: *Menù All You Can Eat & Menù alla Carta*
   - Sottotitolo: *Lovere — Via del Cantiere 10*
   - Due pulsanti: **Prenota su WhatsApp** (pieno, ottone) e **Guarda i menù** (contorno ottone, ancora a `#menu`)
 - Indicatori a puntini in basso, cliccabili, con `aria-label` sensati.
@@ -226,7 +227,7 @@ Genera i pulsanti da un array in `script.js`, così aggiungerne uno domani costa
 ```js
 const MENU = [
   { file: "menu-pranzo.pdf",  nome: "Menù Pranzo",   nota: "Dal lunedì al venerdì, 12:00–15:00" },
-  { file: "menu-festivo.pdf", nome: "Menù Festivo",  nota: "Sabato, domenica e festivi" },
+  { file: "menu-festivo.pdf", nome: "Menù Pranzo Festivo", nota: "Sabato, domenica e festivi" },
   { file: "menu-cena.pdf",    nome: "Menù Cena",     nota: "Tutti i giorni, 19:00–23:30" },
   { file: "menu-cena.pdf",    nome: "Menù Asporto",  nota: "Stessa selezione del menù cena" },
 ];
@@ -264,12 +265,12 @@ Le 5 foto di `assets/images/locale/` in una **striscia a scorrimento automatico 
 
 - Indirizzo completo + pulsante **Apri in Google Maps** (link `https://maps.google.com/?q=Via+del+Cantiere+10,+24065+Lovere+BG`) — questo funziona sempre, anche senza consenso cookie.
 - Sotto, la mappa incorporata **caricata solo dopo consenso**: finché il consenso manca, mostra un riquadro con un'immagine statica sfocata o un fondo `--verde-vetro`, la scritta *"Carica la mappa di Google"* e una riga che spiega che il caricamento comporta una connessione ai server Google. Al clic, si inserisce l'`<iframe>` via JS.
-- Aggiungi una riga utile: *"Parcheggio disponibile in zona porto."* (da confermare col cliente — lasciare un commento `<!-- VERIFICARE -->`)
+- Badge/riquadro in risalto con icona di parcheggio e testo *"Parcheggio gratuito sotto il campo sportivo"*, vicino a indirizzo e mappa (l'informazione è utile e nella sola FAQ resterebbe nascosta in un accordion chiuso).
 
 ### 8.10 — Contatti *(id: `contatti`)*
 
 - **WhatsApp** — pulsante grande, principale. Link `https://wa.me/393520006700?text=Ciao%20Yotto%2C%20vorrei%20prenotare%20un%20tavolo` (il messaggio precompilato aumenta parecchio le conversioni).
-- **Telefono** — `tel:+390350297470`, cliccabile.
+- **Telefono** — si mostrano **entrambi** i numeri, testo visibile esattamente `3520006700 / 0350297470`, con "/" come separatore visivo non cliccabile. Due link `tel:` separati in formato internazionale: `tel:+393520006700` e `tel:+390350297470`. Stessa cosa nel footer.
 - **Indirizzo** — con link alla mappa.
 - **Niente form di prenotazione.** Il cliente non vuole raccogliere richieste (né via email né altro). La prenotazione avviene solo tramite il **pulsante "Prenota su WhatsApp"** (link `wa.me` con messaggio precompilato) e il telefono. Nessun campo da compilare, nessun consenso privacy, niente Netlify Forms.
 - **Icone social** — questa è una richiesta esplicita del cliente: **solo icone cliccabili, il link non si deve vedere.**
@@ -294,7 +295,7 @@ Accordion accessibile (`<details>`/`<summary>` va benissimo, è nativo e accessi
 3. **Quanto costa?** — Pranzo da 16,90 €, cena 30,90 € più 2 € di coperto. Tutti i prezzi nella sezione Prezzi.
 4. **I bambini pagano?** — Fino a 130 cm c'è il prezzo ridotto, sotto i 4 anni non pagano.
 5. **C'è la terrazza?** — Sì, aperta nella bella stagione, con vista sul lago.
-6. **Si può parcheggiare?** — *(da confermare col cliente)*
+6. **Si può parcheggiare?** — Sì, un parcheggio enorme gratuito sotto il campo sportivo.
 7. **Fate asporto?** — *(da confermare col cliente — se sì, rimandare al menù asporto)*
 8. **Ci sono piatti vegetariani?** — Sì, diverse proposte. Per allergie e intolleranze avvisa al momento dell'ordine.
 9. **Accettate gruppi ed eventi?** — Sì, contattaci su WhatsApp per gruppi numerosi.
@@ -466,8 +467,6 @@ Nell'hero e nella navbar usa **l'SVG**, non il PNG.
 | Link Instagram, Facebook, TikTok | Icone social |
 | Ragione sociale e P.IVA | Footer, privacy |
 | Conferma: fanno asporto/delivery? | FAQ, menù asporto |
-| Conferma: c'è parcheggio? | FAQ, sezione mappa |
-| Conferma: il menù festivo vale solo per il pranzo? | Etichetta del pulsante |
 | Testo delle policy legali | Pagine legali |
 | Il dominio (es. `yottosushi.it`) | Deploy |
 

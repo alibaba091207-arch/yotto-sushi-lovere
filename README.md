@@ -18,7 +18,7 @@ I menù sono 3 file dentro la cartella `assets/menu/`:
 | File | A cosa serve |
 |---|---|
 | `menu-pranzo.pdf`  | Menù Pranzo (lun–ven) |
-| `menu-festivo.pdf` | Menù Festivo (sab, dom e festivi) |
+| `menu-festivo.pdf` | Menù Pranzo Festivo (sab, dom e festivi) |
 | `menu-cena.pdf`    | Menù Cena **e** Menù Asporto (stesso file) |
 
 **I nomi non vanno mai cambiati.** Per aggiornare un menù:
@@ -137,8 +137,7 @@ di consultazione (la foto del listino prezzi).
       cerca `TODO: recensioni reali`). **Non inventare recensioni.**
 - [ ] Coordinate della mappa per i dati Google (cerca `TODO` con la parola `geo`
       in `index.html`)
-- [ ] Conferme dal cliente: c'è il parcheggio? fanno asporto/delivery? il menù
-      festivo vale solo a pranzo? (cerca i commenti `VERIFICARE` nei file)
+- [ ] Conferma dal cliente: fanno asporto/delivery? (cerca i commenti `VERIFICARE` nei file)
 - [ ] Quando ci sarà il dominio vero (es. `www.yottosushi.it`), sostituirlo in:
       `index.html`, `sitemap.xml`, `robots.txt`, `site.webmanifest`
 

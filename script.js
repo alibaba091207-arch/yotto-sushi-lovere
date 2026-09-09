@@ -32,7 +32,7 @@ const WHATSAPP_URL = "https://wa.me/393520006700?text=Ciao%20Yotto%2C%20vorrei%2
 // NB: "Cena" e "Asporto" puntano di proposito allo stesso PDF.
 const MENU = [
   { file: "menu-pranzo.pdf",  nome: "Menù Pranzo",  nota: "Dal lunedì al venerdì, 12:00–15:00" },
-  { file: "menu-festivo.pdf", nome: "Menù Festivo", nota: "Sabato, domenica e festivi" },
+  { file: "menu-festivo.pdf", nome: "Menù Pranzo Festivo", nota: "Sabato, domenica e festivi" },
   { file: "menu-cena.pdf",    nome: "Menù Cena",    nota: "Tutti i giorni, 19:00–23:30" },
   { file: "menu-cena.pdf",    nome: "Menù Asporto", nota: "Stessa selezione del menù cena" },
 ];
@@ -256,6 +256,9 @@ function initNavbar() {
   toggle.addEventListener("click", () => {
     (toggle.getAttribute("aria-expanded") === "true") ? chiudi() : apri();
   });
+  // pulsante X in alto a destra nel menu mobile (raggiungibile da Tab, attivabile
+  // con Invio/Spazio perché è un <button>; l'Esc è già gestito da suEsc)
+  $("[data-nav-chiudi]", mobile)?.addEventListener("click", chiudi);
   // chiudi quando si clicca un link della navigazione mobile
   $$("a", mobile).forEach((a) => a.addEventListener("click", chiudi));
   // se si passa a desktop mentre è aperto

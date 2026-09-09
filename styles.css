@@ -275,6 +275,24 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + 1rem); }
   text-align: center;
 }
 .nav__mobile[hidden] { display: none; }
+
+/* X per chiudere, in alto a destra. È un <button>: raggiungibile con Tab,
+   attivabile con Invio/Spazio. L'Esc è gestito in script.js. */
+.nav__mobile-chiudi {
+  position: absolute;
+  top: clamp(.75rem, 3vw, 1.5rem);
+  right: clamp(.75rem, 3vw, 1.5rem);
+  width: 2.75rem; height: 2.75rem;
+  display: grid; place-items: center;
+  background: transparent;
+  border: 1.5px solid var(--ottone);
+  border-radius: var(--raggio);
+  color: var(--crema);
+  cursor: pointer;
+}
+.nav__mobile-chiudi:hover { background: var(--ottone); color: var(--laguna-notte); }
+.nav__mobile-chiudi svg { width: 1.25rem; height: 1.25rem; }
+
 .nav__mobile nav { display: flex; flex-direction: column; gap: var(--s4); }
 .nav__mobile a:not(.btn) {
   font-family: "Fraunces", serif;
@@ -377,6 +395,11 @@ body.nav-aperta { overflow: hidden; }
   pointer-events: none;
 }
 .hero__titolo { max-width: 16ch; }
+.hero__offerta {
+  color: var(--ottone-luce);
+  font-size: clamp(1rem, 1.4vw + .7rem, 1.2rem);
+  max-width: 26ch;
+}
 .hero__sottotitolo { color: var(--marmo-chiaro); letter-spacing: .02em; }
 .hero__azioni { display: flex; flex-wrap: wrap; gap: var(--s3); justify-content: center; margin-top: var(--s2); }
 
@@ -601,8 +624,30 @@ body.nav-aperta { overflow: hidden; }
 
 /* ---------- 16. DOVE SIAMO + MAPPA ---------- */
 .dove-siamo__indirizzo { font-size: 1.15rem; }
-.dove-siamo__parcheggio { color: var(--marmo-chiaro); font-size: .95rem; margin-bottom: var(--s4); }
 .dove-siamo .btn { margin-bottom: var(--s5); }
+
+/* Badge parcheggio: messo in risalto qui perché nella FAQ resterebbe
+   nascosto in un accordion chiuso. */
+.parcheggio-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s3);
+  margin: var(--s4) 0 var(--s5);
+  padding: var(--s2) var(--s4);
+  border: 1px solid var(--ottone);
+  border-radius: var(--raggio);
+  color: var(--crema);
+  font-size: .95rem;
+  line-height: 1.3;
+}
+.parcheggio-badge__ico {
+  flex: none;
+  width: 1.4rem; height: 1.4rem;
+  color: var(--ottone-luce);
+}
+/* sulle sezioni a fondo chiaro (non è questo il caso, ma per sicurezza) */
+.sezione--chiara .parcheggio-badge { border-color: var(--verde-vetro); color: var(--chiaro-testo); }
+.sezione--chiara .parcheggio-badge__ico { color: var(--verde-vetro); }
 .mappa {
   border: 1px solid var(--ottone);
   aspect-ratio: 16 / 10;
@@ -626,6 +671,15 @@ body.nav-aperta { overflow: hidden; }
 .contatti__voci { list-style: none; padding: 0; display: grid; gap: var(--s3); }
 .contatti__voci li { display: grid; gap: var(--s1); }
 .contatti__voci span { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--chiaro-testo-2); }
+
+/* Separatore "/" tra i due numeri di telefono: visivo, non cliccabile */
+.tel-sep { opacity: .55; margin: 0 .15em; }
+.contatti__voci .tel-sep {
+  font-size: 1rem;
+  text-transform: none;
+  letter-spacing: normal;
+  color: inherit;
+}
 
 /* ---------- 18. RECENSIONI ---------- */
 .recensioni__punteggio { display: flex; align-items: baseline; gap: var(--s3); margin-bottom: var(--s5); }
@@ -787,8 +841,9 @@ body.nav-aperta { overflow: hidden; }
   }
   .js .hero__contenuto > :nth-child(1) { animation-delay: .20s; }
   .js .hero__contenuto > :nth-child(2) { animation-delay: .38s; }
-  .js .hero__contenuto > :nth-child(3) { animation-delay: .52s; }
-  .js .hero__contenuto > :nth-child(4) { animation-delay: .66s; }
+  .js .hero__contenuto > :nth-child(3) { animation-delay: .50s; }
+  .js .hero__contenuto > :nth-child(4) { animation-delay: .62s; }
+  .js .hero__contenuto > :nth-child(5) { animation-delay: .74s; }
 
   @keyframes entra-dall-alto { to { opacity: 1; transform: none; } }
 
