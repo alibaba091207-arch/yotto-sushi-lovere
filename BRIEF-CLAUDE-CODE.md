@@ -173,10 +173,13 @@ Una sola idea forte, ripetuta: **la linea d'ottone dell'orizzonte.** Un filo sot
 
 ## 8. STRUTTURA DELLA PAGINA, SEZIONE PER SEZIONE
 
-**Ordine delle sezioni nella pagina:** Hero → I nostri piatti → Il locale → Menù →
-Prezzi → Orari → Dove siamo → Contatti → Recensioni → FAQ → Footer.
+**Ordine delle sezioni nella pagina:** Hero → I nostri piatti → Il locale →
+Cocktail Night → Menù → Prezzi → Orari → Dove siamo → Contatti → Recensioni →
+FAQ → Footer.
 (La sezione "Chi siamo" è stata rimossa. I numeri 8.x qui sotto sono solo
 etichette di paragrafo, non l'ordine di visualizzazione.)
+
+**Navbar:** Il locale · Cocktail · Menù · Prezzi · Orari · Dove siamo · Contatti.
 
 ### 8.1 — Hero (slideshow)
 
@@ -253,6 +256,15 @@ Note importanti:
 Titolo: **Dentro Yotto**. Una riga sotto: *Sala panoramica sul porto, terrazza estiva e cocktail bar.*
 
 Le 5 foto di `assets/images/locale/` in una **striscia orizzontale** come i piatti (8.4), ma in **direzione opposta**: scorre verso **destra**. Stesso funzionamento: scorre da sola ma è anche scorribile a mano (swipe, drag, trackpad, frecce), stesso loop invisibile, stesse pause, stesso comportamento con `prefers-reduced-motion`. Qui non c'è lightbox.
+
+### 8.7-bis — Cocktail Night *(id: `cocktail`)*
+
+Sezione-messaggio **compatta** (non una galleria: niente striscia scorrevole), fra "Il locale" e "Menù". Poco padding verticale: la pagina è già lunga da scrollare su mobile.
+
+- Due colonne su desktop, impilata su mobile.
+- Sinistra: la foto `assets/images/cocktail/cocktail-blu.jpg` (verticale, ritagliata larga per tenere bassa la sezione).
+- Destra: titolo **"Il venerdì è Cocktail Night"** (accento ottone), riga *"Ogni venerdì offriamo un cocktail a tutti i nostri ospiti"*, pulsante **"Prenota il venerdì"** → WhatsApp con messaggio precompilato *"Ciao Yotto! Vorrei prenotare per il venerdì Cocktail Night"*.
+- Fondo scuro come il resto, accento ottone su titolo e pulsante.
 
 ### 8.8 — Orari *(id: `orari`)*
 
@@ -388,6 +400,9 @@ Tutte le foto sono già in `assets/images/`. Sono quadrate (1080×1080 circa) tr
 `esterno-notte.jpg` · `sala-panoramica-lago.jpg` · `sala-pesci-vetro.jpg` · `sala-neon-blu.jpg` (sala con pannelli al neon blu) · `terrazza-verde.jpg`
 
 Alt per la neon blu: `La sala di Yotto con pannelli luminosi blu e arredi in velluto`
+
+### `cocktail/` — sezione "Cocktail Night" (1 foto, aggiunta dal cliente)
+`cocktail-blu.jpg` (verticale) — Alt: `Un cocktail azzurro con ghiaccio, fetta di limone essiccato e un rametto di menta, servito al bancone di Yotto`
 
 ### `piatti/` — galleria (10 foto)
 | File | Alt text |

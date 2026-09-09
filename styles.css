@@ -555,6 +555,34 @@ body.nav-aperta { overflow: hidden; }
 .lightbox__btn:hover { background: var(--ottone); color: var(--laguna-notte); }
 .lightbox__btn--chiudi { position: absolute; top: -3.75rem; right: 0; }
 
+/* ---------- 11-bis. COCKTAIL NIGHT ---------- */
+/* Sezione-messaggio compatta: poco padding verticale (la pagina è già
+   lunga su mobile), due colonne su desktop, impilata sotto. */
+.cocktail { padding-block: clamp(1.75rem, 5vw, 3rem); }
+.cocktail__griglia { display: grid; gap: var(--s5); align-items: center; }
+.cocktail__foto {
+  margin: 0;
+  border: 1px solid var(--ottone);
+  background: #0d1a19;
+  overflow: hidden;
+}
+/* La foto è verticale: qui la ritagliamo larga per tenere la sezione bassa. */
+.cocktail__foto img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: center 30%;
+}
+.cocktail__testo { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s3); }
+.cocktail__testo h2 { color: var(--ottone-luce); margin-bottom: 0; }
+.cocktail__testo p { color: var(--marmo-chiaro); }
+.cocktail__testo .btn { margin-top: var(--s2); }
+
+@media (min-width: 900px) {
+  .cocktail__griglia { grid-template-columns: 22rem 1fr; gap: var(--s7); }
+  .cocktail__foto img { aspect-ratio: 4 / 3; }
+}
+
 /* ---------- 12. MENÙ ---------- */
 .menu__lista {
   list-style: none; padding: 0;

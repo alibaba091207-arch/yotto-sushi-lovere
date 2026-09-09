@@ -107,7 +107,7 @@ Inserisci i dati reali. Compariranno in fondo alla pagina.
 ## 5. Aggiungere o cambiare una foto
 
 Le foto stanno in `assets/images/`, divise per cartella:
-`hero/` (slideshow), `piatti/`, `locale/`, `brand/` (loghi).
+`hero/` (slideshow), `piatti/`, `locale/`, `cocktail/`, `brand/` (loghi).
 
 Le foto sul sito vengono usate in più formati (per essere leggere sul telefono).
 Questi formati vengono generati da uno script. Quindi, per **cambiare o aggiungere**
