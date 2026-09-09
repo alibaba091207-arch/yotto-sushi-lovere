@@ -395,12 +395,22 @@ body.nav-aperta { overflow: hidden; }
   pointer-events: none;
 }
 .hero__titolo { max-width: 16ch; }
+/* Le due righe sotto il titolo: percettibilmente più grandi del testo
+   normale, ma sempre ben sotto al titolo nella gerarchia. Scala fluida
+   con clamp(); text-wrap: balance evita il "capo" con parola orfana su
+   mobile stretto. */
 .hero__offerta {
   color: var(--ottone-luce);
-  font-size: clamp(1rem, 1.4vw + .7rem, 1.2rem);
-  max-width: 26ch;
+  font-size: clamp(1.15rem, 2.4vw + .5rem, 1.7rem);
+  max-width: 40ch;
+  text-wrap: balance;
 }
-.hero__sottotitolo { color: var(--marmo-chiaro); letter-spacing: .02em; }
+.hero__sottotitolo {
+  color: var(--marmo-chiaro);
+  letter-spacing: .02em;
+  font-size: clamp(1.15rem, 1.3vw + .7rem, 1.4rem);
+  text-wrap: balance;
+}
 .hero__azioni { display: flex; flex-wrap: wrap; gap: var(--s3); justify-content: center; margin-top: var(--s2); }
 
 .hero__dots {
