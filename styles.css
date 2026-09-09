@@ -165,7 +165,11 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + 1rem); }
   -webkit-mask: url("/assets/images/brand/logo-yotto.svg") no-repeat center / contain;
           mask: url("/assets/images/brand/logo-yotto.svg") no-repeat center / contain;
 }
-.logo-segno--hero { width: clamp(8rem, 22vw, 12rem); margin-inline: auto; }
+.logo-segno--hero {
+  width: clamp(8rem, 22vw, 12rem);
+  margin-inline: auto;
+  filter: drop-shadow(0 2px 14px rgba(10, 20, 19, .55));
+}
 .logo-segno--footer { width: 8rem; }
 
 /* ---------- 6. PULSANTI ---------- */
@@ -366,13 +370,20 @@ body.nav-aperta { overflow: hidden; }
 /* fallback senza JS: mostra la prima slide */
 .no-js .hero__slide:first-child { opacity: 1; }
 
+/* Velo scuro sopra le foto: deve tenere leggibili logo e testo su TUTTE le
+   slide, compresa la vista lago che è chiara (cielo, acqua, marmo).
+   - un alone radiale dietro al testo centrato
+   - un gradiente dal basso (opaco sotto i pulsanti, più leggero in alto) */
 .hero__velo {
   position: absolute; inset: 0;
-  background: linear-gradient(to top,
-    var(--laguna-notte) 0%,
-    rgba(10, 20, 19, .72) 35%,
-    rgba(10, 20, 19, .35) 70%,
-    rgba(10, 20, 19, .45) 100%);
+  background:
+    radial-gradient(ellipse 120% 62% at 50% 45%,
+      rgba(10, 20, 19, .42) 0%, rgba(10, 20, 19, .1) 70%, transparent 100%),
+    linear-gradient(to top,
+      var(--laguna-notte) 0%,
+      rgba(10, 20, 19, .74) 24%,
+      rgba(10, 20, 19, .34) 62%,
+      rgba(10, 20, 19, .38) 100%);
 }
 
 .hero__contenuto {
@@ -384,6 +395,12 @@ body.nav-aperta { overflow: hidden; }
   flex-direction: column;
   align-items: center;
   gap: var(--s4);
+  /* aureola scura dietro ogni lettera: legibilità garantita anche sulle
+     slide chiare (vista lago), senza scurire il velo su tutta la foto.
+     Un bordo netto + un alone morbido e ampio. */
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, .85),
+    0 2px 26px rgba(10, 20, 19, .78);
   /* cornice d'ottone interna: il "gesto distintivo" */
 }
 .hero::after {
@@ -406,7 +423,7 @@ body.nav-aperta { overflow: hidden; }
   text-wrap: balance;
 }
 .hero__sottotitolo {
-  color: var(--marmo-chiaro);
+  color: var(--crema);            /* bianco: leggibile su tutte le slide, anche la vista lago */
   letter-spacing: .02em;
   font-size: clamp(1.15rem, 1.3vw + .7rem, 1.4rem);
   text-wrap: balance;

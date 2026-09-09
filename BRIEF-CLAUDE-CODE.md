@@ -185,10 +185,10 @@ etichette di paragrafo, non l'ordine di visualizzazione.)
 
 **Questa è una richiesta esplicita del cliente**, ispirata a Yang.
 
-- Slideshow a **schermo intero** con le 4 immagini di `assets/images/hero/`, nell'ordine numerato del nome file.
+- Slideshow a **schermo intero** con le immagini di `assets/images/hero/`, nell'ordine numerato del nome file. **La 1ª slide è `01-vista-lago.jpg`** (la vista sul porto e sul Lago d'Iseo): richiesta esplicita del cliente, è la foto più identificativa.
 - **Crossfade lento** (~1,2 s) ogni **6 secondi**, con zoom impercettibile (scale 1.0 → 1.06 nell'arco della slide).
 - **ATTENZIONE — differenza chiave rispetto a Yang:** su Yang cambia anche il testo, perché ogni slide è un ristorante diverso. Qui il ristorante è uno solo, quindi **il contenuto sopra le immagini è FISSO**. Cambia solo la foto dietro. Se fai cambiare anche il testo, il visitatore pensa che ci siano più locali.
-- Sopra ogni immagine, un velo scuro sfumato dal basso (`linear-gradient` da `--laguna-notte` opaco in basso a trasparente in alto), altrimenti il testo diventa illeggibile su alcune slide.
+- Sopra ogni immagine, un velo scuro (alone radiale dietro al testo + gradiente dal basso) **più un'aureola scura sul testo** (`text-shadow`): serve perché la vista lago è chiara e senza rinforzo il testo si leggerebbe male.
 - Contenuto fisso, centrato:
   - Logo YOTTO
   - Titolo: **Sushi & Asian Cuisine sul Lago d'Iseo**
@@ -349,7 +349,7 @@ Questa parte vale più di quanto sembri: Yang non ce l'ha, e per un ristorante l
 **Meta tag su `index.html`:**
 - `<title>` → `Yotto Sushi Lovere | All you can eat sul Lago d'Iseo`
 - `<meta name="description">` → `Ristorante giapponese e asiatico all you can eat a Lovere, sul Lago d'Iseo. Sushi, sashimi e cucina asiatica. Aperto tutti i giorni a pranzo e cena. Prenota su WhatsApp.`
-- Open Graph e Twitter Card completi, con `assets/images/hero/01-esterno-notte.jpg` come immagine di anteprima.
+- Open Graph e Twitter Card completi, con `assets/images/hero/01-vista-lago.jpg` come immagine di anteprima.
 - `<html lang="it">`, canonical, favicon in tutti i formati, `theme-color` = `#0A1413`.
 
 **JSON-LD `Restaurant`** con: `name`, `image` (array), `address` (PostalAddress completo con `postalCode: "24065"`), `telephone`, `url`, `servesCuisine: ["Giapponese","Cinese","Sushi","Asiatica"]`, `priceRange: "€€"`, `geo` con le coordinate di Via del Cantiere 10, `aggregateRating` (4.6), `hasMenu`, e `openingHoursSpecification` per tutti e sette i giorni con **due fasce ciascuno** (12:00–15:00 e 19:00–23:30).
@@ -389,13 +389,14 @@ Crea `privacy-policy.html` e `cookie-policy.html` con **la stessa impostazione g
 
 Tutte le foto sono già in `assets/images/`. Sono quadrate (1080×1080 circa) tranne dove indicato. Vanno convertite in WebP e ritagliate dove serve.
 
-### `hero/` — slideshow, in quest'ordine
+### `hero/` — slideshow, in quest'ordine (rinumerato: la vista lago è la 1ª)
 | File | Contenuto | Alt text |
 |---|---|---|
-| `01-esterno-notte.jpg` *(1600×1213, orizzontale)* | Facciata illuminata di sera, vetrate curve, terrazza sopra | `L'esterno di Yotto Sushi illuminato di sera, con la terrazza al piano superiore` |
-| `02-sala-panoramica-lago.jpg` | Sala con vetrate sul porto e i pesci di vetro | `La sala panoramica di Yotto con vista sul porto di Lovere` |
-| `03-sala-pesci-vetro.jpg` | Installazione di pesci in vetro azzurro, divani verdi | `L'installazione di pesci in vetro sospesa sul soffitto della sala` |
-| `04-terrazza-verde.jpg` | Piano superiore, tavolo tondo in marmo, verde, insegna YOTTO | `Il piano superiore di Yotto con tavolo tondo in marmo e piante` |
+| `01-vista-lago.jpg` *(2048×2048)* | Vista dal tavolo: porto di Lovere, barche a vela, Lago d'Iseo, montagne | `La vista sul porto di Lovere e sul Lago d'Iseo, con le barche a vela e le montagne, dal tavolo di Yotto` |
+| `02-esterno-notte.jpg` *(1600×1213, orizzontale)* | Facciata illuminata di sera, vetrate curve, terrazza sopra | `L'esterno di Yotto Sushi illuminato di sera, con la terrazza al piano superiore` |
+| `03-sala-panoramica-lago.jpg` | Sala con vetrate sul porto e i pesci di vetro | `La sala panoramica di Yotto con vista sul porto di Lovere` |
+| `04-sala-pesci-vetro.jpg` | Installazione di pesci in vetro azzurro, divani verdi | `L'installazione di pesci in vetro sospesa sul soffitto della sala` |
+| `05-terrazza-verde.jpg` | Piano superiore, tavolo tondo in marmo, verde, insegna YOTTO | `Il piano superiore di Yotto con tavolo tondo in marmo e piante` |
 
 ### `locale/` — sezione "Dentro Yotto" (5 foto)
 `esterno-notte.jpg` · `sala-panoramica-lago.jpg` · `sala-pesci-vetro.jpg` · `sala-neon-blu.jpg` (sala con pannelli al neon blu) · `terrazza-verde.jpg`
@@ -465,7 +466,7 @@ Nell'hero e nella navbar usa **l'SVG**, non il PNG.
 
 ## 14. CRITERI DI ACCETTAZIONE
 
-- [ ] Slideshow hero con 4 immagini, crossfade, **testo fisso**
+- [ ] Slideshow hero con 5 immagini (1ª = vista lago), crossfade, **testo fisso**
 - [ ] Navbar sticky con ancore funzionanti e menu mobile accessibile
 - [ ] 4 pulsanti menù → 3 PDF (cena e asporto condividono il file)
 - [ ] Prezzi corretti, coperto di 2 € ben visibile
