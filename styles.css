@@ -486,36 +486,39 @@ body.nav-aperta { overflow: hidden; }
   display: flex;
   flex-wrap: nowrap;
   width: max-content;
+  --h-scheda: 15rem;           /* altezza delle foto nella striscia */
 }
 .marquee__track img { -webkit-user-drag: none; user-select: none; }
 
-/* ogni foto ha larghezza fissa: non si schiaccia mai.
-   Lo spazio tra le foto è un margine (non "gap"): così una "serie" misura
-   esattamente n·(foto + stacco) e il loop può riavvolgere senza scatti. */
+/* Ogni foto ha ALTEZZA fissa e larghezza naturale: si vede sempre INTERA,
+   senza ritaglio e senza bande scure. Le verticali diventano schede più
+   strette, le orizzontali più larghe; la striscia resta alta uguale.
+   Lo stacco fra le foto è un margine (non "gap") così script.js misura la
+   larghezza reale della serie e il loop riavvolge senza scatti. */
 .marquee__track > li {
   flex: 0 0 auto;
-  width: 15rem;
+  height: var(--h-scheda);
   margin: 0;
   margin-inline-end: var(--s3);
 }
-.marquee__track .locale__foto { height: 100%; margin: 0; }
+.marquee__track > li > .piatto,
+.marquee__track > li > .locale__foto { display: block; height: 100%; margin: 0; }
+.marquee__track picture { display: block; height: 100%; }
+.marquee__track picture > img {
+  display: block;
+  height: var(--h-scheda);
+  width: auto;
+  max-width: none;
+  object-fit: cover;           /* la scheda segue già le proporzioni: nessun taglio reale */
+  transition: filter .25s ease;
+}
 
 .piatto {
-  display: block;
-  width: 100%;
   padding: 0;
   border: 1px solid transparent;
   background: #0d1a19;
   cursor: pointer;
   overflow: hidden;
-}
-/* Immagini mostrate intere: nessun ritaglio. Le foto dei piatti sono quasi
-   quadrate, quindi il riquadro è quadrato e l'eventuale margine è minimo. */
-.piatto img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: contain;
-  transition: filter .25s ease;
 }
 .piatto:hover { border-color: var(--ottone); }
 .piatto:hover img { filter: brightness(.92); }
@@ -634,8 +637,8 @@ body.nav-aperta { overflow: hidden; }
   border: 1px solid rgba(194, 150, 63, .5);
   background: #0d1a19;
 }
-/* Foto mostrate intere, senza ritaglio. */
-.locale__foto img { width: 100%; aspect-ratio: 1 / 1; object-fit: contain; }
+/* Le proporzioni e il ridimensionamento delle foto della striscia sono
+   gestiti nella sezione 11 (.marquee__track picture > img). */
 
 /* ---------- 15. ORARI ---------- */
 .orari__wrap { display: grid; gap: var(--s5); }
@@ -814,7 +817,7 @@ body.nav-aperta { overflow: hidden; }
 
 /* ---------- BREAKPOINT: tablet (≥ 600px) ---------- */
 @media (min-width: 600px) {
-  .marquee__track > li { width: 17rem; }
+  .marquee__track { --h-scheda: 17rem; }
   .menu__lista { grid-template-columns: repeat(2, 1fr); }
   .nav__actions .btn--sm span { display: inline; }
 }
@@ -838,7 +841,7 @@ body.nav-aperta { overflow: hidden; }
   .nav__mobile { display: none !important; }
   .social--nav { display: flex; }
 
-  .marquee__track > li { width: 20rem; }
+  .marquee__track { --h-scheda: 20rem; }
 
   .prezzi__griglia { grid-template-columns: repeat(3, 1fr); }
 

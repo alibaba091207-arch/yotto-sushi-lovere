@@ -244,24 +244,8 @@ function initMarquee() {
       return;                           // niente cloni, niente rAF
     }
 
-    // Quante copie servono perché il "salto" del loop non tocchi mai i bordi
-    // dello scroll. Stima prudente con la foto più stretta (15rem) e la
-    // larghezza massima possibile della finestra.
-    const larghezzaMax = (window.screen && window.screen.width) || window.innerWidth;
-    const serieStretta = originali.length * (15 * 16 + 16);
-    const nCopie = Math.min(8, Math.max(3, Math.ceil(larghezzaMax / serieStretta) + 2));
-    for (let c = 0; c < nCopie; c++) {
-      originali.forEach((el) => {
-        const clone = el.cloneNode(true);
-        clone.classList.add("is-clone");
-        clone.setAttribute("aria-hidden", "true");
-        $$('a, button, input, textarea, select, [tabindex]', clone)
-          .forEach((f) => f.setAttribute("tabindex", "-1"));
-        track.appendChild(clone);
-      });
-    }
-
-    // Larghezza di UNA serie = n foto + il loro stacco (margine destro).
+    // Larghezza di UNA serie = somma delle foto + i loro stacchi.
+    // (Le foto hanno larghezze diverse: verticali strette, orizzontali larghe.)
     const misuraSerie = () => {
       let w = 0;
       originali.forEach((el) => {
@@ -271,8 +255,34 @@ function initMarquee() {
       });
       return w;
     };
+
+    // Duplica una serie intera (cloni decorativi: aria-hidden e fuori dal Tab).
+    const clonaSerie = () => {
+      originali.forEach((el) => {
+        const clone = el.cloneNode(true);
+        clone.classList.add("is-clone");
+        clone.setAttribute("aria-hidden", "true");
+        $$('a, button, input, textarea, select, [tabindex]', clone)
+          .forEach((f) => f.setAttribute("tabindex", "-1"));
+        track.appendChild(clone);
+      });
+    };
+
+    // Servono almeno 2 copie; poi ne aggiungiamo finché la traccia è larga
+    // abbastanza che il "salto" del loop non tocchi mai i bordi dello scroll.
+    clonaSerie(); clonaSerie();
     let seriesW = misuraSerie();
     if (!seriesW) { mq.pausaPerLightbox = () => {}; return; }
+    const assicuraLarghezza = () => {
+      let g = 0;
+      while (track.scrollWidth < 3 * seriesW + 2 * window.innerWidth && g < 6) {
+        clonaSerie();
+        g++;
+      }
+    };
+    // Se il CSS è già applicato le misure sono affidabili; altrimenti ci pensa
+    // ricalcola() al "load" (misure prima del CSS darebbero valori sballati).
+    if (getComputedStyle(track).getPropertyValue("--h-scheda").trim()) assicuraLarghezza();
 
     const segno = mq.dataset.marqueeDir === "dx" ? -1 : 1;
     let velocita = seriesW / (originali.length * 4.5); // px/s (~4,5 s a foto)
@@ -342,23 +352,27 @@ function initMarquee() {
     }
     requestAnimationFrame(tick);
 
-    /* --- ai breakpoint le foto cambiano larghezza: ricalcola la serie --- */
+    /* --- ricalcola la serie se le misure cambiano (breakpoint, immagini
+       che rifiniscono le proporzioni al caricamento) --- */
+    const ricalcola = () => {
+      const nuova = misuraSerie();
+      if (nuova > 0 && Math.abs(nuova - seriesW) > 0.5) {
+        let frazione = (mq.scrollLeft - seriesW) / seriesW;
+        frazione = Math.min(Math.max(frazione, 0), 1);
+        seriesW = nuova;
+        velocita = seriesW / (originali.length * 4.5);
+        pos = seriesW + frazione * seriesW;
+        mq.scrollLeft = pos;
+        atteso = pos;
+      }
+      assicuraLarghezza(); // eventuali cloni in più se ora servono
+    };
     let tResize = null;
     window.addEventListener("resize", () => {
       if (tResize) clearTimeout(tResize);
-      tResize = setTimeout(() => {
-        const nuova = misuraSerie();
-        if (nuova > 0 && Math.abs(nuova - seriesW) > 0.5) {
-          let frazione = (mq.scrollLeft - seriesW) / seriesW;
-          frazione = Math.min(Math.max(frazione, 0), 1);
-          seriesW = nuova;
-          velocita = seriesW / (originali.length * 4.5);
-          pos = seriesW + frazione * seriesW;
-          mq.scrollLeft = pos;
-          atteso = pos;
-        }
-      }, 200);
+      tResize = setTimeout(ricalcola, 200);
     });
+    window.addEventListener("load", ricalcola);
   });
 }
 
