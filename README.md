@@ -113,7 +113,7 @@ Le foto sul sito vengono usate in più formati (per essere leggere sul telefono)
 Questi formati vengono generati da uno script. Quindi, per **cambiare o aggiungere**
 una foto conviene **chiedere a chi ha costruito il sito** (o a Claude Code):
 
-> "Sostituisci la foto `piatti/uramaki-fritto.jpg` con questa nuova e rigenera le versioni."
+> "Sostituisci la foto `piatti/tataki-tonno.jpg` con questa nuova e rigenera le versioni."
 
 Se invece vuoi solo **sostituire** una foto esistente mantenendo lo stesso nome, e
 non ti preoccupa che sia un po' più pesante sul telefono, puoi caricarla su GitHub

@@ -216,6 +216,7 @@ Sezione eliminata su richiesta del cliente. Non reintrodurla.
 - **Striscia orizzontale** che scorre da sola verso **sinistra**, ma che si può anche **scorrere a mano**: swipe col dito, drag col mouse, scroll orizzontale con trackpad/rotellina, frecce da tastiera quando la striscia ha il focus.
 - Direzione **opposta** a quella della striscia "Il locale" (8.7): una va a sinistra, l'altra a destra.
 - **Come è fatta:** il contenitore ha `overflow-x` scrollabile (scrollbar nascosta via CSS, ma scroll attivo); lo scorrimento automatico è in JavaScript (`requestAnimationFrame` che muove `scrollLeft`), così si può "afferrare" a metà. Le foto sono duplicate più volte: quando `scrollLeft` esce dall'intervallo di una serie viene riportato indietro di una serie esatta, su contenuto identico → il loop non si vede.
+- Contenuto: **12 foto** (set rinnovato dal cliente) — 9 piatti + 3 cocktail volutamente mescolati (vedi sezione 12). Le verticali stanno nel riquadro quadrato **senza ritaglio**.
 - Nessuna didascalia: le foto parlano da sole. Al passaggio del mouse, un filo d'ottone appare sul bordo e l'immagine si scurisce leggerissimamente.
 - Cliccando una foto si apre un **lightbox** semplice, scritto a mano: sfondo scuro, frecce, chiusura con `Esc` o clic fuori, navigabile da tastiera, con `aria-modal` e focus trap. Le foto sono `<button>` veri, ma i duplicati del ciclo sono `aria-hidden` e fuori dal Tab. Il clic **non** apre il lightbox se l'utente stava trascinando (spostamento > ~5 px = drag, non click).
 - **Pause che si sommano:** mouse sopra la striscia, focus da tastiera dentro, lightbox aperto, interazione di trascinamento/scroll in corso (+ ~2 s di inattività dopo). Riparte SOLO quando nessuna è attiva, e **da dove si trova** (non riavvolge). All'apertura del lightbox si ferma anche la striscia dietro.
@@ -404,19 +405,27 @@ Alt per la neon blu: `La sala di Yotto con pannelli luminosi blu e arredi in vel
 ### `cocktail/` — sezione "Cocktail Night" (1 foto, aggiunta dal cliente)
 `cocktail-blu.jpg` (verticale) — Alt: `Un cocktail azzurro con ghiaccio, fetta di limone essiccato e un rametto di menta, servito al bancone di Yotto`
 
-### `piatti/` — galleria (10 foto)
+### `piatti/` — striscia scorrevole (12 foto, set rinnovato dal cliente)
+
+L'ordine nella striscia è **mescolato di proposito** (cocktail distanziati, foto
+simili mai vicine): l'ordine vero è quello nell'HTML, non alfabetico. Le 3 foto
+di cocktail sono volute qui dal cliente. Alcune foto sono verticali: nella
+striscia stanno in un riquadro quadrato **senza ritaglio** (`object-fit: contain`).
+
 | File | Alt text |
 |---|---|
-| `tataki-tonno-01.jpg` | `Tataki di tonno con granella di pistacchio e salsa al mango` |
-| `tataki-tonno-02.jpg` | `Tataki di tonno servito su piatto scuro con salse` |
-| `carpaccio-agrumi.jpg` | `Carpaccio di pesce marinato con agrumi` |
-| `sashimi-ghiaccio-secco.jpg` | `Sashimi di tonno servito con ghiaccio secco` |
-| `sashimi-tonno-ghiaccio.jpg` | `Sashimi di tonno su letto di ghiaccio con decorazione dorata` |
-| `uramaki-fritto.jpg` | `Uramaki fritto con tonno e salsa teriyaki` |
-| `tacos-salmone-pistacchio.jpg` | `Tacos di salmone con granella di pistacchio su piatto dorato` |
-| `roll-salmone-caviale.jpg` *(verticale)* | `Roll di salmone con uova di pesce e salsa al mango` |
-| `onigiri-lime.jpg` | `Onigiri con semi di sesamo e lime essiccato` |
-| `nigiri-salmone-scottato.jpg` | `Nigiri di salmone scottato con salse al mango e teriyaki` |
+| `cocktail-martini.jpg` *(verticale)* | `Cocktail servito in coppa Martini, con spicchio di lime e bordo di zucchero, al bancone del cocktail bar` |
+| `cocktail-calici.jpg` *(verticale)* | `Due cocktail in calice, uno chiaro con lime e uno arancione con fragola, al bancone del cocktail bar` |
+| `cocktail-blu-alto.jpg` *(verticale)* | `Cocktail azzurro in bicchiere alto con ghiaccio, lime essiccato e un rametto di menta, al bancone del cocktail bar` |
+| `roll-salmone-mango.jpg` | `Involtini di salmone farciti con crema al mango e uova di lompo nere, serviti su cucchiai di metallo intrecciati` |
+| `roll-salmone-fragola.jpg` | `Involtini di salmone con fragola fresca, crema al formaggio e salsa alla fragola, su foglia di banano` |
+| `barca-sushi-vapore.jpg` *(verticale)* | `Barca di sushi con vela di foglia e bambù: sashimi di salmone e tonno, gamberi e maki, con una tazza fumante di ghiaccio secco` |
+| `barca-sashimi-nigiri.jpg` *(verticale)* | `Barca di sushi a due piani: sopra sashimi misto, gamberi e ostrica, sotto un assortimento di nigiri e maki` |
+| `sashimi-salmone-fumo.jpg` *(verticale)* | `Sashimi di salmone in una ciotola bianca avvolta da una densa nuvola di ghiaccio secco, con germogli di pisello` |
+| `sashimi-tonno-fumo.jpg` | `Sashimi di tonno con lime essiccato, avvolto dal fumo del ghiaccio secco, accanto a un ventaglio dorato traforato` |
+| `tataki-tonno.jpg` | `Tataki di tonno scottato con granella di pistacchio, salsa teriyaki e maionese al mango, su foglia di lattuga, visto dall'alto su piatto nero` |
+| `uramaki-fritti-maionese.jpg` | `Uramaki fritti in tempura con maionese e salsa piccante, erba cipollina e germoglio di pisello, su piatto dal bordo blu` |
+| `uramaki-fritti-teriyaki.jpg` | `Uramaki fritti con salsa teriyaki e lime essiccato, visti dall'alto su piatto ovale bianco, tavolo di marmo verde` |
 
 ### `brand/` — logo già lavorato, pronto all'uso
 
