@@ -197,6 +197,8 @@ etichette di paragrafo, non l'ordine di visualizzazione.)
   - Due pulsanti: **Prenota su WhatsApp** (pieno, ottone) e **Guarda i menù** (contorno ottone, ancora a `#menu`)
 - Indicatori a puntini in basso, cliccabili, con `aria-label` sensati.
 - Controlli: pausa allo `:hover` e al focus da tastiera. Gli indicatori devono essere `<button>` veri, raggiungibili con Tab.
+- **Si può anche scorrere a mano**: swipe col dito su mobile, drag col mouse su desktop. La foto segue il dito in tempo reale; sotto ai ~50 px di spostamento torna alla foto attuale, oltre passa alla successiva/precedente. Il contenuto (titolo, pulsanti) resta fisso, si muove solo la foto. L'automatico si ferma appena si inizia a trascinare e riparte da solo dopo ~3 s di inattività, dalla foto in cui ci si trova. `touch-action: pan-y` sul contenitore: lo swipe orizzontale non blocca lo scroll verticale della pagina. Un tap sui pulsanti/link sopra resta un tap, non viene mai scambiato per uno swipe.
+- `prefers-reduced-motion: reduce`: **niente scorrimento automatico**, ma lo scorrimento manuale resta disponibile (stesso comportamento della striscia dei piatti, 8.4).
 - Su mobile: carica le varianti a 960 px, non le full-size.
 
 ### 8.2 — Barra di navigazione
@@ -466,7 +468,7 @@ Nell'hero e nella navbar usa **l'SVG**, non il PNG.
 
 ## 14. CRITERI DI ACCETTAZIONE
 
-- [ ] Slideshow hero con 5 immagini (1ª = vista lago), crossfade, **testo fisso**
+- [ ] Slideshow hero con 5 immagini (1ª = vista lago), crossfade, **testo fisso**, scorribile anche a mano (swipe/drag)
 - [ ] Navbar sticky con ancore funzionanti e menu mobile accessibile
 - [ ] 4 pulsanti menù → 3 PDF (cena e asporto condividono il file)
 - [ ] Prezzi corretti, coperto di 2 € ben visibile

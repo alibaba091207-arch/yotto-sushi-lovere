@@ -334,7 +334,13 @@ body.nav-aperta { overflow: hidden; }
   place-items: center;
   overflow: hidden;
   margin-top: calc(var(--nav-h) * -1);   /* la navbar trasparente sta sopra */
+  /* Le foto si trascinano a mano in orizzontale (swipe/drag): lo scroll
+     verticale della pagina resta gestito dal browser, solo il gesto
+     orizzontale lo gestisce script.js. */
+  touch-action: pan-y;
 }
+/* Mentre si trascina: niente selezione di testo "fantasma" col mouse. */
+.hero.is-trascinando { user-select: none; }
 .hero__slides, .hero__slide { position: absolute; inset: 0; }
 .hero__slide {
   opacity: 0;

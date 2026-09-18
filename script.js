@@ -441,7 +441,15 @@ function initNavbar() {
 
 
 /* -------------------------------------------------------------
-   5. SLIDESHOW HERO — crossfade ogni 6s, contenuto FISSO
+   5. SLIDESHOW HERO — crossfade automatico + trascinamento a mano
+   (swipe col dito su mobile, drag col mouse su desktop). Le foto
+   sono impilate una sopra l'altra (dissolvenza incrociata): durante
+   il trascinamento la foto attuale e quella "in arrivo" vengono
+   spostate in orizzontale a mano, in tempo reale col dito; al
+   rilascio, se lo spostamento supera la soglia, si passa alla foto
+   successiva/precedente, altrimenti tutto torna al proprio posto.
+   La logica di pausa/ripresa (~3s di inattività) ricalca quella
+   della striscia dei piatti (initMarquee), per coerenza.
    ------------------------------------------------------------- */
 function initHero() {
   const hero = $("[data-hero]");
@@ -450,10 +458,24 @@ function initHero() {
   const dotsWrap = $("[data-hero-dots]", hero);
   if (slides.length < 2) { if (slides[0]) slides[0].classList.add("is-attiva"); return; }
 
-  const INTERVALLO = 5500;   // ogni quanti millisecondi cambia l'immagine
+  const menoMovimento = prefersReducedMotion();
+  const INTERVALLO = 5500;      // ogni quanti millisecondi cambia l'immagine da sola
+  const SOGLIA_CLIC = 8;        // px oltre i quali un tocco diventa trascinamento, non un tap
+  const SOGLIA_SWIPE = 50;      // px di trascinamento oltre i quali si cambia foto
+  const ATTESA_RIPRESA = 3000;  // ms di inattività prima che l'automatico riparta
+
   let corrente = 0;
   let timer = null;
-  let inPausa = false;
+  let timerRipresa = null;
+
+  // Motivi per cui l'automatico resta fermo: basta che uno sia vero.
+  // "trascinando" copre anche il caso limite di un dito fermo a metà
+  // gesto per più dei ~3s di ATTESA_RIPRESA: senza, l'automatico
+  // ripartirebbe sotto al trascinamento ancora in corso.
+  // Con "riduci animazioni" non riparte mai (resta comunque scorribile a mano).
+  const cond = { hover: false, focus: false, interazione: false, trascinando: false };
+  const puoAndare = () =>
+    !menoMovimento && !cond.hover && !cond.focus && !cond.interazione && !cond.trascinando;
 
   // puntini
   const dots = slides.map((_, i) => {
@@ -476,30 +498,176 @@ function initHero() {
 
   function avanti() { vaiA(corrente + 1); }
   function avvia() {
-    if (inPausa) return;
+    if (!puoAndare()) return;
     clearInterval(timer);
     timer = setInterval(avanti, INTERVALLO);
   }
   function ferma() { clearInterval(timer); }
-  function riavvia() { ferma(); avvia(); }
+  function riavvia() {
+    // usata dai puntini: un click è una scelta esplicita, azzera l'attesa
+    cond.interazione = false;
+    if (timerRipresa) clearTimeout(timerRipresa);
+    ferma();
+    avvia();
+  }
+  // segnala un'interazione in corso: ferma l'automatico e (ri)avvia il
+  // conto alla rovescia di ~3s prima che riparta, dalla foto attuale.
+  function segnalaInterazione() {
+    cond.interazione = true;
+    ferma();
+    if (timerRipresa) clearTimeout(timerRipresa);
+    timerRipresa = setTimeout(() => { cond.interazione = false; avvia(); }, ATTESA_RIPRESA);
+  }
 
   vaiA(0);
-
-  // Le immagini cambiano sempre da sole. Se l'utente ha attivato
-  // "riduci animazioni" nel sistema, il CSS toglie la dissolvenza
-  // (@media prefers-reduced-motion) e il cambio diventa netto: la
-  // rotazione resta comunque attiva.
-  avvia();
+  avvia(); // con "riduci animazioni" puoAndare() la tiene ferma: parte solo lo swipe
 
   // pausa su hover e su focus da tastiera
-  hero.addEventListener("mouseenter", () => { inPausa = true; ferma(); });
-  hero.addEventListener("mouseleave", () => { inPausa = false; avvia(); });
-  hero.addEventListener("focusin", () => { inPausa = true; ferma(); });
-  hero.addEventListener("focusout", () => { inPausa = false; avvia(); });
+  hero.addEventListener("mouseenter", () => { cond.hover = true; ferma(); });
+  hero.addEventListener("mouseleave", () => { cond.hover = false; avvia(); });
+  hero.addEventListener("focusin", () => { cond.focus = true; ferma(); });
+  hero.addEventListener("focusout", () => { cond.focus = false; avvia(); });
   // pausa quando la scheda del browser non è in primo piano (riparte al ritorno)
   document.addEventListener("visibilitychange", () => {
     document.hidden ? ferma() : avvia();
   });
+
+  /* ---- trascinamento manuale: segue il dito in tempo reale ---- */
+
+  // Nasconde all'istante una foto "in arrivo" abbandonata (cambio di
+  // direzione a metà gesto, o trascinamento annullato): transizione
+  // disattivata così lo scatto non si vede, poi si ripulisce tutto
+  // subito dopo per tornare al pieno controllo del CSS. Un setTimeout
+  // (non un requestAnimationFrame) perché deve ripulire comunque anche
+  // se la scheda finisce in background a gesto appena interrotto —
+  // altrimenti un'opacità rimasta a 0 potrebbe bloccare per sempre
+  // questa foto la prossima volta che dovesse ridiventare quella attiva.
+  function nascondiSubito(el) {
+    el.style.transition = "none";
+    el.style.opacity = "0";
+    el.style.transform = "translateX(0)";
+    setTimeout(() => {
+      el.style.transition = "";
+      el.style.opacity = "";
+      el.style.transform = "";
+    }, 0);
+  }
+
+  let puntatoreGiu = false, ignoraGesto = false, mossoOltreSoglia = false;
+  let idPuntatore = null, startX = 0, dx = 0, peekIndex = null;
+
+  // Sposta la foto attuale di "spostamento" px e fa "sbirciare" dal
+  // bordo giusto la foto successiva o precedente, proporzionalmente.
+  function posizionaTrascinamento(spostamento) {
+    const attuale = slides[corrente];
+    attuale.style.transition = "none";
+    attuale.style.opacity = "1";
+    attuale.style.transform = `translateX(${spostamento}px)`;
+
+    // dito verso sinistra (spostamento negativo) → arriva la successiva da destra
+    const direzione = spostamento < 0 ? 1 : spostamento > 0 ? -1 : 0;
+    const nuovoPeek = direzione === 0 ? null : (corrente + direzione + slides.length) % slides.length;
+
+    if (nuovoPeek !== peekIndex && peekIndex !== null) nascondiSubito(slides[peekIndex]);
+    peekIndex = nuovoPeek;
+
+    if (peekIndex !== null) {
+      const base = direzione === 1 ? 100 : -100;
+      const peek = slides[peekIndex];
+      peek.style.transition = "none";
+      peek.style.opacity = "1";
+      peek.style.transform = `translateX(calc(${base}% + ${spostamento}px))`;
+    }
+  }
+
+  hero.addEventListener("pointerdown", (e) => {
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    // un tap su un link/pulsante resta un tap: non è un trascinamento
+    if (e.target.closest("a, button")) { ignoraGesto = true; return; }
+    ignoraGesto = false;
+    puntatoreGiu = true;
+    mossoOltreSoglia = false;
+    idPuntatore = e.pointerId;
+    startX = e.clientX;
+    dx = 0;
+  });
+
+  hero.addEventListener("pointermove", (e) => {
+    if (ignoraGesto || !puntatoreGiu || e.pointerId !== idPuntatore) return;
+    dx = e.clientX - startX;
+    if (!mossoOltreSoglia) {
+      if (Math.abs(dx) < SOGLIA_CLIC) return;
+      mossoOltreSoglia = true;
+      cond.trascinando = true; // blocca l'automatico anche se il dito poi resta fermo
+      hero.classList.add("is-trascinando");
+      if (e.pointerType === "mouse") { try { hero.setPointerCapture(idPuntatore); } catch (_) {} }
+    }
+    segnalaInterazione(); // ferma l'automatico e tiene "vivo" il conto alla rovescia
+    const max = hero.clientWidth || 1;
+    dx = Math.max(-max, Math.min(max, dx));
+    posizionaTrascinamento(dx);
+  });
+
+  function fineGesto() {
+    if (ignoraGesto) return;
+    const eraDrag = mossoOltreSoglia;
+    puntatoreGiu = false;
+    mossoOltreSoglia = false;
+    cond.trascinando = false;
+    hero.classList.remove("is-trascinando");
+    if (idPuntatore !== null) { try { hero.releasePointerCapture(idPuntatore); } catch (_) {} }
+    idPuntatore = null;
+    if (!eraDrag) return; // era solo un tap: niente da animare
+
+    const attuale = slides[corrente];
+    const direzione = dx < 0 ? 1 : dx > 0 ? -1 : 0;
+    const easing = "transform .3s cubic-bezier(.2,.7,.3,1)";
+
+    if (direzione !== 0 && Math.abs(dx) >= SOGLIA_SWIPE && peekIndex !== null) {
+      // oltre soglia: la foto attuale esce, quella "in arrivo" prende il suo posto
+      const nuovoIndice = peekIndex;
+      const peek = slides[nuovoIndice];
+      attuale.style.transition = easing;
+      peek.style.transition = easing;
+      attuale.style.transform = `translateX(${direzione === 1 ? "-100%" : "100%"})`;
+      peek.style.transform = "translateX(0)";
+      const concludi = () => {
+        attuale.style.transition = ""; attuale.style.transform = ""; attuale.style.opacity = "";
+        peek.style.transition = ""; peek.style.transform = ""; peek.style.opacity = "";
+        vaiA(nuovoIndice);
+        peekIndex = null;
+      };
+      attuale.addEventListener("transitionend", concludi, { once: true });
+      setTimeout(concludi, 420); // rete di sicurezza se transitionend non arriva
+    } else {
+      // sotto soglia: torna tutto al proprio posto, resta la foto di prima
+      attuale.style.transition = easing;
+      attuale.style.transform = "translateX(0)";
+      const peekDaPulire = peekIndex;
+      if (peekDaPulire !== null) {
+        const peek = slides[peekDaPulire];
+        const base = direzione === 1 ? 100 : -100;
+        peek.style.transition = easing;
+        peek.style.transform = `translateX(${base}%)`;
+      }
+      const concludi = () => {
+        attuale.style.transition = ""; attuale.style.transform = ""; attuale.style.opacity = "";
+        if (peekDaPulire !== null) {
+          const peek = slides[peekDaPulire];
+          peek.style.transition = ""; peek.style.transform = ""; peek.style.opacity = "";
+        }
+        peekIndex = null;
+      };
+      attuale.addEventListener("transitionend", concludi, { once: true });
+      setTimeout(concludi, 380);
+    }
+    dx = 0;
+    segnalaInterazione(); // riparte da sola dopo ~3s, dalla foto in cui si trova
+  }
+
+  hero.addEventListener("pointerup", fineGesto);
+  hero.addEventListener("pointercancel", fineGesto);
+  hero.addEventListener("dragstart", (e) => e.preventDefault()); // niente "fantasma" delle immagini
 }
 
 
