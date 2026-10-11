@@ -33,7 +33,7 @@ Questi dati sono verificati. Usali esattamente così.
 | Indirizzo | Via del Cantiere, 10 — 24065 Lovere (BG), Italia |
 | Telefono fisso | `035 029 7470` → link `tel:+390350297470` |
 | WhatsApp | `+39 352 000 6700` → link `https://wa.me/393520006700` |
-| Valutazione Google | 4,6 / 5 |
+| Valutazione Google | 4,7 / 5 |
 | Cucina | Giapponese e cinese: sushi, sashimi, piatti caldi, cucina asiatica |
 
 **Orari — identici tutti i giorni, lunedì compreso:**
@@ -297,7 +297,7 @@ Sezione-messaggio **compatta** (non una galleria: niente striscia scorrevole), f
 
 ### 8.11 — Recensioni
 
-- Riquadro con **4,6 ★** e il logo Google.
+- Riquadro con **4,7 ★** e il logo Google.
 - 3–4 recensioni **reali** di Yotto, prese da Google Maps, con nome e data.
 - **Finché non hai le recensioni vere, lascia un commento `<!-- TODO: recensioni reali da Google Maps -->` e la struttura vuota. Non inventare recensioni e non copiare quelle di Yang: è scorretto e, per un'attività commerciale, è anche un rischio legale.**
 - Pulsante *"Leggi tutte le recensioni su Google"*.
@@ -354,7 +354,7 @@ Questa parte vale più di quanto sembri: Yang non ce l'ha, e per un ristorante l
 - Open Graph e Twitter Card completi, con `assets/images/hero/01-vista-lago.jpg` come immagine di anteprima.
 - `<html lang="it">`, canonical, favicon in tutti i formati, `theme-color` = `#0A1413`.
 
-**JSON-LD `Restaurant`** con: `name`, `image` (array), `address` (PostalAddress completo con `postalCode: "24065"`), `telephone`, `url`, `servesCuisine: ["Giapponese","Cinese","Sushi","Asiatica"]`, `priceRange: "€€"`, `geo` con le coordinate di Via del Cantiere 10, `aggregateRating` (4.6), `hasMenu`, e `openingHoursSpecification` per tutti e sette i giorni con **due fasce ciascuno** (12:00–15:00 e 19:00–23:30).
+**JSON-LD `Restaurant`** con: `name`, `image` (array), `address` (PostalAddress completo con `postalCode: "24065"`), `telephone`, `url`, `servesCuisine: ["Giapponese","Cinese","Sushi","Asiatica"]`, `priceRange: "€€"`, `geo` con le coordinate di Via del Cantiere 10, `aggregateRating` (4.7), `hasMenu`, e `openingHoursSpecification` per tutti e sette i giorni con **due fasce ciascuno** (12:00–15:00 e 19:00–23:30).
 
 Più il blocco **`FAQPage`** separato.
 
