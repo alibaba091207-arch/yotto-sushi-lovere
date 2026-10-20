@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ordina d'asporto · Yotto Sushi Lovere</title>
+<meta name="description" content="Ordina online il sushi d'asporto di Yotto Sushi e ritiralo al ristorante in Via del Cantiere 10, Lovere. Paghi al ritiro o online con carta.">
+<!-- Togliere al lancio -->
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0A1413">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/images/brand/logo-yotto-cerchio.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#contenuto">Salta al contenuto</a>
+
+<header class="nav nav--scrolled">
+  <div class="nav__inner">
+    <a class="nav__logo" href="/" aria-label="Yotto Sushi — torna alla home">
+      <span class="logo-segno" aria-hidden="true"></span>
+      <span class="visually-hidden">Yotto Sushi</span>
+    </a>
+  </div>
+</header>
+
+<main id="contenuto" class="asporto-pagina">
+  <div class="contenitore">
+    <h1>Ordina d'asporto</h1>
+    <p class="asporto-pagina__intro">Ordina online e ritira al ristorante in Via del Cantiere 10, Lovere. Paghi al ritiro o online con carta.</p>
+
+    <!-- Widget d'asporto di Bottega Studio: menu, carrello, orari di ritiro e
+         pagamento arrivano da lì (dalla dashboard del ristorante), non da questo sito.
+         data-chiave: chiave PROVVISORIA (account di prova). Al lancio va sostituita
+         con la "Chiave pubblica" del cliente Yotto Sushi vero — è l'unico punto. -->
+    <div data-bw-asporto data-chiave="4e6354c2042349528684d87182d16001"></div>
+    <script src="https://app.labottegadelweb.com/widget/asporto.js" defer></script>
+
+    <p class="asporto-pagina__nota">* Prodotto surgelato o abbattuto all'origine.</p>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="contenitore footer__basso">
+    <p><a href="/privacy-policy.html">Privacy Policy</a> · <a href="/cookie-policy.html">Cookie Policy</a></p>
+    <p>&copy; <span id="anno">2026</span> Yotto Sushi</p>
+  </div>
+</footer>
+<script>document.getElementById("anno").textContent = new Date().getFullYear();</script>
+</body>
+</html>

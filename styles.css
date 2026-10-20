@@ -901,6 +901,32 @@ body.nav-aperta { overflow: hidden; }
 }
 .legale__aggiornato { margin-top: var(--s6); font-size: .9rem; }
 
+/* ---------- 22-ter. ORDINA D'ASPORTO (pagina /asporto) ---------- */
+/* Togliere al lancio dell'asporto */
+.asporto-pulsante { display: none !important; }
+
+.asporto-pagina { padding-block: var(--pad-sezione); }
+.asporto-pagina h1 { margin-bottom: var(--s4); }
+.asporto-pagina__intro { color: var(--testo-2); margin-bottom: var(--s6); }
+.asporto-pagina__nota { margin-top: var(--s6); font-size: .85rem; color: var(--testo-2); }
+
+/* Colori e font del widget di Bottega Studio, presi da quelli del sito.
+   --bw-alto = altezza della navbar (sticky in alto), così carrello e
+   finestre non ci finiscono sotto; --bw-livello sopra la navbar (z-index 100). */
+[data-bw-asporto] {
+  --bw-font: "Karla", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --bw-colore: var(--ottone);
+  --bw-colore-testo: var(--laguna-notte);
+  --bw-sfondo: var(--fondo);
+  --bw-alto: var(--nav-h);
+  --bw-testo: var(--testo);
+  --bw-tenue: var(--testo-2);
+  --bw-superficie: #0d1a19;
+  --bw-bordo: rgba(194, 150, 63, .35);
+  --bw-raggio: var(--raggio);
+  --bw-livello: 150;
+}
+
 /* ---------- 22-bis. ANIMAZIONI D'INGRESSO ----------
    Attive solo se l'utente NON ha chiesto meno animazioni e solo con JS
    attivo (classe .js sull'<html>), così senza JS i contenuti restano visibili. */
