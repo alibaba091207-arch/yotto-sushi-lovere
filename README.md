@@ -156,6 +156,29 @@ costruito il sito.
 
 ---
 
+## 7-bis. Ordina d'asporto (pagina /asporto)
+
+Menu, carrello, orari di ritiro e pagamento **non stanno nel sito**: arrivano dal
+widget di Bottega Studio, che legge il menu dalla dashboard del ristorante. Per
+cambiare piatti o prezzi dell'asporto si usa quella dashboard, non questi file.
+
+**Fino al lancio** la pagina è online ma non indicizzata, e i pulsanti
+"Ordina d'asporto" (hero, navbar, menu a tendina, Menù, Contatti, footer) sono nascosti.
+
+**Al lancio:**
+1. In `styles.css`, sezione "ORDINA D'ASPORTO", cancellare **le due regole**
+   sotto il commento "Togliere al lancio dell'asporto"
+   (`.asporto-pulsante { … }` e `.hero__wa { … }`). La seconda fa sì che, una
+   volta comparso "Ordina d'asporto", "Prenota su WhatsApp" nell'hero diventi a contorno.
+2. In `asporto.html`, cancellare `<meta name="robots" content="noindex">` e
+   aggiungere la pagina a `sitemap.xml`.
+3. In `asporto.html`, sostituire il valore di `data-chiave` con la "Chiave pubblica"
+   del cliente Yotto Sushi vero (dashboard → scheda cliente → Chiave pubblica → Copia).
+4. Aggiornare Privacy e Cookie Policy: con gli ordini online il sito raccoglie dati
+   (nome, telefono, pagamento tramite Bottega Studio, controllo anti-robot di Cloudflare).
+
+---
+
 ## 8. Struttura dei file (per riferimento)
 
 ```
