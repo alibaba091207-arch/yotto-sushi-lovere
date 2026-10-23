@@ -902,15 +902,6 @@ body.nav-aperta { overflow: hidden; }
 .legale__aggiornato { margin-top: var(--s6); font-size: .9rem; }
 
 /* ---------- 22-ter. ORDINA D'ASPORTO (pagina /asporto) ---------- */
-/* Togliere al lancio dell'asporto (entrambe le regole qui sotto).
-   - la prima nasconde tutti i pulsanti/link "Ordina d'asporto";
-   - la seconda tiene "Prenota su WhatsApp" dell'hero PIENO come oggi:
-     al lancio diventa a contorno, perché il pulsante pieno sarà
-     "Ordina d'asporto". Senza, fino al lancio l'hero avrebbe due
-     pulsanti a contorno e nessuno pieno. */
-.asporto-pulsante { display: none !important; }
-.hero__wa { --btn-bg: var(--ottone); --btn-fg: var(--laguna-notte); --btn-bd: var(--ottone); text-shadow: none; }
-
 /* Posizione dei pulsanti "Ordina d'asporto" nella home */
 .menu__asporto { margin-top: var(--s5); }
 /* Nella navbar ci sta solo da 1200 px in su (servono ~1030 px con tutte
